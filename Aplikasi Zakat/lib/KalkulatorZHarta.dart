@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
+import 'package:flutter_application_2/zakatMall_1Screen.dart';
 
 class kalkulatorZHartaScreen extends StatefulWidget {
   const kalkulatorZHartaScreen({Key? key}) : super(key: key);
@@ -12,9 +14,11 @@ class _kalkulatorZHartaState extends State<kalkulatorZHartaScreen> {
   @override
   final formKey = GlobalKey<FormState>();
   bool isButtonActive = false;
+  bool isHitung = false;
   late TextEditingController controller;
   String Hasil = "0";
   String bulanan = "0";
+  String Zakat = "0";
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,8 +110,10 @@ class _kalkulatorZHartaState extends State<kalkulatorZHartaScreen> {
                           if (value.isNotEmpty) {
                             var jumlah =
                                 12 * int.parse(bulanan) + int.parse(value);
+                            var Total = (jumlah * 25) / 1000;
                             setState(() {
                               Hasil = jumlah.toString();
+                              Zakat = jumlah.toString();
                             });
                           } else {
                             Hasil = "0";
@@ -129,30 +135,63 @@ class _kalkulatorZHartaState extends State<kalkulatorZHartaScreen> {
 //Form bonus tahunan============================================================================================================
 
 //jumlah yang dibayar============================================================================================================
+                      isHitung
+                          ? Column(
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Pendapatan  total anda selama setahun adalah " +
+                                      Hasil,
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                int.parse(Hasil) < 95000000
+                                    ? Text(
+                                        "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
+                                    : Text(
+                                        "Jumlah Zakat yang harus anda keluarkan adalah" +
+                                            Zakat)
+                              ],
+                            )
+                          : SizedBox(width: 0, height: 0),
 
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Jumlah yang harus dibayarkan adalah:  Rp." + Hasil,
-                        style: TextStyle(fontSize: 18),
-                      ),
 //jumlah yang dibayar============================================================================================================
 
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              onSurface: Colors.lightGreen,
-                              primary: Colors.lightGreen,
-                              minimumSize: const Size(200, 50)),
-                          onPressed: isButtonActive
-                              ? () {
-                                  print("Sukses");
-                                }
-                              : null,
-                          child: Text("Hitung")),
+                      isHitung
+                          ? ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  onSurface: Colors.lightGreen,
+                                  primary: Colors.lightGreen,
+                                  minimumSize: const Size(200, 50)),
+                              onPressed: int.parse(Zakat) > 0
+                                  ? () {
+                                      setState(() {
+                                        Navigator.pushReplacementNamed(
+                                            context, zakatMall_1Screen.route,
+                                            arguments: Zakat);
+                                      });
+                                      ;
+                                    }
+                                  : null,
+                              child: Text("Bayar"))
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  onSurface: Colors.lightGreen,
+                                  primary: Colors.lightGreen,
+                                  minimumSize: const Size(200, 50)),
+                              onPressed: isButtonActive
+                                  ? () {
+                                      setState(() {
+                                        isHitung = true;
+                                      });
+                                      ;
+                                    }
+                                  : null,
+                              child: Text("Hitung")),
                     ],
                   ))),
 //Button bayar============================================================================================================

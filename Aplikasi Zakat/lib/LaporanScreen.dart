@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Provider/Provider.dart';
+import 'package:provider/provider.dart';
 
 List<Map> dataRow = [
   {
@@ -19,10 +21,13 @@ List<Map> dataRow = [
 
 class LaporanScreen extends StatelessWidget {
   static const route = "/Laporan";
+
   const LaporanScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final items = Provider.of<itemLaporan>(context);
+    final _allitems = items.allItems;
     return Scaffold(
       appBar: AppBar(
         title: Text(

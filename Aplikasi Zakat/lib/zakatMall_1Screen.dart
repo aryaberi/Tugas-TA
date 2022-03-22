@@ -69,6 +69,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
   late TextEditingController controller;
 
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as String;
+    String _jumlah = data;
     return Scaffold(
         appBar: AppBar(
           title: Text(

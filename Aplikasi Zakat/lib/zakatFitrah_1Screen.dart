@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/zakatFitrah_2Screen.dart';
 
 class zakatFitrah_1Screen extends StatefulWidget {
   const zakatFitrah_1Screen({Key? key}) : super(key: key);
@@ -8,56 +9,66 @@ class zakatFitrah_1Screen extends StatefulWidget {
   _zakatFitrah_1State createState() => _zakatFitrah_1State();
 }
 
+List<Map> LAZ = [
+  {"id": '1', "image": "images/Logo_LAZ/Logo_Ry.png", "name": "Rumah Yatim"},
+  {"id": '2', "image": "images/Logo_LAZ/Logo_RZ.png", "name": "Rumah Zakat"},
+  {"id": '3', "image": "images/Logo_LAZ/Logo-dd.png", "name": "Dompet Dhuafa"},
+  {"id": '4', "image": "images/Logo_LAZ/logo-laz.png", "name": "LAZ Al-Azhar"},
+  {"id": '5', "image": "images/Logo_LAZ/Logo-lazismu.png", "name": "Lazismu"},
+  {"id": '6', "image": "images/Logo_LAZ/Logo_Baznas.png", "name": "BAZNAS"},
+  {
+    "id": '7',
+    "image": "images/Logo_LAZ/Logo_NU_CARE-LAZISNU.png",
+    "name": "NU_CARE_LAZISNU"
+  },
+];
+
+List<Map> PaymentMetode = [
+  {"id": 'A', "image": "images/Logo_Pembayaran/logo-ovo.png", "name": "Ovo"},
+  {
+    "id": 'B',
+    "image": "images/Logo_Pembayaran/Gopay-Logo.png",
+    "name": "Gopay"
+  },
+  {
+    "id": 'C',
+    "image": "images/Logo_Pembayaran/dana-meta-logo.png",
+    "name": "Dana"
+  },
+  {
+    "id": 'D',
+    "image": "images/Logo_Pembayaran/logo_linkAja.png",
+    "name": "Link Aja"
+  },
+  // {"id": 'E', "image": "images/Logo_Pembayaran/Logo-lazismu.png", "name": "Lazismu"},
+  // {"id": 'F', "image": "images/Logo_Pembayaran/Logo_Baznas.png", "name": "BAZNAS"},
+  // {"id": 'G', "image": "images/Logo_Pembayaran/Logo_NU_CARE-LAZISNU.png", "name": "NU_CARE_LAZISNU"},
+];
+
+int convertAlphabet(value) {
+  int idx = 0;
+  if (value == "A") {
+    idx = 0;
+  } else if (value == "B") {
+    idx = 1;
+  } else if (value == "C") {
+    idx = 2;
+  } else if (value == "D") {
+    idx = 3;
+  }
+  return idx;
+}
+
 class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
   @override
-  List<Map> LAZ = [
-    {"id": '1', "image": "images/Logo_LAZ/Logo_Ry.png", "name": "Rumah Yatim"},
-    {"id": '2', "image": "images/Logo_LAZ/Logo_RZ.png", "name": "Rumah Zakat"},
-    {
-      "id": '3',
-      "image": "images/Logo_LAZ/Logo-dd.png",
-      "name": "Dompet Dhuafa"
-    },
-    {
-      "id": '4',
-      "image": "images/Logo_LAZ/logo-laz.png",
-      "name": "LAZ Al-Azhar"
-    },
-    {"id": '5', "image": "images/Logo_LAZ/Logo-lazismu.png", "name": "Lazismu"},
-    {"id": '6', "image": "images/Logo_LAZ/Logo_Baznas.png", "name": "BAZNAS"},
-    {
-      "id": '7',
-      "image": "images/Logo_LAZ/Logo_NU_CARE-LAZISNU.png",
-      "name": "NU_CARE_LAZISNU"
-    },
-  ];
-
-  List<Map> PaymentMetode = [
-    {"id": 'A', "image": "images/Logo_Pembayaran/logo-ovo.png", "name": "Ovo"},
-    {
-      "id": 'B',
-      "image": "images/Logo_Pembayaran/Gopay-Logo.png",
-      "name": "Gopay"
-    },
-    {
-      "id": 'C',
-      "image": "images/Logo_Pembayaran/dana-meta-logo.png",
-      "name": "Dana"
-    },
-    {
-      "id": 'D',
-      "image": "images/Logo_Pembayaran/logo_linkAja.png",
-      "name": "Link Aja"
-    },
-    // {"id": 'E', "image": "images/Logo_Pembayaran/Logo-lazismu.png", "name": "Lazismu"},
-    // {"id": 'F', "image": "images/Logo_Pembayaran/Logo_Baznas.png", "name": "BAZNAS"},
-    // {"id": 'G', "image": "images/Logo_Pembayaran/Logo_NU_CARE-LAZISNU.png", "name": "NU_CARE_LAZISNU"},
-  ];
   final formKey = GlobalKey<FormState>();
   bool isButtonActive = false;
-  String Hasil = "0";
-  String _selected = "1";
-  String _selected2 = "A";
+  String _Laz = "Rumah Yatim";
+  String _methodPayment = "Ovo";
+  String _jumlah = "0";
+  String initLaz = "1";
+  String initmethodPayment = "A";
+  String _nama = "";
   late TextEditingController controller;
 
   Widget build(BuildContext context) {
@@ -69,14 +80,10 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              );
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
             },
           ),
           actions: [Icon(Icons.home)],
@@ -112,13 +119,20 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                     isExpanded: true,
                                     isDense: true,
                                     hint: new Text("Pilih LAZ"),
-                                    value: _selected,
+                                    value: initLaz,
                                     onChanged: (Value) {
+                                      if (Value!.isNotEmpty) {
+                                        setState(() {
+                                          var idx = Value;
+                                          _Laz =
+                                              LAZ[int.parse(idx) - 1]["name"];
+                                        });
+                                      }
                                       setState(() {
-                                        _selected = Value.toString();
+                                        initLaz = Value.toString();
                                       });
 
-                                      print(_selected);
+                                      print(_Laz);
                                     },
                                     items: LAZ.map((Map map) {
                                       return new DropdownMenuItem<String>(
@@ -168,13 +182,23 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                     isExpanded: true,
                                     isDense: true,
                                     hint: new Text("Pilih Metode Pembayaran"),
-                                    value: _selected2,
+                                    value: initmethodPayment,
                                     onChanged: (Value) {
+                                      if (Value!.isNotEmpty) {
+                                        int Idx =
+                                            convertAlphabet(Value.toString());
+
+                                        setState(() {
+                                          var idx = Value;
+                                          _methodPayment =
+                                              PaymentMetode[Idx]["name"];
+                                        });
+                                      }
                                       setState(() {
-                                        _selected2 = Value.toString();
+                                        initmethodPayment = Value.toString();
                                       });
 
-                                      print(_selected2);
+                                      print(_methodPayment);
                                     },
                                     items: PaymentMetode.map((Map map) {
                                       return new DropdownMenuItem<String>(
@@ -218,11 +242,14 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                         },
                         style: TextStyle(fontSize: 20),
                         onChanged: (value) {
+                          if (value.isNotEmpty) {
+                            _nama = value;
+                            print(_nama);
+                          }
                           if (formKey.currentState!.validate()) {
                             setState(() {
                               isButtonActive = true;
                             });
-                            print("validate");
                           } else {
                             setState(() {
                               isButtonActive = false;
@@ -252,10 +279,10 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                           if (value.isNotEmpty) {
                             var jumlah = 27500 * int.parse(value);
                             setState(() {
-                              Hasil = jumlah.toString();
+                              _jumlah = jumlah.toString();
                             });
                           } else {
-                            Hasil = "0";
+                            _jumlah = "0";
                           }
                           if (formKey.currentState!.validate()) {
                             setState(() {
@@ -279,7 +306,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                         height: 20,
                       ),
                       Text(
-                        "Jumlah yang harus dibayarkan adalah:  Rp." + Hasil,
+                        "Jumlah yang harus dibayarkan adalah:  Rp." + _jumlah,
                         style: TextStyle(fontSize: 18),
                       ),
 //jumlah yang dibayar============================================================================================================
@@ -294,7 +321,14 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                               minimumSize: const Size(200, 50)),
                           onPressed: isButtonActive
                               ? () {
-                                  print("Sukses");
+                                  Navigator.pushReplacementNamed(
+                                      context, ZakatFitrah_2Screen.route,
+                                      arguments: {
+                                        "methodPayment": _methodPayment,
+                                        "Laz": _Laz,
+                                        "nama": _nama,
+                                        "jumlah": _jumlah
+                                      });
                                 }
                               : null,
                           child: Text("Lanjutkan")),
@@ -303,4 +337,17 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
 //Button bayar============================================================================================================
         ]));
   }
+}
+
+class dataPayment {
+  final String methodPayment;
+  final String Laz;
+  final String nama;
+  final String jumlah;
+
+  const dataPayment(
+      {required this.methodPayment,
+      required this.Laz,
+      required this.nama,
+      required this.jumlah});
 }

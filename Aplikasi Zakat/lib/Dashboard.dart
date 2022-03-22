@@ -28,10 +28,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
             title: "Bayar Zakat Fitrah",
             nav: zakatFitrah_1Screen.route,
           ),
-          const CardList(
-              imageurl: "images/zakatMall.png",
-              title: "Bayar Zakat Mall",
-              nav: zakatMall_1Screen.route),
+          Card(
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, zakatMall_1Screen.route,
+                        arguments: "0");
+                  },
+                  child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(children: <Widget>[
+                        Container(
+                          height: 50,
+                          width: 50,
+                          color: Colors.white,
+                          // decoration: BoxDecoration(border: Border.all()),
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: AssetImage("images/zakatMall.png"),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Center(
+                          child: Text(
+                            "Bayar Zakat Mall",
+                            style: TextStyle(fontSize: 20),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      ])))),
           const CardList(
             imageurl: "images/kalkulator.png",
             title: "Hitung Zakat Mall",
@@ -79,7 +105,6 @@ class CardList extends StatelessWidget {
         child: InkWell(
             onTap: () {
               Navigator.pushNamed(context, nav);
-              print("tapped");
             },
             child: Padding(
                 padding: const EdgeInsets.all(5.0),

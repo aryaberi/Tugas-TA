@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Provider/Provider.dart';
+import 'package:provider/provider.dart';
+
+import 'Scroll _view.dart';
 
 class DataTableSample extends StatefulWidget {
   const DataTableSample({Key? key}) : super(key: key);
@@ -8,109 +12,168 @@ class DataTableSample extends StatefulWidget {
 }
 
 class _DataTableSampleState extends State<DataTableSample> {
-  List<Map> dataRow = [
-    {
-      "Id": "1",
-      "No": "1",
-      "Nama": "Budi",
-      "Tanggal": "12/02/2022",
-      "Jenis": "Zakat Fitrah",
-      "Status": "Telah dibayarkan"
-    },
-    {
-      "Id": "2",
-      "No": "2",
-      "Nama": "Maman",
-      "Tanggal": "12/02/2022",
-      "Jenis": "Zakat Fitrah",
-      "Status": "Telah dibayarkan"
-    }
-  ];
-
   void _getSelectedRowInfo(dynamic name, dynamic price) {
     print('Name:$name  price: $price');
   }
 
   @override
   Widget build(BuildContext context) {
+    final items = Provider.of<itemLaporan>(context);
+    final _items = items.allItems;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Laporan Zakat",
-          style: TextStyle(fontSize: 14),
+        appBar: AppBar(
+          title: Text(
+            "Laporan Zakat",
+            style: TextStyle(fontSize: 14),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.lightGreen,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              );
+            },
+          ),
+          actions: [Icon(Icons.home)],
         ),
-        centerTitle: true,
-        backgroundColor: Colors.lightGreen,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            );
-          },
-        ),
-        actions: [Icon(Icons.home)],
-      ),
-      body: Container(
-        child: DataTable(
-          columnSpacing: 10,
-          dataRowHeight: 100,
-          onSelectAll: (b) {},
-          sortAscending: true,
-          columns: <DataColumn>[
-            DataColumn(
-              label: Text('No'),
-            ),
-            DataColumn(
-              label: Text('Detail'),
-            ),
-            DataColumn(
-              label: Text('Status'),
-            ),
-            DataColumn(
-              label: Text(''),
-            ),
-          ],
-          rows: dataRow
-              .map(
-                (Map itemRow) => DataRow(
-                  cells: [
-                    DataCell(
-                      Text(itemRow["No"]),
-                      showEditIcon: false,
-                      placeholder: false,
-                    ),
-                    DataCell(
-                      cardDetail(
-                          nama: itemRow["Nama"],
-                          tanggal: itemRow["Tanggal"],
-                          jenis: itemRow["Jenis"]),
-                      placeholder: false,
-                      // onTap: () {
-                      //   _getSelectedRowInfo(itemRow["Id"], itemRow["Nama"]);
-                      // },
-                    ),
-                    DataCell(
-                      Text(itemRow["Status"]),
-                      showEditIcon: false,
-                      placeholder: false,
-                    ),
-                    DataCell(
-                      Text("rincian"),
-                      placeholder: false,
-                      onTap: () {
-                        _getSelectedRowInfo(itemRow["Id"], itemRow["Nama"]);
-                      },
-                    ),
-                  ],
-                ),
-              )
-              .toList(),
-        ),
-      ),
-    );
+        body: Column(children: [
+          Expanded(
+            child: ListView(children: [
+              DataTable(
+                columnSpacing: 10,
+                dataRowHeight: 100,
+                onSelectAll: (b) {},
+                sortAscending: true,
+                columns: <DataColumn>[
+                  DataColumn(
+                    label: Text('No'),
+                  ),
+                  DataColumn(
+                    label: Text('Detail'),
+                  ),
+                  DataColumn(
+                    label: Text('Status'),
+                  ),
+                  DataColumn(
+                    label: Text(''),
+                  ),
+                ],
+                rows: _items
+                    .map(
+                      (Map itemRow) => DataRow(
+                        cells: [
+                          DataCell(
+                            Text(itemRow["Id"]),
+                            showEditIcon: false,
+                            placeholder: false,
+                          ),
+                          DataCell(
+                            cardDetail(
+                                nama: itemRow["Nama"],
+                                tanggal: itemRow["Tanggal"],
+                                jenis: itemRow["Jenis"]),
+                            placeholder: false,
+                            // onTap: () {
+                            //   _getSelectedRowInfo(itemRow["Id"], itemRow["Nama"]);
+                            // },
+                          ),
+                          DataCell(
+                            Text(itemRow["Status"]),
+                            showEditIcon: false,
+                            placeholder: false,
+                          ),
+                          DataCell(
+                            Text("rincian"),
+                            placeholder: false,
+                            onTap: () {
+                              showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                          title: const Text(
+                                              'Rincian Pembayaran Zakat'),
+                                          content: Container(
+                                            height: 400,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text("Anda telah membayarkat " +
+                                                    itemRow["Jenis"]),
+                                                Text(
+                                                  "Pada Tanggal : " +
+                                                      itemRow["Tanggal"],
+                                                ),
+                                                Text("Kepada : " +
+                                                    itemRow["Laz"]),
+                                                Text("Atas Nama : " +
+                                                    itemRow["Nama"]),
+                                                Text("Sebesar : " +
+                                                    itemRow["Jumlah"]),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                itemRow["Status"] ==
+                                                        "Telah diterima oleh LAZ"
+                                                    ? Text("Saat ini Zakat anda telah diterima oleh LAZ yang bersangkutan, Anda bisa menghubungi " +
+                                                        itemRow["Penangung"] +
+                                                        "Untuk informasi lebih seputar status Zakat anda")
+                                                    : Column(children: [
+                                                        Text("No Penanggung Jawab :" +
+                                                            itemRow[
+                                                                "Penangung"]),
+                                                        Text(
+                                                            "Telah disalurkan ke " +
+                                                                itemRow[
+                                                                    "Tempat"]),
+                                                        Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Text(
+                                                            "Pada Tanggal : " +
+                                                                itemRow[
+                                                                    "Distribusi"],
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "Anda dapat menghubungi No " +
+                                                              itemRow["NoTlp"] +
+                                                              " Selaku " +
+                                                              itemRow[
+                                                                  "AtasNama"] +
+                                                              " untuk memastikan",
+                                                        )
+                                                      ]),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('Ok'),
+                                            )
+                                          ]));
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
+            ]),
+          )
+        ]));
   }
 }
 
