@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/tes3.dart';
+import 'package:intl/intl.dart';
 
-List<Map> data2 = [
-  {"Id": "1", "Jenis": "Zakat Harta", "Tanggal": "12/03/2022"},
-  {"Id": "2", "Jenis": "Zakat Profesi", "Tanggal": "12/03/2022"},
-];
 final newData =
     dataAlarm(id: "2", jenis: "Zakat Fitrah", tanggal: "12/02/2022");
 List<dataAlarm> _dataAlarm2 = <dataAlarm>[];
@@ -17,22 +14,117 @@ class AlarmScrenn extends StatefulWidget {
 }
 
 class _AlarmScrennState extends State<AlarmScrenn> {
-  final List<Map<String, dynamic>> data = [
-    {"Id": "1", "Jenis": "Zakat Harta", "Tanggal": "12/03/2022"},
-    {"Id": "2", "Jenis": "Zakat Profesi", "Tanggal": "12/03/2022"},
+  List<Map> zakatMall = [
+    {"name": "Zakat Pendapatan"},
+    {"name": "Zakat Tabungan"},
+    {"name": "Zakat Perniagaan"},
+    {"name": "Zakat Emas"},
+    {"name": "Zakat Perak"},
+    {"name": "Zakat Fidyah"}
   ];
+
+  String Jenis = "Zakat Harta";
+  String Tgl = "1";
+  String Bulan = "1";
+  String Taun = "2022";
+  String Tanggal = "1/1/2022";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            var Idx = _dataAlarm2.length + 1;
-            setState(() {
-              _dataAlarm2.add(dataAlarm(
-                  id: Idx.toString(), jenis: "ujang", tanggal: "12/04/2021"));
-            });
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Setel Alarm'),
+                content: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: DropdownButtonFormField(
+                        isExpanded: true,
+                        isDense: true,
+                        hint: new Text("Pilih Jenis Zakat"),
+                        value: Jenis,
+                        onChanged: (Value) {
+                          setState(() {
+                            Jenis = Value.toString();
+                          });
+
+                          print(Jenis);
+                        },
+                        items: zakatMall.map((Map map) {
+                          return new DropdownMenuItem<String>(
+                            value: map["name"].toString(),
+                            // value: _mySelection,
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Text(map["name"])),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "1.Masukan Tanggal pemasangan:",
+                        ),
+                        onChanged: (value) {
+                          if (value.isNotEmpty) {
+                            Tgl = value;
+                            print(Tgl);
+                          }
+                          ;
+                        }),
+                    TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "2.Masukan Bulan pemasangan:",
+                        ),
+                        onChanged: (value) {
+                          if (value.isNotEmpty) {
+                            Bulan = value;
+                            print(Bulan);
+                          }
+                          ;
+                        }),
+                  ]),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      var Idx = _dataAlarm2.length + 1;
+                      Taun = DateFormat("yyyy").format(DateTime.now());
+                      int Tahun = int.parse(Taun) + 1;
+                      Tanggal = Tgl + "/" + Bulan + "/" + Tahun.toString();
+                      setState(() {
+                        _dataAlarm2.add(dataAlarm(
+                            id: Idx.toString(),
+                            jenis: Jenis,
+                            tanggal: Tanggal));
+                      });
+                      Navigator.pop(context, 'OK');
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
           },
           child: Icon(Icons.add),
         ),
@@ -60,10 +152,6 @@ class _AlarmScrennState extends State<AlarmScrenn> {
             return CardListAlarm(
                 jenis: items.jenis, tanggal: items.tanggal, id: items.id);
           }).toList(),
-          TextButton(
-            onPressed: () {},
-            child: const Text('Show Dialog'),
-          )
         ]));
   }
 }
@@ -105,30 +193,7 @@ class _CardListAlarmState extends State<CardListAlarm> {
               return IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('AlertDialog Title'),
-                      content: const Text('AlertDialog description'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _dataAlarm2.removeWhere(
-                                  (element) => element.id == widget.id);
-                            });
-
-                            Navigator.pop(context, 'OK');
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
+                  _dataAlarm2.removeWhere((item) => item.id == widget.id);
                 },
               );
             },
