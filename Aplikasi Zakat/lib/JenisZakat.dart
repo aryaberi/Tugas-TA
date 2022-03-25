@@ -9,16 +9,16 @@ import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerak.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerniagaan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatTabungan.dart';
 
-class KalkulatorScreen extends StatelessWidget {
-  const KalkulatorScreen({Key? key}) : super(key: key);
-  static const route = "/Kalkulator";
+class JenisZakatScreen extends StatelessWidget {
+  const JenisZakatScreen({Key? key}) : super(key: key);
+  static const route = "/JenisZakat";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            " Zakat",
+            "Macam-macam Zakat",
             style: TextStyle(fontSize: 14),
           ),
           centerTitle: true,
@@ -37,28 +37,30 @@ class KalkulatorScreen extends StatelessWidget {
         ),
         body: ListView(shrinkWrap: true, children: [
           CardList(
-              name: "Zakat Pendapatan",
-              route: kalkulatorZPendapatanScreen.route),
+              name: "Zakat Fitrah", route: kalkulatorZPendapatanScreen.route),
           CardList(
-              name: "Zakat Tabungan", route: kalkulatorZTabunganScreen.route),
+              name: "Zakat Penghasilan",
+              route: kalkulatorZTabunganScreen.route),
           CardList(
               name: "Zakat Perniagaan",
               route: kalkulatorZPerniagaanScreen.route),
           CardList(
-            name: "Zakat Emas",
+            name: "Zakat Tabungan",
             route: kalkulatorZEmasScreen.route,
           ),
           CardList(
-            name: "Zakat Perak",
+            name: "Zakat Emas",
             route: kalkulatorZPerakScreen.route,
           ),
           CardList(
+              name: "Zakat Perak", route: kalkulatorZPerniagaanScreen.route),
+          CardList(
             name: "Zakat Hadiah",
-            route: kalkulatorZHadiahScreen.route,
+            route: kalkulatorZEmasScreen.route,
           ),
           CardList(
             name: "Zakat Fidyah",
-            route: kalkulatorZFidyahScreen.route,
+            route: kalkulatorZPerakScreen.route,
           ),
         ]));
   }

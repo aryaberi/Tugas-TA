@@ -9,16 +9,16 @@ import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerak.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerniagaan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatTabungan.dart';
 
-class KalkulatorScreen extends StatelessWidget {
-  const KalkulatorScreen({Key? key}) : super(key: key);
-  static const route = "/Kalkulator";
+class BantuanScreen extends StatelessWidget {
+  const BantuanScreen({Key? key}) : super(key: key);
+  static const route = "/Bantuan";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            " Zakat",
+            "Bantuan Penggunaan",
             style: TextStyle(fontSize: 14),
           ),
           centerTitle: true,
@@ -37,28 +37,21 @@ class KalkulatorScreen extends StatelessWidget {
         ),
         body: ListView(shrinkWrap: true, children: [
           CardList(
-              name: "Zakat Pendapatan",
+              name: "Cara Membayar Zakat Fitrah",
               route: kalkulatorZPendapatanScreen.route),
           CardList(
-              name: "Zakat Tabungan", route: kalkulatorZTabunganScreen.route),
+              name: "Cara Membayar Zakat Mall",
+              route: kalkulatorZTabunganScreen.route),
           CardList(
-              name: "Zakat Perniagaan",
+              name: "Cara Menghitung Zakat",
               route: kalkulatorZPerniagaanScreen.route),
           CardList(
-            name: "Zakat Emas",
+            name: "Cara Memasang Alarm",
             route: kalkulatorZEmasScreen.route,
           ),
           CardList(
-            name: "Zakat Perak",
+            name: "Cara Belajar Zakat",
             route: kalkulatorZPerakScreen.route,
-          ),
-          CardList(
-            name: "Zakat Hadiah",
-            route: kalkulatorZHadiahScreen.route,
-          ),
-          CardList(
-            name: "Zakat Fidyah",
-            route: kalkulatorZFidyahScreen.route,
           ),
         ]));
   }

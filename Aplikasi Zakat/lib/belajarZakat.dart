@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_2/Belajar_Page/Hukuman.dart';
+import 'package:flutter_application_2/Belajar_Page/WajibZakat.dart';
+import 'package:flutter_application_2/Belajar_Page/ZakatOnline.dart';
+import 'package:flutter_application_2/Belajar_Page/pengertianZakat.dart';
 import 'package:flutter_application_2/Widget/CardList.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatEmas.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatFidyah.dart';
@@ -9,16 +13,16 @@ import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerak.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerniagaan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatTabungan.dart';
 
-class KalkulatorScreen extends StatelessWidget {
-  const KalkulatorScreen({Key? key}) : super(key: key);
-  static const route = "/Kalkulator";
+class BelajarScreen extends StatelessWidget {
+  const BelajarScreen({Key? key}) : super(key: key);
+  static const route = "/Belajar";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            " Zakat",
+            "Belajar Zakat",
             style: TextStyle(fontSize: 14),
           ),
           centerTitle: true,
@@ -36,29 +40,16 @@ class KalkulatorScreen extends StatelessWidget {
           actions: [Icon(Icons.home)],
         ),
         body: ListView(shrinkWrap: true, children: [
+          CardList(name: "Pengertian Zakat", route: pengertianScreen.route),
+          CardList(name: "Mengapa Wajib Zakat", route: WajibScreen.route),
+          CardList(name: "Jenis Zakat", route: pengertianScreen.route),
           CardList(
-              name: "Zakat Pendapatan",
-              route: kalkulatorZPendapatanScreen.route),
-          CardList(
-              name: "Zakat Tabungan", route: kalkulatorZTabunganScreen.route),
-          CardList(
-              name: "Zakat Perniagaan",
-              route: kalkulatorZPerniagaanScreen.route),
-          CardList(
-            name: "Zakat Emas",
-            route: kalkulatorZEmasScreen.route,
+            name: "Hukuman Bagi Orang yang Tidak Mau Berzakat",
+            route: HukumanScreen.route,
           ),
           CardList(
-            name: "Zakat Perak",
-            route: kalkulatorZPerakScreen.route,
-          ),
-          CardList(
-            name: "Zakat Hadiah",
-            route: kalkulatorZHadiahScreen.route,
-          ),
-          CardList(
-            name: "Zakat Fidyah",
-            route: kalkulatorZFidyahScreen.route,
+            name: "Hukum Membayar Zakat Online",
+            route: zakatOnlineScreen.route,
           ),
         ]));
   }

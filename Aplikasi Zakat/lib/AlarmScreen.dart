@@ -6,6 +6,8 @@ final newData =
     dataAlarm(id: "2", jenis: "Zakat Fitrah", tanggal: "12/02/2022");
 List<dataAlarm> _dataAlarm2 = <dataAlarm>[];
 
+final List<CardListAlarm> _myWidgetList = [];
+
 class AlarmScrenn extends StatefulWidget {
   const AlarmScrenn({Key? key}) : super(key: key);
   static const route = "/Alarm";
@@ -23,7 +25,7 @@ class _AlarmScrennState extends State<AlarmScrenn> {
     {"name": "Zakat Fidyah"}
   ];
 
-  String Jenis = "Zakat Harta";
+  String Jenis = "Zakat Pendapatan";
   String Tgl = "1";
   String Bulan = "1";
   String Taun = "2022";
@@ -32,127 +34,176 @@ class _AlarmScrennState extends State<AlarmScrenn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                title: const Text('Setel Alarm'),
-                content: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(children: [
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      child: DropdownButtonFormField(
-                        isExpanded: true,
-                        isDense: true,
-                        hint: new Text("Pilih Jenis Zakat"),
-                        value: Jenis,
-                        onChanged: (Value) {
-                          setState(() {
-                            Jenis = Value.toString();
-                          });
+      resizeToAvoidBottomInset: false,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Setel Alarm'),
+              content: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(children: [
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                    ),
+                    child: DropdownButtonFormField(
+                      isExpanded: true,
+                      isDense: true,
+                      hint: new Text("Pilih Jenis Zakat"),
+                      value: Jenis,
+                      onChanged: (Value) {
+                        setState(() {
+                          Jenis = Value.toString();
+                        });
 
-                          print(Jenis);
-                        },
-                        items: zakatMall.map((Map map) {
-                          return new DropdownMenuItem<String>(
-                            value: map["name"].toString(),
-                            // value: _mySelection,
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: Text(map["name"])),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                        print(Jenis);
+                      },
+                      items: zakatMall.map((Map map) {
+                        return new DropdownMenuItem<String>(
+                          value: map["name"].toString(),
+                          // value: _mySelection,
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(map["name"])),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "1.Masukan Tanggal pemasangan:",
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "1.Masukan Tanggal pemasangan:",
-                        ),
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            Tgl = value;
-                            print(Tgl);
-                          }
-                          ;
-                        }),
-                    TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "2.Masukan Bulan pemasangan:",
-                        ),
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            Bulan = value;
-                            print(Bulan);
-                          }
-                          ;
-                        }),
-                  ]),
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      var Idx = _dataAlarm2.length + 1;
-                      Taun = DateFormat("yyyy").format(DateTime.now());
-                      int Tahun = int.parse(Taun) + 1;
-                      Tanggal = Tgl + "/" + Bulan + "/" + Tahun.toString();
-                      setState(() {
-                        _dataAlarm2.add(dataAlarm(
-                            id: Idx.toString(),
-                            jenis: Jenis,
-                            tanggal: Tanggal));
-                      });
-                      Navigator.pop(context, 'OK');
-                    },
-                    child: const Text('OK'),
-                  ),
-                ],
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          Tgl = value;
+                          print(Tgl);
+                        }
+                        ;
+                      }),
+                  TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "2.Masukan Bulan pemasangan:",
+                      ),
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          Bulan = value;
+                          print(Bulan);
+                        }
+                        ;
+                      }),
+                ]),
               ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    var Idx = _dataAlarm2.length + 1;
+                    Taun = DateFormat("yyyy").format(DateTime.now());
+                    int Tahun = int.parse(Taun) + 1;
+                    Tanggal = Tgl + "/" + Bulan + "/" + Tahun.toString();
+                    setState(() {
+                      _myWidgetList.add(CardListAlarm(
+                          id: Idx.toString(), jenis: Jenis, tanggal: Tanggal));
+                      _dataAlarm2.add(dataAlarm(
+                          id: Idx.toString(), jenis: Jenis, tanggal: Tanggal));
+                    });
+                    Navigator.pop(context, 'OK');
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
+      appBar: AppBar(
+        title: Text(
+          "Alarm Zakat",
+          style: TextStyle(fontSize: 14),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.lightGreen,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             );
           },
-          child: Icon(Icons.add),
         ),
-        appBar: AppBar(
-          title: Text(
-            "Laporan Zakat",
-            style: TextStyle(fontSize: 14),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.lightGreen,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-          actions: [Icon(Icons.home)],
-        ),
-        body: ListView(children: [
-          ..._dataAlarm2.map((items) {
-            return CardListAlarm(
-                jenis: items.jenis, tanggal: items.tanggal, id: items.id);
-          }).toList(),
-        ]));
+        actions: [Icon(Icons.home)],
+      ),
+      body: ListView.builder(
+        itemCount: _dataAlarm2.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Text(index.toString()),
+                    Text("${_dataAlarm2[index].jenis}"),
+                    Text("${_dataAlarm2[index].tanggal}"),
+                  ],
+                ),
+                SizedBox(width: 150),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                                    title: const Text('Hapus Alarm'),
+                                    content: Text(
+                                        "Yakin untuk menghapus alarm ini ?"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'Cancel'),
+                                        child: const Text('Tidak'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _myWidgetList.remove(index);
+                                            _dataAlarm2
+                                                .remove(_dataAlarm2[index]);
+                                          });
+
+                                          Navigator.pop(context, 'OK');
+                                        },
+                                        child: Text("Ya"),
+                                      )
+                                    ]));
+                      });
+                    },
+                    icon: Icon(Icons.delete))
+              ],
+            ),
+          );
+          // return CardListAlarm(
+          //     id: index.toString(),
+          //     jenis: "${_dataAlarm2[index].jenis}",
+          //     tanggal: "${_dataAlarm2[index].tanggal}");
+        },
+      ),
+    );
   }
 }
 
@@ -193,7 +244,31 @@ class _CardListAlarmState extends State<CardListAlarm> {
               return IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  _dataAlarm2.removeWhere((item) => item.id == widget.id);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Hapus Alarm'),
+                              content:
+                                  Text("Yakin untuk menghapus alarm ini ?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Tidak'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _myWidgetList.remove(widget.id);
+                                      _dataAlarm2.remove(
+                                          _dataAlarm2[int.parse(widget.id)]);
+                                    });
+
+                                    Navigator.pop(context, 'OK');
+                                  },
+                                  child: Text("Ya"),
+                                )
+                              ]));
                 },
               );
             },

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/AlarmScreen.dart';
+import 'package:flutter_application_2/belajarZakat.dart';
+import 'package:flutter_application_2/Bantuan.dart';
 import 'package:flutter_application_2/DataTableSample.dart';
 import 'package:flutter_application_2/KalkulatorZakat.dart';
 import 'package:flutter_application_2/LaporanScreen.dart';
@@ -23,7 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           actions: [CircleAvatar(child: Icon(Icons.person))],
         ),
         body: ListView(children: [
-          const CardList(
+          const CardListDashboard(
             imageurl: "images/zakatFitrah.jpg",
             title: "Bayar Zakat Fitrah",
             nav: zakatFitrah_1Screen.route,
@@ -58,41 +60,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                         ),
                       ])))),
-          const CardList(
+          const CardListDashboard(
             imageurl: "images/kalkulator.png",
             title: "Hitung Zakat Mall",
             nav: KalkulatorScreen.route,
           ),
-          const CardList(
+          const CardListDashboard(
             imageurl: "images/laporan.png",
             title: "Laporan Zakat",
             nav: DataTableSample.route,
           ),
-          const CardList(
+          const CardListDashboard(
             imageurl: "images/alarm.png",
             title: "Pasang Alarm",
             nav: AlarmScrenn.route,
           ),
-          const CardList(
+          const CardListDashboard(
             imageurl: "images/belajar.png",
             title: "Belajar Zakat",
-            nav: zakatMall_1Screen.route,
+            nav: BelajarScreen.route,
           ),
-          const CardList(
+          const CardListDashboard(
             imageurl: "images/bantuan.png",
             title: "Bantuan",
-            nav: zakatMall_1Screen.route,
+            nav: BantuanScreen.route,
           ),
         ]));
   }
 }
 
-class CardList extends StatelessWidget {
+class CardListDashboard extends StatelessWidget {
   final String imageurl;
   final String title;
   final String nav;
 
-  const CardList({
+  const CardListDashboard({
     Key? key,
     required this.imageurl,
     required this.title,

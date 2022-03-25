@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/AlarmScreen.dart';
+import 'package:flutter_application_2/Belajar_Page/jenisZakat.dart';
+import 'package:flutter_application_2/JenisZakat.dart';
+import 'package:flutter_application_2/belajarZakat.dart';
+import 'package:flutter_application_2/Bantuan.dart';
+import 'package:flutter_application_2/Belajar_Page/Hukuman.dart';
+import 'package:flutter_application_2/Belajar_Page/WajibZakat.dart';
+import 'package:flutter_application_2/Belajar_Page/ZakatOnline.dart';
+import 'package:flutter_application_2/Belajar_Page/pengertianZakat.dart';
 import 'package:flutter_application_2/DataTableSample.dart';
 import 'package:flutter_application_2/KalkulatorZHarta.dart';
 import 'package:flutter_application_2/KalkulatorZakat.dart';
@@ -65,6 +73,13 @@ class MyApp extends StatelessWidget {
             LaporanScreen.route: (context) => const LaporanScreen(),
             DataTableSample.route: (context) => const DataTableSample(),
             AlarmScrenn.route: (context) => const AlarmScrenn(),
+            BelajarScreen.route: (context) => const BelajarScreen(),
+            pengertianScreen.route: (context) => const pengertianScreen(),
+            jenisZakatScreen.route: (context) => const JenisZakatScreen(),
+            WajibScreen.route: (context) => const WajibScreen(),
+            HukumanScreen.route: (context) => const HukumanScreen(),
+            zakatOnlineScreen.route: (context) => const zakatOnlineScreen(),
+            BantuanScreen.route: (context) => const BantuanScreen(),
           }),
     );
   }

@@ -96,8 +96,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     // int.parse(data) > 0 ? Hasil = data : null;
 
-    int.parse(data["Zakat"]!) > 0 ? Hasil = data["Zakat"]! : null;
-    int.parse(data["Zakat"]!) > 0 ? _jenis = data["Jenis"]! : null;
+    data.isNotEmpty ? Hasil = data["Zakat"]! : null;
+    data.isNotEmpty ? _jenis = data["Jenis"]! : null;
 
     return Scaffold(
         appBar: AppBar(
@@ -339,41 +339,43 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                       //Form nama============================================================================================================
 
 //Form jumlah orang============================================================================================================
+                      data.isNotEmpty
+                          ? Text("Jumlah Zakat yang akan dibayarkan " +
+                              data["Zakat"]!)
+                          : TextFormField(
+                              decoration: InputDecoration(
+                                  labelText:
+                                      "2.Masukan Jumlah yang ingin dibayarkan :"),
+                              validator: (value) {
+                                if (value!.isEmpty ||
+                                    !RegExp('^[0-9]').hasMatch(value)) {
+                                  return "Isi dengan angka";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              style: TextStyle(fontSize: 20),
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  Hasil = value;
+                                  print(Hasil);
+                                } else {
+                                  Hasil = "0";
+                                }
+                                if (formKey.currentState!.validate()) {
+                                  setState(() {
+                                    isButtonActive = true;
+                                  });
+                                  print("validate");
+                                } else {
+                                  setState(() {
+                                    isButtonActive = false;
+                                  });
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                            labelText:
-                                "2.Masukan Jumlah yang ingin dibayarkan :"),
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
-                            return "Isi dengan angka";
-                          } else {
-                            return null;
-                          }
-                        },
-                        style: TextStyle(fontSize: 20),
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            Hasil = value;
-                            print(Hasil);
-                          } else {
-                            Hasil = "0";
-                          }
-                          if (formKey.currentState!.validate()) {
-                            setState(() {
-                              isButtonActive = true;
-                            });
-                            print("validate");
-                          } else {
-                            setState(() {
-                              isButtonActive = false;
-                            });
-
-                            print(isButtonActive);
-                          }
-                        },
-                      ),
+                                  print(isButtonActive);
+                                }
+                              },
+                            ),
 //Form jumlah orang============================================================================================================
 
 //jumlah yang dibayar============================================================================================================
