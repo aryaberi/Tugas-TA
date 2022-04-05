@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/AlarmScreen.dart';
+import 'package:flutter_application_2/Bantuan_Page/Alarm.dart';
+import 'package:flutter_application_2/Bantuan_Page/Belajar.dart';
+import 'package:flutter_application_2/Bantuan_Page/Kalkulator.dart';
+import 'package:flutter_application_2/Bantuan_Page/Laporan.dart';
+import 'package:flutter_application_2/Bantuan_Page/bayarZakatFitrah.dart';
+import 'package:flutter_application_2/Bantuan_Page/bayarZakatMal.dart';
 import 'package:flutter_application_2/Belajar_Page/jenisZakat.dart';
 import 'package:flutter_application_2/JenisZakat.dart';
 import 'package:flutter_application_2/belajarZakat.dart';
@@ -46,16 +52,30 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           //   home: (zakatFitrah_1Screen()),
           // );
-          initialRoute: DashboardScreen.route,
+          initialRoute: LoginScreen.route,
           routes: {
+            // route Menu Dashboard//
+            LoginScreen.route: (context) => const LoginScreen(),
+            RegisterScreen.route: (context) => const RegisterScreen(),
             DashboardScreen.route: (context) => const DashboardScreen(),
             zakatFitrah_1Screen.route: (context) => const zakatFitrah_1Screen(),
+            zakatMall_1Screen.route: (context) => const zakatMall_1Screen(),
+            KalkulatorScreen.route: (context) => const KalkulatorScreen(),
+            LaporanScreen.route: (context) => const LaporanScreen(),
+            DataTableSample.route: (context) => const DataTableSample(),
+            AlarmScrenn.route: (context) => const AlarmScrenn(),
+            BelajarScreen.route: (context) => const BelajarScreen(),
+            BantuanScreen.route: (context) => const BantuanScreen(),
+
+            //route Zakat fitrah//
             ZakatFitrah_2Screen.route: (context) => ZakatFitrah_2Screen(),
             zakatFitrah_3Screen.route: (context) => zakatFitrah_3Screen(),
-            zakatMall_1Screen.route: (context) => const zakatMall_1Screen(),
+
+            //route Zakat Mall//
             ZakatMall_2Screen.route: (context) => ZakatMall_2Screen(),
             zakatMall_3Screen.route: (context) => zakatMall_3Screen(),
-            KalkulatorScreen.route: (context) => const KalkulatorScreen(),
+
+            //route Kalkulator//
             kalkulatorZPendapatanScreen.route: (context) =>
                 const kalkulatorZPendapatanScreen(),
             kalkulatorZTabunganScreen.route: (context) =>
@@ -70,16 +90,24 @@ class MyApp extends StatelessWidget {
                 const kalkulatorZHadiahScreen(),
             kalkulatorZFidyahScreen.route: (context) =>
                 const kalkulatorZFidyahScreen(),
-            LaporanScreen.route: (context) => const LaporanScreen(),
-            DataTableSample.route: (context) => const DataTableSample(),
-            AlarmScrenn.route: (context) => const AlarmScrenn(),
-            BelajarScreen.route: (context) => const BelajarScreen(),
+
+            //route Belajar//
             pengertianScreen.route: (context) => const pengertianScreen(),
             jenisZakatScreen.route: (context) => const JenisZakatScreen(),
             WajibScreen.route: (context) => const WajibScreen(),
             HukumanScreen.route: (context) => const HukumanScreen(),
             zakatOnlineScreen.route: (context) => const zakatOnlineScreen(),
-            BantuanScreen.route: (context) => const BantuanScreen(),
+
+            //route bantuan//
+            bantuanKalulatorScreen.route: (context) =>
+                const bantuanKalulatorScreen(),
+            bantuanLaporanScreen.route: (context) =>
+                const bantuanLaporanScreen(),
+            bantuanAlarmScreen.route: (context) => const bantuanAlarmScreen(),
+            bantuanBelajarScreen.route: (context) =>
+                const bantuanBelajarScreen(),
+            bantuanZMScreen.route: (context) => const bantuanZMScreen(),
+            bantuanZFScreen.route: (context) => const bantuanZFScreen(),
           }),
     );
   }

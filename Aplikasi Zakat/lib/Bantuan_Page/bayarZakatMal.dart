@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class bantuanZFScreen extends StatelessWidget {
-  const bantuanZFScreen({Key? key}) : super(key: key);
+class bantuanZMScreen extends StatelessWidget {
+  const bantuanZMScreen({Key? key}) : super(key: key);
 
-  static const route = "/bantuanZF";
+  static const route = "/bantuanZM";
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class bantuanZFScreen extends StatelessWidget {
       body: ListView(
         children: [
           Text(
-            "Cara Membayar Zakat Fitrah",
+            "Cara Membayar Zakat Mall",
             style: TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
           ),
@@ -38,7 +38,7 @@ class bantuanZFScreen extends StatelessWidget {
             height: 10,
           ),
           Text(
-              "2. Pada tampilan berikutt .... Pilih LAZ dan juga metode pembayaran"),
+              "2. Pada tampilan berikutt .... Pilih jenis zakat mall, LAZ dan juga metode pembayaran"),
           SizedBox(
             height: 10,
           ),
@@ -47,7 +47,6 @@ class bantuanZFScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          
           Text(
               "4. Tekan Tombol bayar, setelah itu anda akan dibawa kehalaman konfiramsi, pastikan data yang telah dimasukan telah sesuai"),
           SizedBox(
@@ -65,11 +64,11 @@ class bantuanZFScreen extends StatelessWidget {
           ),
           Text(
               "7. Apabila anda memilih metode pembayaran secara tranfer atm maupun Mbking, silahkan tranferkan uang anda pada rekening yang diberikan dan menekan tombol konfirmasi."),
+          Text(
+              "8. Selamat anda telah berhasil melakukan pembayaran zakat mall."),
           SizedBox(
             height: 10,
           ),
-          Text(
-              "8. Selamat anda telah berhasil melakukan pembayaran zakat fitrah."),          
         ],
       ),
     );

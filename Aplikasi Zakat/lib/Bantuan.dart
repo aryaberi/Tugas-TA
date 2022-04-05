@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_2/Bantuan_Page/Alarm.dart';
+import 'package:flutter_application_2/Bantuan_Page/Belajar.dart';
+import 'package:flutter_application_2/Bantuan_Page/Kalkulator.dart';
+import 'package:flutter_application_2/Bantuan_Page/Laporan.dart';
+import 'package:flutter_application_2/Bantuan_Page/bayarZakatFitrah.dart';
+import 'package:flutter_application_2/Bantuan_Page/bayarZakatMal.dart';
 import 'package:flutter_application_2/Widget/CardList.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatEmas.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatFidyah.dart';
@@ -37,21 +43,21 @@ class BantuanScreen extends StatelessWidget {
         ),
         body: ListView(shrinkWrap: true, children: [
           CardList(
-              name: "Cara Membayar Zakat Fitrah",
-              route: kalkulatorZPendapatanScreen.route),
+              name: "Cara Membayar Zakat Fitrah", route: bantuanZFScreen.route),
           CardList(
-              name: "Cara Membayar Zakat Mall",
-              route: kalkulatorZTabunganScreen.route),
+              name: "Cara Membayar Zakat Mall", route: bantuanZMScreen.route),
           CardList(
               name: "Cara Menghitung Zakat",
-              route: kalkulatorZPerniagaanScreen.route),
+              route: bantuanKalulatorScreen.route),
+          CardList(
+              name: "Cara Melihat Laporan", route: bantuanLaporanScreen.route),
           CardList(
             name: "Cara Memasang Alarm",
-            route: kalkulatorZEmasScreen.route,
+            route: bantuanAlarmScreen.route,
           ),
           CardList(
             name: "Cara Belajar Zakat",
-            route: kalkulatorZPerakScreen.route,
+            route: bantuanBelajarScreen.route,
           ),
         ]));
   }

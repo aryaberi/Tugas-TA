@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:intl/intl.dart';
 
 class kalkulatorZFidyahScreen extends StatefulWidget {
   const kalkulatorZFidyahScreen({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
   String _Jumlah = "0";
   String _Harga = "0";
   String Zakat = "0";
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +65,10 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                         decoration: InputDecoration(
                           labelText: "1.Total hari tidak puasa:",
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -98,6 +105,10 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText: "2.Biaya satu kali makan:"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -139,7 +150,10 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                                   height: 20,
                                 ),
                                 Text(
-                                  "Total Fidyah anda  adalah " + Zakat,
+                                  "Total Fidyah anda  adalah " +
+                                      formatter
+                                          .format(int.parse(Zakat))
+                                          .toString(),
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],
@@ -181,6 +195,7 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                                       setState(() {
                                         int Total = int.parse(_Jumlah) *
                                             int.parse(_Harga);
+
                                         Zakat = Total.toString();
                                         isHitung = true;
                                       });

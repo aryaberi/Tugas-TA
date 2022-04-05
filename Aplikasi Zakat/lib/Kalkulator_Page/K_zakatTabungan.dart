@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:intl/intl.dart';
 
 class kalkulatorZTabunganScreen extends StatefulWidget {
   const kalkulatorZTabunganScreen({Key? key}) : super(key: key);
@@ -21,6 +23,10 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
   String _Bunga = "0";
   String _Deposito = "0";
   String Zakat = "0";
+  String HasilRp = "0";
+  String ZakatRp = "0";
+
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +69,10 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                         decoration: InputDecoration(
                           labelText: "1.Masukan Total Tabungan anda:",
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -99,6 +109,10 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText: "2.Masukan Bunga dari Tabungan Anda :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -140,6 +154,10 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                         decoration: InputDecoration(
                             labelText:
                                 "3.Masukan Jumlah Deposito yang Dimiliki :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -185,7 +203,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                 ),
                                 Text(
                                   "Tabungan total anda selama setahun adalah " +
-                                      Hasil,
+                                      HasilRp,
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 int.parse(Hasil) < 95000000
@@ -193,7 +211,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                         "Tabungan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
                                     : Text(
                                         "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            Zakat)
+                                            ZakatRp)
                               ],
                             )
                           : SizedBox(width: 0, height: 0),
@@ -236,8 +254,15 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                             int.parse(_Deposito) -
                                             int.parse(_Bunga);
                                         Hasil = Total.toString();
+
                                         Zakat = (((Total * 25) / 1000).toInt())
                                             .toString();
+                                        var rupiah1 =
+                                            formatter.format(int.parse(Hasil));
+                                        var rupiah2 =
+                                            formatter.format(int.parse(Zakat));
+                                        HasilRp = rupiah1.toString();
+                                        ZakatRp = rupiah2.toString();
                                       });
                                       ;
                                     }

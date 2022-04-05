@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:intl/intl.dart';
 
 class kalkulatorZEmasScreen extends StatefulWidget {
   const kalkulatorZEmasScreen({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
   String _dimiliki = "0";
   String _digunakan = "0";
   String Zakat = "0";
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +65,10 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                         decoration: InputDecoration(
                           labelText: "1.Masukan Emas yang dimiliki:",
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -99,6 +106,10 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                         decoration: InputDecoration(
                             labelText:
                                 "2.Masukan Jumlah emas yang digunakan :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -143,7 +154,9 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                 ),
                                 Text(
                                   "Total simpanan emas anda selama setahun adalah " +
-                                      (Hasil),
+                                      formatter
+                                          .format(int.parse(Hasil))
+                                          .toString(),
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 int.parse(Hasil) < 95000000
@@ -151,7 +164,9 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                         "Simpanan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
                                     : Text(
                                         "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            Zakat)
+                                            formatter
+                                                .format(int.parse(Zakat))
+                                                .toString())
                               ],
                             )
                           : SizedBox(width: 0, height: 0),
@@ -191,10 +206,11 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                       setState(() {
                                         int Jumlah = int.parse(_dimiliki) +
                                             int.parse(_digunakan);
+
                                         Hasil = (Jumlah * 850000).toString();
+
                                         Zakat =
-                                            (((int.parse(Hasil) * 25) / 1000)
-                                                    .toInt())
+                                            (((Jumlah * 850000) * 25) / 1000)
                                                 .toString();
                                         isHitung = true;
                                       });

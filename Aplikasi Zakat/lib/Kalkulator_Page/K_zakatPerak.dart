@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:intl/intl.dart';
 
 class kalkulatorZPerakScreen extends StatefulWidget {
   const kalkulatorZPerakScreen({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
   String _dimiliki = "0";
   String _digunakan = "0";
   String Zakat = "0";
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +65,8 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                         decoration: InputDecoration(
                           labelText: "1.Masukan Perak yang dimiliki:",
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -99,6 +104,8 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                         decoration: InputDecoration(
                             labelText:
                                 "2.Masukan Jumlah Perak yang digunakan :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -143,7 +150,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                                 ),
                                 Text(
                                   "Simpanan Perak total anda dalam rupiah selama setahun adalah " +
-                                      Hasil,
+                                      formatter.format(int.parse(Hasil)).toString(),
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 int.parse(Hasil) < 95000000
@@ -151,7 +158,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                                         "Simpanan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
                                     : Text(
                                         "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            Zakat)
+                                            formatter.format(int.parse(Zakat)).toString())
                               ],
                             )
                           : SizedBox(width: 0, height: 0),

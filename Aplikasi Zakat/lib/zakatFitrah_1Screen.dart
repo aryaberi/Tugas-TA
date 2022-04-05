@@ -1,4 +1,6 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_2Screen.dart';
 
 class zakatFitrah_1Screen extends StatefulWidget {
@@ -62,6 +64,7 @@ int convertAlphabet(value) {
 class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
   @override
   final formKey = GlobalKey<FormState>();
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
   bool isButtonActive = false;
   String _Laz = "Rumah Yatim";
   String _methodPayment = "Ovo";
@@ -232,6 +235,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: "1.Masukan Nama anda:",
+                          hintText: "nama anda'",
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -244,12 +248,15 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                         onChanged: (value) {
                           if (value.isNotEmpty) {
                             _nama = value;
-                            print(_nama);
+                            print("isNotEmpty");
+                          } else {
+                            print("isEmpty");
                           }
                           if (formKey.currentState!.validate()) {
                             setState(() {
                               isButtonActive = true;
                             });
+                            print("validate");
                           } else {
                             setState(() {
                               isButtonActive = false;
@@ -265,7 +272,12 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
 
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "2.Masukan Jumlah orang :"),
+                            labelText: "2.Masukan Jumlah orang :",
+                            hintText: "jumlah orang"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -306,7 +318,8 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                         height: 20,
                       ),
                       Text(
-                        "Jumlah yang harus dibayarkan adalah:  Rp." + _jumlah,
+                        "Jumlah yang harus dibayarkan adalah: " +
+                            formatter.format(int.parse(_jumlah)).toString(),
                         style: TextStyle(fontSize: 18),
                       ),
 //jumlah yang dibayar============================================================================================================

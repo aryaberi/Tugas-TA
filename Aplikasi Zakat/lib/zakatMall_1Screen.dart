@@ -1,4 +1,6 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
 
 class zakatMall_1Screen extends StatefulWidget {
@@ -79,6 +81,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
     {"name": "Zakat Fidyah"}
   ];
   final formKey = GlobalKey<FormState>();
+
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
   bool isButtonActive = false;
   String _nama = "";
   String Hasil = "0";
@@ -93,11 +97,15 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 
   Widget build(BuildContext context) {
     final data =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     // int.parse(data) > 0 ? Hasil = data : null;
 
-    data.isNotEmpty ? Hasil = data["Zakat"]! : null;
-    data.isNotEmpty ? _jenis = data["Jenis"]! : null;
+    data.isNotEmpty && int.parse(data["Zakat"]!) > 0
+        ? Hasil = data["Zakat"]!
+        : null;
+    data.isNotEmpty && data["jenis"] != "belum"
+        ? _jenis = data["Jenis"]!
+        : null;
 
     return Scaffold(
         appBar: AppBar(
@@ -134,7 +142,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                         height: 20,
                       ),
 //Dropdown Jenis Zakat=========================================================================================================
-                      data.isNotEmpty
+                      data.isNotEmpty && data["Jenis"] != "belum"
                           ? Text("Pembayara " + data["Jenis"]!)
                           : DecoratedBox(
                               decoration: BoxDecoration(
@@ -337,15 +345,21 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                         },
                       ),
                       //Form nama============================================================================================================
-
+ 
 //Form jumlah orang============================================================================================================
-                      data.isNotEmpty
+                      data.isNotEmpty && int.parse(data["Zakat"]!) > 0
                           ? Text("Jumlah Zakat yang akan dibayarkan " +
-                              data["Zakat"]!)
+                              formatter
+                                  .format(int.parse(data["Zakat"]!))
+                                  .toString())
                           : TextFormField(
                               decoration: InputDecoration(
                                   labelText:
                                       "2.Masukan Jumlah yang ingin dibayarkan :"),
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               validator: (value) {
                                 if (value!.isEmpty ||
                                     !RegExp('^[0-9]').hasMatch(value)) {
@@ -400,6 +414,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                           onPressed: isButtonActive
                               ? () {
                                   print(_jenis);
+
                                   Navigator.pushNamed(
                                       context, ZakatMall_2Screen.route,
                                       arguments: {

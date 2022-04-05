@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 
@@ -22,6 +24,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
   String _Piutang = "0";
   String _Hutang = "0";
   String Zakat = "0";
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +67,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                         decoration: InputDecoration(
                           labelText: "1.Masukan Aset atau Modal yang dimiliki:",
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -100,6 +105,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText: "2.Pendapatan selama satu tahun :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -140,6 +147,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText: "3.Masukan Jumlah yang Dihutangkan :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -181,6 +190,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                         decoration: InputDecoration(
                             labelText:
                                 "3.Masukan Jumlah Hutang yang harus dibayar :"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -226,7 +237,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                 ),
                                 Text(
                                   "Pendapatan  perniagaan total anda selama setahun adalah " +
-                                      Hasil,
+                                     formatter.format(int.parse(Hasil)).toString(),
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 int.parse(Hasil) < 95000000
@@ -234,7 +245,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                         "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
                                     : Text(
                                         "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            Zakat)
+                                            formatter.format(int.parse(Zakat)).toString())
                               ],
                             )
                           : SizedBox(width: 0, height: 0),

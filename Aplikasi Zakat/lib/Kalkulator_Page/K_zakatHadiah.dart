@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 
@@ -19,6 +21,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
   String _Total = "0";
   String _Selected = "1";
   String Zakat = "0";
+  final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +64,10 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                         decoration: InputDecoration(
                           labelText: "1.Masukan Total Hadiah:",
                         ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -136,10 +143,11 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                   height: 20,
                                 ),
                                 Text(
-                                  "Zakat yang perlu anda keluarkan adalah " +
-                                      Zakat,
-                                  style: TextStyle(fontSize: 18),
-                                ),
+                                    "Zakat yang perlu anda keluarkan adalah " +
+                                        formatter
+                                            .format(int.parse(Zakat))
+                                            .toString(),
+                                    style: TextStyle(fontSize: 18)),
                               ],
                             )
                           : SizedBox(width: 0, height: 0),

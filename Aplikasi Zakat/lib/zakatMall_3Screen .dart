@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_2/Provider/Provider.dart';
 import 'package:provider/provider.dart';
@@ -77,9 +78,12 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
                         child: TextFormField(
                           decoration:
                               InputDecoration(labelText: "Masukan no hp :"),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           validator: (value) {
-                            if (value!.isEmpty ||
-                                !RegExp('^[0-9]').hasMatch(value)) {
+                            if (value!.isEmpty || value.length < 11) {
                               return "Isi dengan angka";
                             } else {
                               return null;

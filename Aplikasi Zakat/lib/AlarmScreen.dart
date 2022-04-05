@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/tes3.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +25,7 @@ class _AlarmScrennState extends State<AlarmScrenn> {
     {"name": "Zakat Perak"},
     {"name": "Zakat Fidyah"}
   ];
-
+  final formKey = GlobalKey<FormState>();
   String Jenis = "Zakat Pendapatan";
   String Tgl = "1";
   String Bulan = "1";
@@ -44,64 +45,104 @@ class _AlarmScrennState extends State<AlarmScrenn> {
               title: const Text('Setel Alarm'),
               content: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Column(children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                    ),
-                    child: DropdownButtonFormField(
-                      isExpanded: true,
-                      isDense: true,
-                      hint: new Text("Pilih Jenis Zakat"),
-                      value: Jenis,
-                      onChanged: (Value) {
-                        setState(() {
-                          Jenis = Value.toString();
-                        });
+                child: Form(
+                  key: formKey,
+                  child: Column(children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: DropdownButtonFormField(
+                        isExpanded: true,
+                        isDense: true,
+                        hint: new Text("Pilih Jenis Zakat"),
+                        value: Jenis,
+                        onChanged: (Value) {
+                          setState(() {
+                            Jenis = Value.toString();
+                          });
 
-                        print(Jenis);
-                      },
-                      items: zakatMall.map((Map map) {
-                        return new DropdownMenuItem<String>(
-                          value: map["name"].toString(),
-                          // value: _mySelection,
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: Text(map["name"])),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                          print(Jenis);
+                        },
+                        items: zakatMall.map((Map map) {
+                          return new DropdownMenuItem<String>(
+                            value: map["name"].toString(),
+                            // value: _mySelection,
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Text(map["name"])),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "1.Masukan Tanggal pemasangan:",
-                      ),
-                      onChanged: (value) {
-                        if (value.isNotEmpty) {
-                          Tgl = value;
-                          print(Tgl);
-                        }
-                        ;
-                      }),
-                  TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "2.Masukan Bulan pemasangan:",
-                      ),
-                      onChanged: (value) {
-                        if (value.isNotEmpty) {
-                          Bulan = value;
-                          print(Bulan);
-                        }
-                        ;
-                      }),
-                ]),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "1.Masukan Tanggal pemasangan:",
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(2),
+                        ],
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp('0[1-9]|1[0-9]|2[0-9]|3[0-1]')
+                                  .hasMatch(value)) {
+                            return "Isi dari angka 01-31";
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (value) {
+                          if (formKey.currentState!.validate()) {
+                            print("Validate");
+                          } else {
+                            print("NotValidate");
+                          }
+                          if (value.isNotEmpty) {
+                            Tgl = value;
+                            print(Tgl);
+                          }
+                          ;
+                        }),
+                    TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "2.Masukan Bulan pemasangan:",
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(2),
+                        ],
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp('0[1-9]|1[0-2]').hasMatch(value)) {
+                            return "Isi dengan angka 01-12";
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (value) {
+                          if (formKey.currentState!.validate()) {
+                            print("Validate");
+                          } else {
+                            print("NotValidate");
+                          }
+                          if (value.isNotEmpty) {
+                            Bulan = value;
+                            print(Bulan);
+                          }
+                          ;
+                        }),
+                  ]),
+                ),
               ),
               actions: <Widget>[
                 TextButton(
