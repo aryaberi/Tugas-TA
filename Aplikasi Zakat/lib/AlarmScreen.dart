@@ -188,7 +188,6 @@ class _AlarmScrennState extends State<AlarmScrenn> {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView.builder(
         itemCount: _dataAlarm2.length,
@@ -196,9 +195,154 @@ class _AlarmScrennState extends State<AlarmScrenn> {
           return Card(
             child: Row(
               children: [
+                IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Setel Alarm'),
+                          content: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Form(
+                              key: formKey,
+                              child: Column(children: [
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                  ),
+                                  child: DropdownButtonFormField(
+                                    isExpanded: true,
+                                    isDense: true,
+                                    hint: new Text("Pilih Jenis Zakat"),
+                                    value: Jenis,
+                                    onChanged: (Value) {
+                                      setState(() {
+                                        Jenis = Value.toString();
+                                      });
+
+                                      print(Jenis);
+                                    },
+                                    items: zakatMall.map((Map map) {
+                                      return new DropdownMenuItem<String>(
+                                        value: map["name"].toString(),
+                                        // value: _mySelection,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(map["name"])),
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                    decoration: InputDecoration(
+                                      labelText:
+                                          "1.Masukan Tanggal pemasangan:",
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      LengthLimitingTextInputFormatter(2),
+                                    ],
+                                    validator: (value) {
+                                      if (value!.isEmpty ||
+                                          !RegExp('0[1-9]|1[0-9]|2[0-9]|3[0-1]')
+                                              .hasMatch(value)) {
+                                        return "Isi dari angka 01-31";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    onChanged: (value) {
+                                      if (formKey.currentState!.validate()) {
+                                        print("Validate");
+                                      } else {
+                                        print("NotValidate");
+                                      }
+                                      if (value.isNotEmpty) {
+                                        Tgl = value;
+                                        print(Tgl);
+                                      }
+                                      ;
+                                    }),
+                                TextFormField(
+                                    decoration: InputDecoration(
+                                      labelText: "2.Masukan Bulan pemasangan:",
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      LengthLimitingTextInputFormatter(2),
+                                    ],
+                                    validator: (value) {
+                                      if (value!.isEmpty ||
+                                          !RegExp('0[1-9]|1[0-2]')
+                                              .hasMatch(value)) {
+                                        return "Isi dengan angka 01-12";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    onChanged: (value) {
+                                      if (formKey.currentState!.validate()) {
+                                        print("Validate");
+                                      } else {
+                                        print("NotValidate");
+                                      }
+                                      if (value.isNotEmpty) {
+                                        Bulan = value;
+                                        print(Bulan);
+                                      }
+                                      ;
+                                    }),
+                              ]),
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                var Idx = _dataAlarm2.length + 1;
+                                Taun =
+                                    DateFormat("yyyy").format(DateTime.now());
+                                int Tahun = int.parse(Taun) + 1;
+                                Tanggal =
+                                    Tgl + "/" + Bulan + "/" + Tahun.toString();
+                                setState(() {
+                                  _myWidgetList.remove(index);
+                                  _dataAlarm2.remove(_dataAlarm2[index]);
+                                  // _myWidgetList.add(CardListAlarm(
+                                  //     id: index.toString(),
+                                  //     jenis: Jenis,
+                                  //     tanggal: Tanggal));
+                                  _dataAlarm2.add(dataAlarm(
+                                      id: Idx.toString(),
+                                      jenis: Jenis,
+                                      tanggal: Tanggal));
+                                });
+                                Navigator.pop(context, 'OK');
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.more_vert)),
+                SizedBox(width: 20),
                 Column(
                   children: [
-                    Text(index.toString()),
+                    // Text(index.toString()),
                     Text("${_dataAlarm2[index].jenis}"),
                     Text("${_dataAlarm2[index].tanggal}"),
                   ],

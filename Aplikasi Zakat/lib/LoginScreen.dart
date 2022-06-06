@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Dashboard.dart';
 import 'package:flutter_application_2/RegisterScreen.dart';
+import 'package:provider/provider.dart';
+
+import 'Provider/User.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,7 +14,28 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  bool _passwordVisible = false;
+  void initState() {
+    _passwordVisible = false;
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
+    final user = Provider.of<dataUser>(context);
+    final _users = user.allItems;
+    String Nama = "";
+    String Pass = "";
+    String userName = "";
+    bool isTrue = false;
+
+    // void _toggle() {
+    //   setState(() {
+    //     print(_obscureText);
+    //     _obscureText = !_obscureText;
+    //     print(_obscureText);
+    //   });
+    // }
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -41,21 +65,52 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 hintText: "masukan email anda",
                 labelText: "e-mail"),
+            onChanged: (value) {
+              if (value.isNotEmpty) {
+                Nama = value;
+                print("isNotEmpty");
+              } else {
+                print("isEmpty");
+              }
+            },
           ),
           SizedBox(
             height: 20,
           ),
           TextFormField(
-            obscureText: true,
+            obscureText: !_passwordVisible,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(),
+                suffixIcon: GestureDetector(
+                  onLongPress: () {
+                    setState(() {
+                      _passwordVisible = true;
+                    });
+                  },
+                  onLongPressUp: () {
+                    setState(() {
+                      _passwordVisible = false;
+                    });
+                  },
+                  child: Icon(_passwordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                ),
                 prefixIcon: Icon(
                   Icons.lock,
                   size: 40,
                 ),
                 hintText: "masukan password anda",
                 labelText: "password"),
+            onChanged: (value) {
+              if (value.isNotEmpty) {
+                Pass = value;
+                print("isNotEmpty");
+              } else {
+                print("isEmpty");
+              }
+            },
           ),
           SizedBox(
             height: 20,
@@ -67,7 +122,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: InkWell(
                     splashColor: Colors.white,
                     onTap: () {
-                      Navigator.pushNamed(context, DashboardScreen.route);
+                      isTrue = user.check(Nama, Pass);
+
+                      if (isTrue == true) {
+                        userName = user.getUserName(Nama, Pass);
+                        Navigator.pushNamed(context, DashboardScreen.route,
+                            arguments: userName);
+                      }
+                      print(isTrue);
+                      print(_passwordVisible);
                     },
                     child: Center(
                       child: Text(

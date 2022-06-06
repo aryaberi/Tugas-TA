@@ -64,6 +64,7 @@ flutter:
   assets:
       - images/Logo_LAZ/
       - images/Logo_Pembayaran/
+      - images/Bantuan_Zakat_Fitrah/
       - images/zakatFitrah.jpg
       - images/zakatMall.png
       - images/kalkulator.png

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Provider/Provider.dart';
+import 'package:flutter_application_2/Provider/itemLaporan2.dart';
 import 'package:provider/provider.dart';
 
 import 'Scroll _view.dart';
@@ -19,7 +20,9 @@ class _DataTableSampleState extends State<DataTableSample> {
   @override
   Widget build(BuildContext context) {
     final items = Provider.of<itemLaporan>(context);
-    final _items = items.allItems;
+    final items2 = Provider.of<itemLaporan2>(context);
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
+    final _items = userName == "Maman" ? items.allItems : items2.allItems;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -38,7 +41,6 @@ class _DataTableSampleState extends State<DataTableSample> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: Column(children: [
           Expanded(

@@ -20,7 +20,6 @@ class bantuanLaporanScreen extends StatelessWidget {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [
@@ -32,8 +31,7 @@ class bantuanLaporanScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text(
-              "1. Pilih menu Laporan pada dashboard seperti gambar berikut."),
+          Text("1. Pilih menu Laporan pada dashboard seperti gambar berikut."),
           SizedBox(
             height: 10,
           ),
@@ -44,7 +42,6 @@ class bantuanLaporanScreen extends StatelessWidget {
           ),
           Text(
               "3. Tekan tulisan rincian untuk mengetahui lebih lanjut detai laporan dan juga apabila ingin mengunduh laporan."),
-          
         ],
       ),
     );

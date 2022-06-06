@@ -125,7 +125,6 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -184,6 +183,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 //Dropdown Jenis Zakat=========================================================================================================
 
 //Dropdown LAZ menu============================================================================================================
+                      Text(
+                        "Pilih Laz tujuan",
+                        style: TextStyle(fontSize: 20),
+                      ),
                       Container(
                         padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
@@ -247,6 +250,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 //Dropdown Metode pembayara menu============================================================================================================
                       SizedBox(
                         height: 20,
+                      ),
+                      Text(
+                        "Pilih metode pembayaran",
+                        style: TextStyle(fontSize: 20),
                       ),
                       Container(
                         padding: EdgeInsets.all(15),
@@ -345,7 +352,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                         },
                       ),
                       //Form nama============================================================================================================
- 
+
 //Form jumlah orang============================================================================================================
                       data.isNotEmpty && int.parse(data["Zakat"]!) > 0
                           ? Text("Jumlah Zakat yang akan dibayarkan " +
@@ -422,7 +429,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                         "Laz": _Laz,
                                         "nama": _nama,
                                         "jenis": _jenis,
-                                        "jumlah": Hasil
+                                        "jumlah": Hasil,
+                                        "usernama" : data["usernama"],
                                       });
                                 }
                               : null,

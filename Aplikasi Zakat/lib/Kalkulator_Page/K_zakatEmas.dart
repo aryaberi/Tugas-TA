@@ -25,6 +25,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -43,7 +44,6 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -154,6 +154,11 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                 ),
                                 Text(
                                   "Total simpanan emas anda selama setahun adalah " +
+                                      _dimiliki +
+                                      "-" +
+                                      _digunakan +
+                                      "X" +
+                                      "Rp.85000" +
                                       formatter
                                           .format(int.parse(Hasil))
                                           .toString(),
@@ -176,7 +181,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) < 95000000
+                      isHitung && int.parse(Hasil) > 95000000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -189,7 +194,8 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                             context, zakatMall_1Screen.route,
                                             arguments: {
                                               "Zakat": Zakat,
-                                              "Jenis": "Zakat Emas"
+                                              "Jenis": "Zakat Emas",
+                                              "userNama": userName
                                             });
                                       });
                                       ;
@@ -204,7 +210,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                               onPressed: isButtonActive
                                   ? () {
                                       setState(() {
-                                        int Jumlah = int.parse(_dimiliki) +
+                                        int Jumlah = int.parse(_dimiliki) -
                                             int.parse(_digunakan);
 
                                         Hasil = (Jumlah * 850000).toString();

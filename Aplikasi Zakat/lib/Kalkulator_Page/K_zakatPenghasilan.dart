@@ -21,9 +21,11 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
   String Hasil = "0";
   String bulanan = "0";
   String Zakat = "0";
+  String Bonus = "0";
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -42,7 +44,6 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -118,6 +119,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                         },
                         style: TextStyle(fontSize: 20),
                         onChanged: (value) {
+                          Bonus = value;
                           if (value.isNotEmpty) {
                             var jumlah =
                                 12 * int.parse(bulanan) + int.parse(value);
@@ -155,6 +157,12 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                                 ),
                                 Text(
                                   "Pendapatan  total anda selama setahun adalah " +
+                                      "(12 " +
+                                      "X " +
+                                      bulanan +
+                                      " ) " +
+                                      Bonus +
+                                      " = " +
                                       formatter
                                           .format(int.parse(Hasil))
                                           .toString(),
@@ -177,7 +185,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) < 95000000
+                      isHitung && int.parse(Hasil) > 95000000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -190,7 +198,8 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                                             context, zakatMall_1Screen.route,
                                             arguments: {
                                               "Zakat": Zakat,
-                                              "Jenis": "Zakat Pendapatan"
+                                              "Jenis": "Zakat Pendapatan",
+                                              "usernama": userName
                                             });
                                       });
                                       ;

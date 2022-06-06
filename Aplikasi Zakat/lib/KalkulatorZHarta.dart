@@ -39,7 +39,6 @@ class _kalkulatorZHartaState extends State<kalkulatorZHartaScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(

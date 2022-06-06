@@ -19,7 +19,6 @@ class zakatOnlineScreen extends StatelessWidget {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [

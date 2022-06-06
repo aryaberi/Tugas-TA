@@ -37,7 +37,6 @@ class BelajarScreen extends StatelessWidget {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(shrinkWrap: true, children: [
           CardList(name: "Pengertian Zakat", route: pengertianScreen.route),

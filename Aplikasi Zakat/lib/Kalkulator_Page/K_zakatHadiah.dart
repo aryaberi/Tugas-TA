@@ -24,6 +24,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -42,7 +43,6 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -170,7 +170,8 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                             context, zakatMall_1Screen.route,
                                             arguments: {
                                               "Zakat": Zakat,
-                                              "Jenis": "Zakat Hadiah"
+                                              "Jenis": "Zakat Hadiah",
+                                              "userName": userName
                                             });
                                       });
                                       ;

@@ -20,7 +20,6 @@ class jenisZakatScreen extends StatelessWidget {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [

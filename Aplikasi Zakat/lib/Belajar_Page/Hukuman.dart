@@ -19,7 +19,6 @@ class HukumanScreen extends StatelessWidget {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [

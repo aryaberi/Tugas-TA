@@ -27,6 +27,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -45,7 +46,6 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -68,7 +68,9 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                           labelText: "1.Masukan Aset atau Modal yang dimiliki:",
                         ),
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -106,7 +108,9 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                         decoration: InputDecoration(
                             labelText: "2.Pendapatan selama satu tahun :"),
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -148,7 +152,9 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                         decoration: InputDecoration(
                             labelText: "3.Masukan Jumlah yang Dihutangkan :"),
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -191,7 +197,9 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                             labelText:
                                 "3.Masukan Jumlah Hutang yang harus dibayar :"),
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -237,7 +245,16 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                 ),
                                 Text(
                                   "Pendapatan  perniagaan total anda selama setahun adalah " +
-                                     formatter.format(int.parse(Hasil)).toString(),
+                                      _Aset +
+                                      "+" +
+                                      _Pendapatan +
+                                      "+" +
+                                      _Piutang +
+                                      "-" +
+                                      _Hutang +
+                                      formatter
+                                          .format(int.parse(Hasil))
+                                          .toString(),
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 int.parse(Hasil) < 95000000
@@ -245,7 +262,9 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                         "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
                                     : Text(
                                         "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            formatter.format(int.parse(Zakat)).toString())
+                                            formatter
+                                                .format(int.parse(Zakat))
+                                                .toString())
                               ],
                             )
                           : SizedBox(width: 0, height: 0),
@@ -255,7 +274,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) < 95000000
+                      isHitung && int.parse(Hasil) > 95000000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -268,7 +287,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                             context, zakatMall_1Screen.route,
                                             arguments: {
                                               "Zakat": Zakat,
-                                              "Jenis": "Zakat Perniagaan"
+                                              "Jenis": "Zakat Perniagaan",
+                                              "usernama": userName
                                             });
                                       });
                                       ;

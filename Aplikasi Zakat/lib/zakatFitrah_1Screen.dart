@@ -65,6 +65,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
   @override
   final formKey = GlobalKey<FormState>();
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
+
   bool isButtonActive = false;
   String _Laz = "Rumah Yatim";
   String _methodPayment = "Ovo";
@@ -75,6 +76,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
   late TextEditingController controller;
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -89,7 +91,6 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
               Navigator.pop(context);
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -106,6 +107,10 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                         height: 20,
                       ),
 //Dropdown LAZ menu============================================================================================================
+                      Text(
+                        "Pilih LAZ tujuan",
+                        style: TextStyle(fontSize: 20),
+                      ),
                       Container(
                         padding: EdgeInsets.all(15),
                         decoration: BoxDecoration(
@@ -168,6 +173,10 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
 //Dropdown Metode pembayara menu============================================================================================================
                       SizedBox(
                         height: 20,
+                      ),
+                      Text(
+                        "Pilih Metode pembayaran",
+                        style: TextStyle(fontSize: 20),
                       ),
                       Container(
                         padding: EdgeInsets.all(15),
@@ -235,7 +244,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: "1.Masukan Nama anda:",
-                          hintText: "nama anda'",
+                          hintText: "nama anda",
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -340,7 +349,8 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                         "methodPayment": _methodPayment,
                                         "Laz": _Laz,
                                         "nama": _nama,
-                                        "jumlah": _jumlah
+                                        "jumlah": _jumlah,
+                                        "usernama": userName,
                                       });
                                 }
                               : null,

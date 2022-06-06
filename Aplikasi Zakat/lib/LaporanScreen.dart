@@ -46,7 +46,6 @@ class LaporanScreen extends StatelessWidget {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(children: [
         DataTable(

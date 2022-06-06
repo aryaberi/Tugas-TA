@@ -17,7 +17,7 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Laporan Zakat",
+          "Pembayaran Zakat Fitrah",
           style: TextStyle(fontSize: 14),
         ),
         centerTitle: true,
@@ -28,7 +28,6 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
             Navigator.pop(context);
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [

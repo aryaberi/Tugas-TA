@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_2/Dashboard.dart';
+import 'package:flutter_application_2/Provider/itemLaporan2.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_2/Provider/Provider.dart';
 import 'package:provider/provider.dart';
@@ -42,10 +44,13 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final items = Provider.of<itemLaporan>(context);
     final _items = items.allItems;
+    final items2 = Provider.of<itemLaporan2>(context);
+    final _items2 = items2.allItems;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Laporan Zakat",
+          "Pembayaran Zakat Fitrah",
           style: TextStyle(fontSize: 14),
         ),
         centerTitle: true,
@@ -56,7 +61,6 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
             Navigator.pop(context);
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [
@@ -140,26 +144,48 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
-                                          Navigator.pop(context);
+                                          // Navigator.pop(context);
                                           String Penangung =
                                               convertLaz(data["Laz"]);
                                           String now = DateFormat("dd/MM/yyyy")
                                               .format(DateTime.now());
-                                          var no = _items.length + 1;
-                                          items.addData({
-                                            "Id": no.toString(),
-                                            "Nama": data["nama"],
-                                            "Tanggal": now,
-                                            "Jenis": "Zakat Fitrah",
-                                            "Jumlah": data["jumlah"],
-                                            "Status": "Telah diterima oleh LAZ",
-                                            "Laz": data["Laz"],
-                                            "Penangung": Penangung,
-                                            "Distribusi": "Belum ada",
-                                            "Tempat": "Belum ada",
-                                            "NoTlp": "Belum ada",
-                                            "AtasNama": "Belum ada"
-                                          });
+                                          var no = data["usernama"] == "Maman"
+                                              ? _items.length + 1
+                                              : _items2.length + 1;
+                                          data["usernama"] == "Maman"
+                                              ? items.addData({
+                                                  "Id": no.toString(),
+                                                  "Nama": data["nama"],
+                                                  "Tanggal": now,
+                                                  "Jenis": "Zakat Fitrah",
+                                                  "Jumlah": data["jumlah"],
+                                                  "Status":
+                                                      "Telah diterima oleh LAZ",
+                                                  "Laz": data["Laz"],
+                                                  "Penangung": Penangung,
+                                                  "Distribusi": "Belum ada",
+                                                  "Tempat": "Belum ada",
+                                                  "NoTlp": "Belum ada",
+                                                  "AtasNama": "Belum ada"
+                                                })
+                                              : items2.addData({
+                                                  "Id": no.toString(),
+                                                  "Nama": data["nama"],
+                                                  "Tanggal": now,
+                                                  "Jenis": "Zakat Fitrah",
+                                                  "Jumlah": data["jumlah"],
+                                                  "Status":
+                                                      "Telah diterima oleh LAZ",
+                                                  "Laz": data["Laz"],
+                                                  "Penangung": Penangung,
+                                                  "Distribusi": "Belum ada",
+                                                  "Tempat": "Belum ada",
+                                                  "NoTlp": "Belum ada",
+                                                  "AtasNama": "Belum ada"
+                                                });
+                                          Navigator.pushNamed(
+                                              context, DashboardScreen.route,
+                                              arguments: data["usernama"]);
                                         },
                                         child: const Text('Ok'),
                                       )

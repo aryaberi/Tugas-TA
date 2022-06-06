@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CardList extends StatelessWidget {
+class CardList2 extends StatelessWidget {
   final String name;
   final String route;
-  const CardList({
+  final String argumen;
+  const CardList2({
     Key? key,
     required this.name,
     required this.route,
+    required this.argumen,
   }) : super(key: key);
 
   @override
@@ -16,7 +18,7 @@ class CardList extends StatelessWidget {
       child: Card(
           child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, route);
+          Navigator.pushNamed(context, route, arguments: argumen);
         },
         child: ListTile(
           title: Text(name),

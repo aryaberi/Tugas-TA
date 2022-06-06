@@ -20,7 +20,6 @@ class bantuanKalulatorScreen extends StatelessWidget {
             );
           },
         ),
-        actions: [Icon(Icons.home)],
       ),
       body: ListView(
         children: [

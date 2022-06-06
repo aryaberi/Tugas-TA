@@ -33,7 +33,6 @@ class JenisZakatScreen extends StatelessWidget {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(shrinkWrap: true, children: [
           CardList(

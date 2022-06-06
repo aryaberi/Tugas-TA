@@ -25,6 +25,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -43,7 +44,6 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -66,7 +66,9 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                           labelText: "1.Masukan Perak yang dimiliki:",
                         ),
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -105,7 +107,9 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                             labelText:
                                 "2.Masukan Jumlah Perak yang digunakan :"),
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter> [FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         validator: (value) {
                           if (value!.isEmpty ||
                               !RegExp('^[0-9]').hasMatch(value)) {
@@ -150,7 +154,14 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                                 ),
                                 Text(
                                   "Simpanan Perak total anda dalam rupiah selama setahun adalah " +
-                                      formatter.format(int.parse(Hasil)).toString(),
+                                      _dimiliki +
+                                      "-" +
+                                      _digunakan +
+                                      "X" +
+                                      "Rp.650000" +
+                                      formatter
+                                          .format(int.parse(Hasil))
+                                          .toString(),
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 int.parse(Hasil) < 95000000
@@ -158,7 +169,9 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                                         "Simpanan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
                                     : Text(
                                         "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            formatter.format(int.parse(Zakat)).toString())
+                                            formatter
+                                                .format(int.parse(Zakat))
+                                                .toString())
                               ],
                             )
                           : SizedBox(width: 0, height: 0),
@@ -168,7 +181,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) < 95000000
+                      isHitung && int.parse(Hasil) > 95000000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -179,7 +192,11 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                                       setState(() {
                                         Navigator.pushReplacementNamed(
                                             context, zakatMall_1Screen.route,
-                                            arguments: Zakat);
+                                            arguments: {
+                                              "Zakat": Zakat,
+                                              "Jenis": "Zakat Perak",
+                                              "usernama": userName
+                                            });
                                       });
                                       ;
                                     }
@@ -193,7 +210,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                               onPressed: isButtonActive
                                   ? () {
                                       setState(() {
-                                        int Jumlah = int.parse(_dimiliki) +
+                                        int Jumlah = int.parse(_dimiliki) -
                                             int.parse(_digunakan);
                                         Hasil = (Jumlah * 650000).toString();
                                         Zakat =

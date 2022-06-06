@@ -29,6 +29,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
 
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -47,7 +48,6 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(children: [
           Padding(
@@ -203,6 +203,11 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                 ),
                                 Text(
                                   "Tabungan total anda selama setahun adalah " +
+                                      _Tabungan +
+                                      "+" +
+                                      _Deposito +
+                                      "-" +
+                                      _Bunga +
                                       HasilRp,
                                   style: TextStyle(fontSize: 18),
                                 ),
@@ -221,7 +226,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) < 95000000
+                      isHitung && int.parse(Hasil) >= 95000000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -234,7 +239,8 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                             context, zakatMall_1Screen.route,
                                             arguments: {
                                               "Zakat": Zakat,
-                                              "Jenis": "Zakat Tabungan"
+                                              "Jenis": "Zakat Tabungan",
+                                              "usernama": userName
                                             });
                                       });
                                       ;

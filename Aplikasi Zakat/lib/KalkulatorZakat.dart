@@ -8,6 +8,7 @@ import 'package:flutter_application_2/Kalkulator_Page/K_zakatPenghasilan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerak.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerniagaan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatTabungan.dart';
+import 'package:flutter_application_2/Widget/CardList2.dart';
 
 class KalkulatorScreen extends StatelessWidget {
   const KalkulatorScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class KalkulatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -33,29 +35,32 @@ class KalkulatorScreen extends StatelessWidget {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(shrinkWrap: true, children: [
-          CardList(
+          CardList2(
               name: "Zakat Pendapatan",
-              route: kalkulatorZPendapatanScreen.route),
-          CardList(
-              name: "Zakat Tabungan", route: kalkulatorZTabunganScreen.route),
-          CardList(
+              route: kalkulatorZPendapatanScreen.route,
+              argumen: userName),
+          CardList2(
+              name: "Zakat Tabungan",
+              route: kalkulatorZTabunganScreen.route,
+              argumen: userName),
+          CardList2(
               name: "Zakat Perniagaan",
-              route: kalkulatorZPerniagaanScreen.route),
-          CardList(
-            name: "Zakat Emas",
-            route: kalkulatorZEmasScreen.route,
-          ),
-          CardList(
-            name: "Zakat Perak",
-            route: kalkulatorZPerakScreen.route,
-          ),
-          CardList(
-            name: "Zakat Hadiah",
-            route: kalkulatorZHadiahScreen.route,
-          ),
+              route: kalkulatorZPerniagaanScreen.route,
+              argumen: userName),
+          CardList2(
+              name: "Zakat Emas",
+              route: kalkulatorZEmasScreen.route,
+              argumen: userName),
+          CardList2(
+              name: "Zakat Perak",
+              route: kalkulatorZPerakScreen.route,
+              argumen: userName),
+          CardList2(
+              name: "Zakat Hadiah",
+              route: kalkulatorZHadiahScreen.route,
+              argumen: userName),
           CardList(
             name: "Zakat Fidyah",
             route: kalkulatorZFidyahScreen.route,
