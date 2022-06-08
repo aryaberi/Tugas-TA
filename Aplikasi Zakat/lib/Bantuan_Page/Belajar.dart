@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Widget/Image_font_1.dart';
+
 class bantuanBelajarScreen extends StatelessWidget {
   const bantuanBelajarScreen({Key? key}) : super(key: key);
 
@@ -32,14 +34,17 @@ class bantuanBelajarScreen extends StatelessWidget {
             height: 20,
           ),
           Text("1. Pilih menu belajar pada dashboard seperti gambar berikut."),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/belajar_1.jpg"),
           SizedBox(
             height: 10,
           ),
           Text("2. Pilih topik yang ingin dipelajari"),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/belajar_2.jpg"),
           SizedBox(
             height: 10,
           ),
           Text("3. Selamat belajar."),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/belajar_3.jpg"),
         ],
       ),
     );

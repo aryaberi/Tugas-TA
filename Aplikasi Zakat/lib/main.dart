@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         child: ChangeNotifierProvider(
           create: (context) => itemLaporan(),
           child: MaterialApp(
-              title: 'Flutter Demo',
+              title: 'ZOI',
               debugShowCheckedModeBanner: false,
               //   home: (zakatFitrah_1Screen()),
               // );

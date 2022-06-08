@@ -22,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String Pass1 = "";
     String Pass2 = "";
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.lightGreen,
           leading: Builder(

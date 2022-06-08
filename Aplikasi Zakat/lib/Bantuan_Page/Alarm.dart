@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Widget/Image_font_1.dart';
+
 class bantuanAlarmScreen extends StatelessWidget {
   const bantuanAlarmScreen({Key? key}) : super(key: key);
 
@@ -32,6 +34,7 @@ class bantuanAlarmScreen extends StatelessWidget {
             height: 20,
           ),
           Text("1. Pilih menu Alarm pada dashboard seperti gambar berikut."),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_1.jpg"),
           SizedBox(
             height: 10,
           ),
@@ -41,15 +44,18 @@ class bantuanAlarmScreen extends StatelessWidget {
           ),
           Text(
               "3. Apabila akan membuat laporan baru, tekan tombol + pada pojok kanan bawah layar seperti berikut...."),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_3.jpg"),
           SizedBox(
             height: 10,
           ),
           Text(
               "4. Pilih jenis zakat, serta masukan tanggal dan bulan pemyetelan alarm"),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_4.jpg"),
           SizedBox(
             height: 10,
           ),
           Text("5. Tekan tombol setel untuk memasang alarm ."),
+          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_5.jpg"),
           SizedBox(
             height: 10,
           ),
