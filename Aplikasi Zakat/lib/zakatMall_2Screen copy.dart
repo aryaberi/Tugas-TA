@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/zakatFitrah_3Screen.dart';
+import 'package:flutter_application_2/zakatMall_3Screen%20.dart';
 
 class ZakatMall_2Screen extends StatefulWidget {
   static const route = "/ZakatMall2";
@@ -66,7 +66,7 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
                     minimumSize: const Size(200, 50)),
                 onPressed: () {
                   Navigator.pushReplacementNamed(
-                      context, zakatFitrah_3Screen.route,
+                      context, zakatMall_3Screen.route,
                       arguments: data);
                 },
                 child: Text("Lanjutkan")),

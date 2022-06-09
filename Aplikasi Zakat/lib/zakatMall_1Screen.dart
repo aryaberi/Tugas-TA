@@ -21,6 +21,10 @@ int convertAlphabet(value) {
     idx = 2;
   } else if (value == "D") {
     idx = 3;
+  } else if (value == "E") {
+    idx = 4;
+  } else if (value == "F") {
+    idx = 5;
   }
   return idx;
 }
@@ -66,9 +70,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
       "image": "images/Logo_Pembayaran/logo_linkAja.png",
       "name": "Link Aja"
     },
-    // {"id": 'E', "image": "images/Logo_Pembayaran/Logo-lazismu.png", "name": "Lazismu"},
-    // {"id": 'F', "image": "images/Logo_Pembayaran/Logo_Baznas.png", "name": "BAZNAS"},
-    // {"id": 'G', "image": "images/Logo_Pembayaran/Logo_NU_CARE-LAZISNU.png", "name": "NU_CARE_LAZISNU"},
+    {"id": 'E', "image": "images/Logo_Pembayaran/BRI.png", "name": "BRI"},
+    {"id": 'F', "image": "images/Logo_Pembayaran/BNI.png", "name": "BNI"},
   ];
 
   List<Map> zakatMall = [
@@ -92,6 +95,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
   String _Selected3 = "A";
   String _Laz = "Rumah Yatim";
   String _methodPayment = "Ovo";
+  String _kindPayment = "emoney";
   String _jenis = "Zakat Harta";
   late TextEditingController controller;
 
@@ -145,38 +149,49 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                           ? Text("Pembayara " + data["Jenis"]!)
                           : DecoratedBox(
                               decoration: BoxDecoration(
-                                border: Border.all(),
-                              ),
-                              child: DropdownButton<String>(
-                                isExpanded: true,
-                                isDense: true,
-                                hint: new Text("Pilih Jenis Zakat"),
-                                value: _Selected,
-                                onChanged: (Value) {
-                                  if (Value!.isNotEmpty) {
-                                    _jenis = Value;
-                                  }
-                                  setState(() {
-                                    _Selected = Value.toString();
-                                  });
+                                  border:
+                                      Border.all(width: 1, color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                        child: DropdownButtonHideUnderline(
+                                            child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<String>(
+                                        isExpanded: true,
+                                        isDense: true,
+                                        hint: new Text("Pilih Jenis Zakat"),
+                                        value: _Selected,
+                                        onChanged: (Value) {
+                                          if (Value!.isNotEmpty) {
+                                            _jenis = Value;
+                                          }
+                                          setState(() {
+                                            _Selected = Value.toString();
+                                          });
 
-                                  // print(_selected3);
-                                },
-                                items: zakatMall.map((Map map) {
-                                  return new DropdownMenuItem<String>(
-                                    value: map["name"].toString(),
-                                    // value: _mySelection,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            child: Text(map["name"])),
-                                      ],
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
+                                          // print(_selected3);
+                                        },
+                                        items: zakatMall.map((Map map) {
+                                          return new DropdownMenuItem<String>(
+                                            value: map["name"].toString(),
+                                            // value: _mySelection,
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
+                                                    child: Text(map["name"])),
+                                              ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    )))
+                                  ])),
                       SizedBox(
                         height: 20,
                       ),
@@ -287,6 +302,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                       setState(() {
                                         _Selected3 = Value.toString();
                                       });
+                                      if (_methodPayment == "BNI" ||
+                                          _methodPayment == "BRI") {
+                                        _kindPayment = "tranfer";
+                                      }
                                       print(_methodPayment);
                                       print(Value);
 
@@ -426,11 +445,12 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                       context, ZakatMall_2Screen.route,
                                       arguments: {
                                         "methodPayment": _methodPayment,
+                                        "kindPayment": _kindPayment,
                                         "Laz": _Laz,
                                         "nama": _nama,
-                                        "jenis": _jenis,
+                                        "jenis": _Selected,
                                         "jumlah": Hasil,
-                                        "usernama" : data["usernama"],
+                                        "usernama": data["usernama"],
                                       });
                                 }
                               : null,

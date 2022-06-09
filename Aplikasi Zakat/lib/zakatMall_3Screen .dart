@@ -37,11 +37,12 @@ class zakatMall_3Screen extends StatefulWidget {
 
 class _zakatMall_3State extends State<zakatMall_3Screen> {
   final formKey = GlobalKey<FormState>();
-  bool isButtonActive = false;
+  bool isValidate = false;
   @override
   Widget build(BuildContext context) {
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    bool isButtonActive = data["kindPayment"] == "emoney" ? false : true;
     final items = Provider.of<itemLaporan>(context);
     final _items = items.allItems;
     final items2 = Provider.of<itemLaporan2>(context);
@@ -68,46 +69,60 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
               padding: const EdgeInsets.only(top: 50.0, left: 8.0, right: 8.0),
               child: Column(
                 children: [
-                  Text(
-                      "Untuk melakukan pembayaran menggunakan metode " +
-                          data["methodPayment"] +
-                          " silahkan masukan no hp yang terhubung dengan " +
-                          data["methodPayment"],
-                      style: TextStyle(fontSize: 16)),
-                  Form(
-                      key: formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, left: 8.0, right: 8.0),
-                        child: TextFormField(
-                          decoration:
-                              InputDecoration(labelText: "Masukan no hp :"),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 11) {
-                              return "Isi dengan angka";
-                            } else {
-                              return null;
-                            }
-                          },
-                          onChanged: (value) {
-                            if (formKey.currentState!.validate()) {
-                              setState(() {
-                                isButtonActive = true;
-                              });
-                              print("validate");
-                            } else {
-                              setState(() {
-                                isButtonActive = false;
-                              });
-                            }
-                          },
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      )),
+                  data["kindPayment"] == "emoney"
+                      ? Text(
+                          "Untuk melakukan pembayaran menggunakan metode " +
+                              data["kindPayment"] +
+                              " silahkan masukan no hp yang terhubung dengan akun " +
+                              data["kindPayment"] +
+                              "Anda",
+                          style: TextStyle(fontSize: 16))
+                      : Text(
+                          "Untuk melakukan pembayaran menggunakan metode " +
+                              data["kindPayment"] +
+                              " silahkan tranfer ke no rek berikut" +
+                              //         data["methodPayment"] ==
+                              //     "BRI"
+                              // ? "123456789999"
+                              " 9998765432112345",
+                          style: TextStyle(fontSize: 16)),
+                  data["kindPayment"] == "emoney"
+                      ? Form(
+                          key: formKey,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 20.0, left: 8.0, right: 8.0),
+                            child: TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Masukan no hp :"),
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 11) {
+                                  return "Isi dengan angka";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              onChanged: (value) {
+                                if (formKey.currentState!.validate()) {
+                                  setState(() {
+                                    isValidate = true;
+                                  });
+                                  print(isButtonActive);
+                                  print("validate");
+                                } else {
+                                  setState(() {
+                                    isValidate = false;
+                                  });
+                                }
+                              },
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ))
+                      : Column(),
                 ],
               )),
           SizedBox(height: 90),
@@ -118,7 +133,7 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
                     onSurface: Colors.lightGreen,
                     primary: Colors.lightGreen,
                     minimumSize: const Size(200, 50)),
-                onPressed: isButtonActive
+                onPressed: isButtonActive || isValidate
                     ? () {
                         showDialog<String>(
                             context: context,
@@ -192,7 +207,9 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
                                     ]));
                       }
                     : null,
-                child: Text("Bayar")),
+                child: data["kindPayment"] == "emoney"
+                    ? Text("Bayar")
+                    : Text("Ok")),
           )
         ],
       ),

@@ -42,9 +42,8 @@ List<Map> PaymentMetode = [
     "image": "images/Logo_Pembayaran/logo_linkAja.png",
     "name": "Link Aja"
   },
-  // {"id": 'E', "image": "images/Logo_Pembayaran/Logo-lazismu.png", "name": "Lazismu"},
-  // {"id": 'F', "image": "images/Logo_Pembayaran/Logo_Baznas.png", "name": "BAZNAS"},
-  // {"id": 'G', "image": "images/Logo_Pembayaran/Logo_NU_CARE-LAZISNU.png", "name": "NU_CARE_LAZISNU"},
+  {"id": 'E', "image": "images/Logo_Pembayaran/BRI.png", "name": "BRI"},
+  {"id": 'F', "image": "images/Logo_Pembayaran/BNI.png", "name": "BNI"},
 ];
 
 int convertAlphabet(value) {
@@ -57,6 +56,10 @@ int convertAlphabet(value) {
     idx = 2;
   } else if (value == "D") {
     idx = 3;
+  } else if (value == "E") {
+    idx = 4;
+  } else if (value == "F") {
+    idx = 5;
   }
   return idx;
 }
@@ -69,6 +72,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
   bool isButtonActive = false;
   String _Laz = "Rumah Yatim";
   String _methodPayment = "Ovo";
+  String _kindPayment = "emoney";
   String _jumlah = "0";
   String initLaz = "1";
   String initmethodPayment = "A";
@@ -209,6 +213,10 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                       setState(() {
                                         initmethodPayment = Value.toString();
                                       });
+                                      if (_methodPayment == "BNI" ||
+                                          _methodPayment == "BRI") {
+                                        _kindPayment = "tranfer";
+                                      }
 
                                       print(_methodPayment);
                                     },
@@ -347,6 +355,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                       context, ZakatFitrah_2Screen.route,
                                       arguments: {
                                         "methodPayment": _methodPayment,
+                                        "kindPayment": _kindPayment,
                                         "Laz": _Laz,
                                         "nama": _nama,
                                         "jumlah": _jumlah,
