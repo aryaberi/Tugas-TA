@@ -144,36 +144,50 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                         },
                       ),
 //Form bonus tahunan============================================================================================================
-
+                      SizedBox(
+                        height: 20,
+                      ),
 //jumlah yang dibayar============================================================================================================
                       isHitung
-                          ? Column(
-                              children: [
-                                SizedBox(
-                                  height: 20,
+                          ? Card(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
                                 ),
-                                Text(
-                                  "Simpanan Perak total anda dalam rupiah selama setahun adalah " +
-                                      _dimiliki +
-                                      "-" +
-                                      _digunakan +
-                                      "X" +
-                                      "Rp.650000" +
-                                      formatter
-                                          .format(int.parse(Hasil))
-                                          .toString(),
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                int.parse(Hasil) < 95000000
-                                    ? Text(
-                                        "Simpanan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
-                                    : Text(
-                                        "Jumlah Zakat yang harus anda keluarkan adalah" +
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Simpanan Perak total anda dalam rupiah selama setahun adalah " +
+                                            _dimiliki +
+                                            " - " +
+                                            _digunakan +
+                                            " X " +
+                                            "Rp.650000" +
+                                            " = " +
                                             formatter
-                                                .format(int.parse(Zakat))
-                                                .toString())
-                              ],
-                            )
+                                                .format(int.parse(Hasil))
+                                                .toString(),
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      int.parse(Hasil) < 95000000
+                                          ? Text(
+                                              "Simpanan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                              style: TextStyle(fontSize: 14))
+                                          : Text(
+                                              "Jumlah Zakat yang harus anda keluarkan adalah " +
+                                                  formatter
+                                                      .format(int.parse(Zakat))
+                                                      .toString(),
+                                              style: TextStyle(fontSize: 14))
+                                    ],
+                                  )))
                           : SizedBox(width: 0, height: 0),
 
 //jumlah yang dibayar============================================================================================================

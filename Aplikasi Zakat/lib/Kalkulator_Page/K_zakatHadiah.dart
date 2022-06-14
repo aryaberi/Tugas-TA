@@ -134,23 +134,31 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                         Text("Banyak jerih payah")
                       ]),
 //Form jenis Hadiah ============================================================================================================
-
-//jumlah yang dibayar============================================================================================================
-                      isHitung
-                          ? Column(
-                              children: [
-                                SizedBox(
+SizedBox(
                                   height: 20,
                                 ),
+//jumlah yang dibayar============================================================================================================
+                      isHitung
+                          ? Card(shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
+                                ),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                              child: Column(
+                              children: [
+                                
                                 Text(
                                     "Zakat yang perlu anda keluarkan adalah " +
                                         formatter
                                             .format(int.parse(Zakat))
                                             .toString(),
-                                    style: TextStyle(fontSize: 18)),
+                                    style: TextStyle(fontSize: 14)),
                               ],
-                            )
-                          : SizedBox(width: 0, height: 0),
+                            ))
+                          ): SizedBox(width: 0, height: 0),
 
 //jumlah yang dibayar============================================================================================================
 

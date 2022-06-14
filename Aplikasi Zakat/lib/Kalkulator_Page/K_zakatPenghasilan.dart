@@ -147,36 +147,52 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                         },
                       ),
 //Form bonus tahunan============================================================================================================
-
+                      SizedBox(
+                        height: 20,
+                      ),
 //jumlah yang dibayar============================================================================================================
                       isHitung
-                          ? Column(
-                              children: [
-                                SizedBox(
-                                  height: 20,
+                          ? Card(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
                                 ),
-                                Text(
-                                  "Pendapatan  total anda selama setahun adalah " +
-                                      "(12 " +
-                                      "X " +
-                                      bulanan +
-                                      " ) " +
-                                      Bonus +
-                                      " = " +
-                                      formatter
-                                          .format(int.parse(Hasil))
-                                          .toString(),
-                                  style: TextStyle(fontSize: 18),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Pendapatan  total anda selama setahun adalah " +
+                                          "(12 " +
+                                          "X " +
+                                          bulanan +
+                                          " ) " +
+                                          "+ " +
+                                          Bonus +
+                                          " = " +
+                                          formatter
+                                              .format(int.parse(Hasil))
+                                              .toString(),
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    int.parse(Hasil) < 95000000
+                                        ? Text(
+                                            "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                            style: TextStyle(fontSize: 14))
+                                        : Text(
+                                            "Jumlah Zakat yang harus anda keluarkan adalah " +
+                                                formatter
+                                                    .format(int.parse(Zakat))
+                                                    .toString(),
+                                            style: TextStyle(fontSize: 14))
+                                  ],
                                 ),
-                                int.parse(Hasil) < 95000000
-                                    ? Text(
-                                        "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
-                                    : Text(
-                                        "Jumlah Zakat yang harus anda keluarkan adalah" +
-                                            formatter
-                                                .format(int.parse(Zakat))
-                                                .toString())
-                              ],
+                              ),
                             )
                           : SizedBox(width: 0, height: 0),
 
@@ -211,7 +227,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
                                   minimumSize: const Size(200, 50)),
-                              onPressed: isButtonActive
+                              onPressed: isButtonActive & isHitung == false
                                   ? () {
                                       setState(() {
                                         isHitung = true;

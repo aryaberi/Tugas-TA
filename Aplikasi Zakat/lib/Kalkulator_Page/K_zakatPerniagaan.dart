@@ -235,38 +235,52 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                         },
                       ),
 //Form Yang dihutangkan ============================================================================================================
-
+                      SizedBox(
+                        height: 20,
+                      ),
 //jumlah yang dibayar============================================================================================================
                       isHitung
-                          ? Column(
-                              children: [
-                                SizedBox(
-                                  height: 20,
+                          ? Card(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
                                 ),
-                                Text(
-                                  "Pendapatan  perniagaan total anda selama setahun adalah " +
-                                      _Aset +
-                                      "+" +
-                                      _Pendapatan +
-                                      "+" +
-                                      _Piutang +
-                                      "-" +
-                                      _Hutang +
-                                      formatter
-                                          .format(int.parse(Hasil))
-                                          .toString(),
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                int.parse(Hasil) < 95000000
-                                    ? Text(
-                                        "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini")
-                                    : Text(
-                                        "Jumlah Zakat yang harus anda keluarkan adalah" +
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Pendapatan  perniagaan total anda selama setahun adalah " +
+                                            _Aset +
+                                            " + " +
+                                            _Pendapatan +
+                                            " + " +
+                                            _Piutang +
+                                            " - " +
+                                            _Hutang +
+                                            " = " +
                                             formatter
-                                                .format(int.parse(Zakat))
-                                                .toString())
-                              ],
-                            )
+                                                .format(int.parse(Hasil))
+                                                .toString(),
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      int.parse(Hasil) < 95000000
+                                          ? Text(
+                                              "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                              style: TextStyle(fontSize: 14))
+                                          : Text(
+                                              "Jumlah Zakat yang harus anda keluarkan adalah " +
+                                                  formatter
+                                                      .format(int.parse(Zakat))
+                                                      .toString(),
+                                              style: TextStyle(fontSize: 14))
+                                    ],
+                                  )))
                           : SizedBox(width: 0, height: 0),
 
 //jumlah yang dibayar============================================================================================================
@@ -300,7 +314,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
                                   minimumSize: const Size(200, 50)),
-                              onPressed: isButtonActive
+                              onPressed: isButtonActive & isHitung == false
                                   ? () {
                                       setState(() {
                                         isHitung = true;

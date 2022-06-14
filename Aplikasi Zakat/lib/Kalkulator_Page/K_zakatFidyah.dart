@@ -141,23 +141,32 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                         },
                       ),
 //Form bonus tahunan============================================================================================================
-
+                      SizedBox(
+                        height: 20,
+                      ),
 //jumlah yang dibayar============================================================================================================
                       isHitung
-                          ? Column(
-                              children: [
-                                SizedBox(
-                                  height: 20,
+                          ? Card(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.black,
                                 ),
-                                Text(
-                                  "Total Fidyah anda  adalah " +
-                                      formatter
-                                          .format(int.parse(Zakat))
-                                          .toString(),
-                                  style: TextStyle(fontSize: 18),
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Total Fidyah anda  adalah " +
+                                          formatter
+                                              .format(int.parse(Zakat))
+                                              .toString(),
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            )
+                              ))
                           : SizedBox(width: 0, height: 0),
 
 //jumlah yang dibayar============================================================================================================

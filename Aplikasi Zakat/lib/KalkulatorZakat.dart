@@ -20,7 +20,7 @@ class KalkulatorScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            " Zakat",
+            "Kalkulator Zakat",
             style: TextStyle(fontSize: 14),
           ),
           centerTitle: true,
