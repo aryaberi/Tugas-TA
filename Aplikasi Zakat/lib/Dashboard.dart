@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/AlarmScreen.dart';
+import 'package:flutter_application_2/LoginScreen.dart';
 import 'package:flutter_application_2/belajarZakat.dart';
 import 'package:flutter_application_2/Bantuan.dart';
 import 'package:flutter_application_2/DataTableSample.dart';
@@ -28,16 +29,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
           leadingWidth: 200,
           leading: Builder(
             builder: (BuildContext context) {
-              return TextButton(
-                style: TextButton.styleFrom(primary: Colors.white),
-                child: Text(userName),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+              return Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Row(children: [
+                  CircleAvatar(child: Icon(Icons.person)),
+                  TextButton(
+                    style: TextButton.styleFrom(primary: Colors.white),
+                    child: Text(userName),
+                    onPressed: () {
+                      Navigator.pushNamed(context, LoginScreen.route);
+                    },
+                  )
+                ]),
               );
             },
           ),
-          actions: [CircleAvatar(child: Icon(Icons.person))],
+          // actions: [CircleAvatar(child: Icon(Icons.person))],
         ),
         body: ListView(children: [
           Center(

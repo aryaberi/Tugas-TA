@@ -37,10 +37,9 @@ class zakatFitrah_3Screen extends StatefulWidget {
 
 class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
   final formKey = GlobalKey<FormState>();
-
+  bool isValidate = false;
   @override
   Widget build(BuildContext context) {
-    bool isValidate = false;
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     bool isButtonActive = data["kindPayment"] == "emoney" ? false : true;
@@ -112,6 +111,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                   setState(() {
                                     isValidate = true;
                                   });
+                                  print(isButtonActive);
                                   print("validate");
                                 } else {
                                   setState(() {
@@ -122,7 +122,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                               style: TextStyle(fontSize: 20),
                             ),
                           ))
-                      : Column()
+                      : Column(),
                 ],
               )),
           SizedBox(height: 90),
@@ -159,7 +159,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
-                                          // Navigator.pop(context);
+                                          Navigator.pop(context);
                                           String Penangung =
                                               convertLaz(data["Laz"]);
                                           String now = DateFormat("dd/MM/yyyy")
@@ -167,37 +167,37 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                           var no = data["usernama"] == "Maman"
                                               ? _items.length + 1
                                               : _items2.length + 1;
-                                          data["usernama"] == "Maman"
-                                              ? items.addData({
-                                                  "Id": no.toString(),
-                                                  "Nama": data["nama"],
-                                                  "Tanggal": now,
-                                                  "Jenis": "Zakat Fitrah",
-                                                  "Jumlah": data["jumlah"],
-                                                  "Status":
-                                                      "Telah diterima oleh LAZ",
-                                                  "Laz": data["Laz"],
-                                                  "Penangung": Penangung,
-                                                  "Distribusi": "Belum ada",
-                                                  "Tempat": "Belum ada",
-                                                  "NoTlp": "Belum ada",
-                                                  "AtasNama": "Belum ada"
-                                                })
-                                              : items2.addData({
-                                                  "Id": no.toString(),
-                                                  "Nama": data["nama"],
-                                                  "Tanggal": now,
-                                                  "Jenis": "Zakat Fitrah",
-                                                  "Jumlah": data["jumlah"],
-                                                  "Status":
-                                                      "Telah diterima oleh LAZ",
-                                                  "Laz": data["Laz"],
-                                                  "Penangung": Penangung,
-                                                  "Distribusi": "Belum ada",
-                                                  "Tempat": "Belum ada",
-                                                  "NoTlp": "Belum ada",
-                                                  "AtasNama": "Belum ada"
-                                                });
+                                          // data["usernama"] == "Maman"?
+                                          items.addData({
+                                            "Id": no.toString(),
+                                            "Nama": data["nama"],
+                                            "UserName": data["usernama"],
+                                            "Tanggal": now,
+                                            "Jenis": "Zakat Fitrah",
+                                            "Jumlah": data["jumlah"],
+                                            "Status": "Telah diterima oleh LAZ",
+                                            "Laz": data["Laz"],
+                                            "Penangung": Penangung,
+                                            "Distribusi": "Belum ada",
+                                            "Tempat": "Belum ada",
+                                            "NoTlp": "Belum ada",
+                                            "AtasNama": "Belum ada"
+                                          });
+                                          // : items2.addData({
+                                          //     "Id": no.toString(),
+                                          //     "Nama": data["nama"],
+                                          //     "Tanggal": now,
+                                          //     "Jenis": "Zakat Fitrah",
+                                          //     "Jumlah": data["jumlah"],
+                                          //     "Status":
+                                          //         "Telah diterima oleh LAZ",
+                                          //     "Laz": data["Laz"],
+                                          //     "Penangung": Penangung,
+                                          //     "Distribusi": "Belum ada",
+                                          //     "Tempat": "Belum ada",
+                                          //     "NoTlp": "Belum ada",
+                                          //     "AtasNama": "Belum ada"
+                                          //   });
                                           Navigator.pushNamed(
                                               context, DashboardScreen.route,
                                               arguments: data["usernama"]);

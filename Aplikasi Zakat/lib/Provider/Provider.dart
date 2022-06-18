@@ -6,6 +6,7 @@ class itemLaporan with ChangeNotifier {
     {
       "Id": "1",
       "Nama": "Budi",
+      "UserName": "Budi",
       "Tanggal": "12/02/2022",
       "Jenis": "Zakat Fitrah",
       "Jumlah": "27500",
@@ -20,6 +21,37 @@ class itemLaporan with ChangeNotifier {
     {
       "Id": "2",
       "Nama": "Maman",
+      "UserName": "Maman",
+      "Tanggal": "12/02/2022",
+      "Jenis": "Zakat Fitrah",
+      "Jumlah": "27500",
+      "Status": "Telah dibayarkan",
+      "Laz": "Dhompet Dhuafa",
+      "Penangung": "011122223333",
+      "Distribusi": "18/02/2022",
+      "Tempat": "Kampung Melarat",
+      "NoTlp": "089898977012",
+      "AtasNama": "Lurah Kampung Melarat"
+    },
+    {
+      "Id": "3",
+      "Nama": "Maman",
+      "UserName": "Maman",
+      "Tanggal": "12/02/2022",
+      "Jenis": "Zakat Fitrah",
+      "Jumlah": "27500",
+      "Status": "Telah dibayarkan",
+      "Laz": "Baznas",
+      "Penangung": "09999777766",
+      "Distribusi": "20/02/2022",
+      "Tempat": "Kampung Miskin",
+      "NoTlp": "088877766651",
+      "AtasNama": "Lurah Kampung Miskin"
+    },
+    {
+      "Id": "4",
+      "Nama": "Maman",
+      "UserName": "Maman",
       "Tanggal": "12/02/2022",
       "Jenis": "Zakat Fitrah",
       "Jumlah": "27500",
@@ -40,5 +72,16 @@ class itemLaporan with ChangeNotifier {
   void addData(value) {
     dataRow.add(value);
     notifyListeners();
+  }
+
+  List<Map> getByName(String userName) {
+    int i = 0;
+    List<Map> _data = [];
+    for (i; i < [...dataRow].length; i++) {
+      if ([...dataRow][i]["UserName"] == userName) {
+        _data.add(dataRow[i]);
+      }
+    }
+    return [..._data];
   }
 }

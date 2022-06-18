@@ -8,12 +8,14 @@ class dataUser with ChangeNotifier {
       "Nama": "Budi",
       "Email": "Budi123@gmail.com",
       "Password": "Budi123",
+      "NoIdentity": "1234567887654321"
     },
     {
       "Id": "2",
       "Nama": "Maman",
       "Email": "Maman@gmail.com",
       "Password": "Maman123",
+      "NoIdentity": "8765432112345678"
     }
   ];
 

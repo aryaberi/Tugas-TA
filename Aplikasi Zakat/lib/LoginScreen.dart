@@ -14,8 +14,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  bool isWrong = false;
   bool _passwordVisible = false;
   void initState() {
+    isWrong = false;
     _passwordVisible = false;
     super.initState();
   }
@@ -117,8 +119,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
+                const SizedBox(height: 5),
+                isWrong
+                    ? Text("email atau password yang anda masukan salah",
+                        style: TextStyle(color: Colors.red))
+                    : Text(""),
                 SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Card(
                     color: Colors.lightGreen,
@@ -134,8 +141,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushNamed(
                                   context, DashboardScreen.route,
                                   arguments: userName);
+                            } else {
+                              setState(() {
+                                isWrong = true;
+                              });
                             }
                             print(isTrue);
+                            print(isWrong);
                             print(_passwordVisible);
                           },
                           child: Center(

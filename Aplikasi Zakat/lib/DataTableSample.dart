@@ -17,12 +17,28 @@ class _DataTableSampleState extends State<DataTableSample> {
     print('Name:$name  price: $price');
   }
 
+  List<Map> getByName(String userName, List<Map> dataRow) {
+    int i = 0;
+    List<Map> _data = [];
+    print([...dataRow].length);
+    for (i; i < [...dataRow].length; i++) {
+      print([...dataRow][i]["UserName"]);
+      if ([...dataRow][i]["UserName"] == userName) {
+        _data.add(dataRow[i]);
+      }
+    }
+    print(_data.length);
+    return [..._data];
+  }
+
   @override
   Widget build(BuildContext context) {
     final items = Provider.of<itemLaporan>(context);
-    final items2 = Provider.of<itemLaporan2>(context);
+    // final items2 = Provider.of<itemLaporan2>(context);
     final userName = ModalRoute.of(context)!.settings.arguments as String;
-    final _items = userName == "Maman" ? items.allItems : items2.allItems;
+    final _item = items.allItems;
+    List<Map> _items = getByName(userName, _item);
+    // userName == "Maman" ? items.getByName(userName) : items2.allItems;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -97,60 +113,100 @@ class _DataTableSampleState extends State<DataTableSample> {
                                   builder: (BuildContext context) =>
                                       AlertDialog(
                                           title: const Text(
-                                              'Rincian Pembayaran Zakat'),
+                                              'Rincian Pembayaran Zakat',
+                                              style: TextStyle(fontSize: 16)),
                                           content: Container(
-                                            height: 400,
+                                            height: itemRow["Status"] ==
+                                                    "Telah diterima oleh LAZ"
+                                                ? 200
+                                                : 200,
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text("Anda telah membayarkat " +
-                                                    itemRow["Jenis"]),
                                                 Text(
-                                                  "Pada Tanggal : " +
-                                                      itemRow["Tanggal"],
-                                                ),
-                                                Text("Kepada : " +
-                                                    itemRow["Laz"]),
-                                                Text("Atas Nama : " +
-                                                    itemRow["Nama"]),
-                                                Text("Sebesar : " +
-                                                    itemRow["Jumlah"]),
+                                                    "Anda telah membayarkat " +
+                                                        itemRow["Jenis"],
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
+                                                SizedBox(height: 10),
+                                                Text(
+                                                    "Pada Tanggal                  : " +
+                                                        itemRow["Tanggal"],
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
+                                                Text(
+                                                    "Kepada                             : " +
+                                                        itemRow["Laz"],
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
+                                                Text(
+                                                    "Atas Nama                      : " +
+                                                        itemRow["Nama"],
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
+                                                Text(
+                                                    "Sebesar                            : " +
+                                                        itemRow["Jumlah"],
+                                                    style: TextStyle(
+                                                        fontSize: 12)),
                                                 SizedBox(
                                                   height: 10,
                                                 ),
                                                 itemRow["Status"] ==
                                                         "Telah diterima oleh LAZ"
-                                                    ? Text("Saat ini Zakat anda telah diterima oleh LAZ yang bersangkutan, Anda bisa menghubungi " +
-                                                        itemRow["Penangung"] +
-                                                        "Untuk informasi lebih seputar status Zakat anda")
-                                                    : Column(children: [
-                                                        Text("No Penanggung Jawab :" +
+                                                    ? Text(
+                                                        "Saat ini Zakat anda telah diterima oleh LAZ yang bersangkutan, Anda bisa menghubungi menggunakan nomor " +
                                                             itemRow[
-                                                                "Penangung"]),
-                                                        Text(
-                                                            "Telah disalurkan ke " +
-                                                                itemRow[
-                                                                    "Tempat"]),
+                                                                "Penangung"] +
+                                                            " untuk informasi lebih seputar status Zakat anda",
+                                                        style: TextStyle(
+                                                            fontSize: 12))
+                                                    : Column(children: [
+                                                        Align(
+                                                            alignment: Alignment
+                                                                .topLeft,
+                                                            child: Text(
+                                                                "No Penanggung Jawab : " +
+                                                                    itemRow[
+                                                                        "Penangung"],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12))),
+                                                        Align(
+                                                            alignment: Alignment
+                                                                .topLeft,
+                                                            child: Text(
+                                                                "Telah disalurkan ke        : " +
+                                                                    itemRow[
+                                                                        "Tempat"],
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12))),
                                                         Align(
                                                           alignment:
                                                               Alignment.topLeft,
                                                           child: Text(
-                                                            "Pada Tanggal : " +
-                                                                itemRow[
-                                                                    "Distribusi"],
-                                                          ),
+                                                              "Pada Tanggal                  : " +
+                                                                  itemRow[
+                                                                      "Distribusi"],
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      12)),
                                                         ),
+                                                        SizedBox(height: 10),
                                                         Text(
-                                                          "Anda dapat menghubungi No " +
-                                                              itemRow["NoTlp"] +
-                                                              " Selaku " +
-                                                              itemRow[
-                                                                  "AtasNama"] +
-                                                              " untuk memastikan",
-                                                        )
+                                                            "Anda dapat menghubungi No " +
+                                                                itemRow[
+                                                                    "NoTlp"] +
+                                                                " Selaku " +
+                                                                itemRow[
+                                                                    "AtasNama"] +
+                                                                " untuk memastikan",
+                                                            style: TextStyle(
+                                                                fontSize: 12))
                                                       ]),
                                                 SizedBox(
                                                   height: 10,

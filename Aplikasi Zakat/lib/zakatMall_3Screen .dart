@@ -167,37 +167,37 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
                                           var no = data["usernama"] == "Maman"
                                               ? _items.length + 1
                                               : _items2.length + 1;
-                                          data["usernama"] == "Maman"
-                                              ? items.addData({
-                                                  "Id": no.toString(),
-                                                  "Nama": data["nama"],
-                                                  "Tanggal": now,
-                                                  "Jenis": data["jenis"],
-                                                  "Jumlah": data["jumlah"],
-                                                  "Status":
-                                                      "Telah diterima oleh LAZ",
-                                                  "Laz": data["Laz"],
-                                                  "Penangung": Penangung,
-                                                  "Distribusi": "Belum ada",
-                                                  "Tempat": "Belum ada",
-                                                  "NoTlp": "Belum ada",
-                                                  "AtasNama": "Belum ada"
-                                                })
-                                              : items2.addData({
-                                                  "Id": no.toString(),
-                                                  "Nama": data["nama"],
-                                                  "Tanggal": now,
-                                                  "Jenis": data["jenis"],
-                                                  "Jumlah": data["jumlah"],
-                                                  "Status":
-                                                      "Telah diterima oleh LAZ",
-                                                  "Laz": data["Laz"],
-                                                  "Penangung": Penangung,
-                                                  "Distribusi": "Belum ada",
-                                                  "Tempat": "Belum ada",
-                                                  "NoTlp": "Belum ada",
-                                                  "AtasNama": "Belum ada"
-                                                });
+                                          // data["usernama"] == "Maman"?
+                                          items.addData({
+                                            "Id": no.toString(),
+                                            "Nama": data["nama"],
+                                            "UserName": data["usernama"],
+                                            "Tanggal": now,
+                                            "Jenis": data["jenis"],
+                                            "Jumlah": data["jumlah"],
+                                            "Status": "Telah diterima oleh LAZ",
+                                            "Laz": data["Laz"],
+                                            "Penangung": Penangung,
+                                            "Distribusi": "Belum ada",
+                                            "Tempat": "Belum ada",
+                                            "NoTlp": "Belum ada",
+                                            "AtasNama": "Belum ada"
+                                          });
+                                          // : items2.addData({
+                                          //     "Id": no.toString(),
+                                          //     "Nama": data["nama"],
+                                          //     "Tanggal": now,
+                                          //     "Jenis": data["jenis"],
+                                          //     "Jumlah": data["jumlah"],
+                                          //     "Status":
+                                          //         "Telah diterima oleh LAZ",
+                                          //     "Laz": data["Laz"],
+                                          //     "Penangung": Penangung,
+                                          //     "Distribusi": "Belum ada",
+                                          //     "Tempat": "Belum ada",
+                                          //     "NoTlp": "Belum ada",
+                                          //     "AtasNama": "Belum ada"
+                                          //   });
                                           Navigator.pushNamed(
                                               context, DashboardScreen.route,
                                               arguments: data["usernama"]);
