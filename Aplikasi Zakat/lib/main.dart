@@ -31,6 +31,7 @@ import 'package:flutter_application_2/Provider/Provider.dart';
 import 'package:flutter_application_2/Provider/User.dart';
 import 'package:flutter_application_2/zakatFitrah_2Screen.dart';
 import 'package:flutter_application_2/zakatFitrah_3Screen.dart';
+import 'package:flutter_application_2/zakatFitrah_4Screen%20.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
 import 'package:flutter_application_2/zakatMall_3Screen%20.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
                 //route Zakat fitrah//
                 ZakatFitrah_2Screen.route: (context) => ZakatFitrah_2Screen(),
                 zakatFitrah_3Screen.route: (context) => zakatFitrah_3Screen(),
+                zakatFitrah_4Screen.route: (context) => zakatFitrah_4Screen(),
 
                 //route Zakat Mall//
                 ZakatMall_2Screen.route: (context) => ZakatMall_2Screen(),

@@ -37,6 +37,7 @@ class _DataTableSampleState extends State<DataTableSample> {
     // final items2 = Provider.of<itemLaporan2>(context);
     final userName = ModalRoute.of(context)!.settings.arguments as String;
     final _item = items.allItems;
+    int i = 0;
     List<Map> _items = getByName(userName, _item);
     // userName == "Maman" ? items.getByName(userName) : items2.allItems;
     return Scaffold(
@@ -85,7 +86,7 @@ class _DataTableSampleState extends State<DataTableSample> {
                       (Map itemRow) => DataRow(
                         cells: [
                           DataCell(
-                            Text(itemRow["Id"]),
+                            Text(itemRow["Count"].toString()),
                             showEditIcon: false,
                             placeholder: false,
                           ),

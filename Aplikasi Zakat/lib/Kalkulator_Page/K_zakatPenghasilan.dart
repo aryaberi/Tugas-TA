@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:intl/intl.dart';
 
 class kalkulatorZPendapatanScreen extends StatefulWidget {
@@ -67,11 +68,11 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -107,11 +108,11 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                             labelText: "2.Masukan Bonus tahunan anda :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -122,7 +123,8 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                           Bonus = value;
                           if (value.isNotEmpty) {
                             var jumlah =
-                                12 * int.parse(bulanan) + int.parse(value);
+                                12 * int.parse(bulanan.replaceAll(",", "")) +
+                                    int.parse(value.replaceAll(",", ""));
                             var Total = ((jumlah * 25) / 1000).toInt();
                             var rupiah = formatter.format(Total);
                             setState(() {

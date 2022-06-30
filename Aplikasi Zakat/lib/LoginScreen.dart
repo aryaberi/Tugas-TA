@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text("ZOI"),
+          leading: Container(),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
         ),
@@ -134,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: InkWell(
                           splashColor: Colors.white,
                           onTap: () {
+                            print(Nama);
+                            print(Pass);
                             isTrue = user.check(Nama, Pass);
 
                             if (isTrue == true) {
@@ -146,9 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 isWrong = true;
                               });
                             }
-                            print(isTrue);
-                            print(isWrong);
-                            print(_passwordVisible);
+                            // print(isTrue);
+                            // print(isWrong);
+                            // print(_passwordVisible);
                           },
                           child: Center(
                             child: Text(

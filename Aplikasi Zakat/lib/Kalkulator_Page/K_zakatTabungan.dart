@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:intl/intl.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class kalkulatorZTabunganScreen extends StatefulWidget {
   const kalkulatorZTabunganScreen({Key? key}) : super(key: key);
@@ -71,11 +72,11 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -111,11 +112,11 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                             labelText: "2.Masukan Bunga dari Tabungan Anda :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -156,11 +157,11 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                 "3.Masukan Jumlah Deposito yang Dimiliki :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -270,9 +271,12 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                   ? () {
                                       setState(() {
                                         isHitung = true;
-                                        int Total = int.parse(_Tabungan) +
-                                            int.parse(_Deposito) -
-                                            int.parse(_Bunga);
+                                        int Total = int.parse(
+                                                _Tabungan.replaceAll(",", "")) +
+                                            int.parse(
+                                                _Deposito.replaceAll(",", "")) -
+                                            int.parse(
+                                                _Bunga.replaceAll(",", ""));
                                         Hasil = Total.toString();
 
                                         Zakat = (((Total * 25) / 1000).toInt())

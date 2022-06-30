@@ -152,9 +152,7 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                 TextButton(
                   onPressed: () {
                     var Idx = _dataAlarm2.length + 1;
-                    Taun = DateFormat("yyyy").format(DateTime.now());
-                    int Tahun = int.parse(Taun) + 1;
-                    Tanggal = Tgl + "/" + Bulan + "/" + Tahun.toString();
+                    Tanggal = Tgl + "/" + Bulan;
                     setState(() {
                       _myWidgetList.add(CardListAlarm(
                           id: Idx.toString(), jenis: Jenis, tanggal: Tanggal));
@@ -315,9 +313,8 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                                 var Idx = _dataAlarm2.length + 1;
                                 Taun =
                                     DateFormat("yyyy").format(DateTime.now());
-                                int Tahun = int.parse(Taun) + 1;
-                                Tanggal =
-                                    Tgl + "/" + Bulan + "/" + Tahun.toString();
+
+                                Tanggal = Tgl + "/" + Bulan;
                                 setState(() {
                                   _myWidgetList.remove(index);
                                   _dataAlarm2.remove(_dataAlarm2[index]);
@@ -347,7 +344,7 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                     Text("${_dataAlarm2[index].tanggal}"),
                   ],
                 ),
-                SizedBox(width: 150),
+                SizedBox(width: 120),
                 IconButton(
                     onPressed: () {
                       setState(() {

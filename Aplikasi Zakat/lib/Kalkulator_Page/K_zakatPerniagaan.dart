@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class kalkulatorZPerniagaanScreen extends StatefulWidget {
   const kalkulatorZPerniagaanScreen({Key? key}) : super(key: key);
@@ -69,11 +70,11 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -109,11 +110,11 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                             labelText: "2.Pendapatan selama satu tahun :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -153,11 +154,11 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                             labelText: "3.Masukan Jumlah yang Dihutangkan :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -198,11 +199,11 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                 "3.Masukan Jumlah Hutang yang harus dibayar :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -318,10 +319,14 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                   ? () {
                                       setState(() {
                                         isHitung = true;
-                                        int Total = int.parse(_Aset) +
-                                            int.parse(_Pendapatan) +
-                                            int.parse(_Piutang) -
-                                            int.parse(_Hutang);
+                                        int Total = int.parse(
+                                                _Aset.replaceAll(",", "")) +
+                                            int.parse(_Pendapatan.replaceAll(
+                                                ",", "")) +
+                                            int.parse(
+                                                _Piutang.replaceAll(",", "")) -
+                                            int.parse(
+                                                _Hutang.replaceAll(",", ""));
                                         Hasil = Total.toString();
                                         Zakat = (((Total * 25) / 1000).toInt())
                                             .toString();

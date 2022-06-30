@@ -37,9 +37,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             },
           ),
+          title: const Text("Pendaftaran"),
+          centerTitle: true,
         ),
         body: ListView(
           children: [
+            SizedBox(
+              height: 10,
+            ),
             Text(
               "Silahkan Daftrakan Diri Anda",
               style: TextStyle(
@@ -95,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 20,
             ),
             TextFormField(
-              obscureText: true,
+              obscureText: false,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(),
@@ -118,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 20,
             ),
             TextFormField(
-              obscureText: true,
+              obscureText: false,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(),
@@ -141,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 20,
             ),
             TextFormField(
-              obscureText: true,
+              obscureText: false,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 focusedBorder: OutlineInputBorder(),
@@ -152,6 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 hintText: "masukan no identitas anda",
                 labelText: "No KTP/KK",
               ),
+              maxLength: 16,
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly
@@ -184,14 +190,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onTap: () {
                         if (Pass1 == Pass2) {
                           var no = _users.length + 1;
-                          user.addData({
-                            "Id": no.toString(),
-                            "Nama": Nama,
-                            "Email": Email,
-                            "Password": Pass1,
-                            "NoIdentity": NoIdentity
-                          });
-                          Navigator.pushNamed(context, LoginScreen.route);
+                          showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                      title: const Text('Pendaftaran berhasil'),
+                                      content: Container(
+                                        height: 80,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(Icons.check),
+                                            Text(
+                                                'Selamat akun anda berhasil didaftarkan'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            user.addData({
+                                              "Id": no.toString(),
+                                              "Nama": Nama,
+                                              "Email": Email,
+                                              "Password": Pass1,
+                                              "NoIdentity": NoIdentity,
+                                              "Ovo": false,
+                                              "SOvo": "1000000",
+                                              "Gopay": false,
+                                              "SGopay": "1000000",
+                                              "Dana": false,
+                                              "SDana": "1000000",
+                                              "Link Aja": false,
+                                              "SLink": "1000000",
+                                            });
+                                            Navigator.pushNamed(
+                                                context, LoginScreen.route);
+                                          },
+                                          child: const Text('Ok'),
+                                        )
+                                      ]));
                         }
                       },
                       child: const Center(

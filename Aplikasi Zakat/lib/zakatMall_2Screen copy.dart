@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/zakatMall_3Screen%20.dart';
+import 'package:intl/intl.dart';
 
 class ZakatMall_2Screen extends StatefulWidget {
   static const route = "/ZakatMall2";
@@ -12,8 +13,10 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
   @override
   // Map data = [] as Map;
   Widget build(BuildContext context) {
+    final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
+    var _jumlah = formatter.format(int.parse(data["jumlah"]));
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -41,7 +44,7 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
               style: TextStyle(fontSize: 16)),
           Text("Atas Nama                  :   " + data["nama"],
               style: TextStyle(fontSize: 16)),
-          Text("Dengan Jumlah          :   " + data["jumlah"],
+          Text("Dengan Jumlah          :   " + _jumlah.toString(),
               style: TextStyle(fontSize: 16)),
           SizedBox(height: 20),
           Text(
@@ -65,8 +68,7 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
                     primary: Colors.lightGreen,
                     minimumSize: const Size(200, 50)),
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
-                      context, zakatMall_3Screen.route,
+                  Navigator.pushNamed(context, zakatMall_3Screen.route,
                       arguments: data);
                 },
                 child: Text("Lanjutkan")),

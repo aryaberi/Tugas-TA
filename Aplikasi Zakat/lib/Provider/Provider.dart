@@ -5,6 +5,7 @@ class itemLaporan with ChangeNotifier {
   List<Map> dataRow = [
     {
       "Id": "1",
+      "Count": "1",
       "Nama": "Budi",
       "UserName": "Budi",
       "Tanggal": "12/02/2022",
@@ -20,6 +21,7 @@ class itemLaporan with ChangeNotifier {
     },
     {
       "Id": "2",
+      "Count": "1",
       "Nama": "Maman",
       "UserName": "Maman",
       "Tanggal": "12/02/2022",
@@ -35,6 +37,7 @@ class itemLaporan with ChangeNotifier {
     },
     {
       "Id": "3",
+      "Count": "2",
       "Nama": "Maman",
       "UserName": "Maman",
       "Tanggal": "12/02/2022",
@@ -50,6 +53,7 @@ class itemLaporan with ChangeNotifier {
     },
     {
       "Id": "4",
+      "Count": "3",
       "Nama": "Maman",
       "UserName": "Maman",
       "Tanggal": "12/02/2022",
@@ -83,5 +87,22 @@ class itemLaporan with ChangeNotifier {
       }
     }
     return [..._data];
+  }
+
+  int getCountName(String userName) {
+    int value = 0;
+    int i = 0;
+    print("Masuk Count");
+    for (i; i < dataRow.length; i++) {
+      print(dataRow[i]["UserName"]);
+      print(userName);
+      if (dataRow[i]["UserName"] == userName) {
+        print("Nambah nih");
+        value = value + 1;
+      }
+    }
+    print("ini hasil akhir nya");
+    print(value);
+    return value;
   }
 }

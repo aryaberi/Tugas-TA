@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:intl/intl.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class kalkulatorZFidyahScreen extends StatefulWidget {
   const kalkulatorZFidyahScreen({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
                         ],
                         validator: (value) {
                           if (value!.isEmpty ||
@@ -107,11 +108,11 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                             labelText: "2.Biaya satu kali makan:"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -204,7 +205,8 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                                   ? () {
                                       setState(() {
                                         int Total = int.parse(_Jumlah) *
-                                            int.parse(_Harga);
+                                            int.parse(
+                                                _Harga.replaceAll(",", ""));
 
                                         Zakat = Total.toString();
                                         isHitung = true;

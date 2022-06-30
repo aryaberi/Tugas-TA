@@ -61,10 +61,10 @@ class KalkulatorScreen extends StatelessWidget {
               name: "Zakat Hadiah",
               route: kalkulatorZHadiahScreen.route,
               argumen: userName),
-          CardList(
-            name: "Zakat Fidyah",
-            route: kalkulatorZFidyahScreen.route,
-          ),
+          CardList2(
+              name: "Zakat Fidyah",
+              route: kalkulatorZFidyahScreen.route,
+              argumen: userName),
         ]));
   }
 }

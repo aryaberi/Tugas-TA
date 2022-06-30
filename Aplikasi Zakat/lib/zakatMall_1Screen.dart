@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class zakatMall_1Screen extends StatefulWidget {
   const zakatMall_1Screen({Key? key}) : super(key: key);
@@ -384,7 +385,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                       "2.Masukan Jumlah yang ingin dibayarkan :"),
                               keyboardType: TextInputType.number,
                               inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
+                                FilteringTextInputFormatter.digitsOnly,
+                                ThousandsFormatter()
                               ],
                               validator: (value) {
                                 if (value!.isEmpty ||
@@ -449,7 +451,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                         "Laz": _Laz,
                                         "nama": _nama,
                                         "jenis": _Selected,
-                                        "jumlah": Hasil,
+                                        "jumlah": Hasil.replaceAll(",", ""),
                                         "usernama": data["usernama"],
                                       });
                                 }

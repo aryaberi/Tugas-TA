@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class kalkulatorZHadiahScreen extends StatefulWidget {
   const kalkulatorZHadiahScreen({Key? key}) : super(key: key);
@@ -66,11 +67,11 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly,
+                          ThousandsFormatter()
                         ],
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('^[0-9]').hasMatch(value)) {
+                          if (value!.isEmpty) {
                             return "Isi dengan angka";
                           } else {
                             return null;
@@ -98,7 +99,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                         },
                       ),
 //Form Hadiah Total ============================================================================================================
-
+                      SizedBox(height: 20),
 //Form Jenis Hadiah ============================================================================================================
                       Row(children: [
                         Radio(
@@ -134,12 +135,13 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                         Text("Banyak jerih payah")
                       ]),
 //Form jenis Hadiah ============================================================================================================
-SizedBox(
-                                  height: 20,
-                                ),
+                      SizedBox(
+                        height: 20,
+                      ),
 //jumlah yang dibayar============================================================================================================
                       isHitung
-                          ? Card(shape: RoundedRectangleBorder(
+                          ? Card(
+                              shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   color: Colors.black,
                                 ),
@@ -147,18 +149,17 @@ SizedBox(
                               ),
                               child: Padding(
                                   padding: const EdgeInsets.all(20),
-                              child: Column(
-                              children: [
-                                
-                                Text(
-                                    "Zakat yang perlu anda keluarkan adalah " +
-                                        formatter
-                                            .format(int.parse(Zakat))
-                                            .toString(),
-                                    style: TextStyle(fontSize: 14)),
-                              ],
-                            ))
-                          ): SizedBox(width: 0, height: 0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                          "Zakat yang perlu anda keluarkan adalah " +
+                                              formatter
+                                                  .format(int.parse(Zakat))
+                                                  .toString(),
+                                          style: TextStyle(fontSize: 14)),
+                                    ],
+                                  )))
+                          : SizedBox(width: 0, height: 0),
 
 //jumlah yang dibayar============================================================================================================
 
@@ -194,26 +195,35 @@ SizedBox(
                               onPressed: isButtonActive
                                   ? () {
                                       if (_Selected == "1") {
-                                        var jumlah =
-                                            ((int.parse(_Total) * 20) / 100)
-                                                .toInt();
+                                        var jumlah = ((int.parse(
+                                                        _Total.replaceAll(
+                                                            "", "")) *
+                                                    20) /
+                                                100)
+                                            .toInt();
 
                                         setState(() {
                                           Zakat = jumlah.toString();
                                         });
                                         print(_Selected);
                                       } else if (_Selected == "2") {
-                                        var jumlah =
-                                            ((int.parse(_Total) * 10) / 100)
-                                                .toInt();
+                                        var jumlah = ((int.parse(
+                                                        _Total.replaceAll(
+                                                            "", "")) *
+                                                    10) /
+                                                100)
+                                            .toInt();
                                         setState(() {
                                           Zakat = jumlah.toString();
                                         });
                                         print(_Selected);
                                       } else if (_Selected == "3") {
-                                        var jumlah =
-                                            ((int.parse(_Total) * 25) / 1000)
-                                                .toInt();
+                                        var jumlah = ((int.parse(
+                                                        _Total.replaceAll(
+                                                            "", "")) *
+                                                    25) /
+                                                1000)
+                                            .toInt();
                                         setState(() {
                                           Zakat = jumlah.toString();
                                         });

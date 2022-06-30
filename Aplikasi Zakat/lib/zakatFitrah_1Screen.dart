@@ -351,14 +351,14 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                               minimumSize: const Size(200, 50)),
                           onPressed: isButtonActive
                               ? () {
-                                  Navigator.pushReplacementNamed(
+                                  Navigator.pushNamed(
                                       context, ZakatFitrah_2Screen.route,
                                       arguments: {
                                         "methodPayment": _methodPayment,
                                         "kindPayment": _kindPayment,
                                         "Laz": _Laz,
                                         "nama": _nama,
-                                        "jumlah": _jumlah,
+                                        "jumlah": _jumlah.replaceAll(",", ""),
                                         "usernama": userName,
                                       });
                                 }
