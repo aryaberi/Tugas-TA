@@ -76,11 +76,21 @@ class bantuanZMScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
+          Text("7. Setelah itu masukan PIN dari akun e-money anda."),
+          image_font_1(
+              imageurl: "images/Bantuan_Zakat_Fitrah/bayar_zakat_mall_9.jpg"),
+          SizedBox(
+            height: 10,
+          ),
           Text(
-              "7. Apabila anda memilih metode pembayaran secara tranfer atm maupun Mbking, silahkan tranferkan uang anda pada rekening yang diberikan dan menekan tombol konfirmasi."),
-          // image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/bayar_zakat_mall_7.jpg"),
+              "8. Apabila anda memilih metode pembayaran secara tranfer atm maupun Mbking, silahkan tranferkan uang anda pada rekening yang diberikan dan menekan tombol konfirmasi."),
+          image_font_1(
+              imageurl: "images/Bantuan_Zakat_Fitrah/bayar_zakat_mall_10.jpg"),
+          SizedBox(
+            height: 10,
+          ),
           Text(
-              "8. Selamat anda telah berhasil melakukan pembayaran zakat mall."),
+              "9. Selamat anda telah berhasil melakukan pembayaran zakat mall."),
           image_font_1(
               imageurl: "images/Bantuan_Zakat_Fitrah/bayar_zakat_mall_8.jpg"),
           SizedBox(

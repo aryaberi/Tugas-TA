@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -104,5 +105,15 @@ class itemLaporan with ChangeNotifier {
     print("ini hasil akhir nya");
     print(value);
     return value;
+  }
+
+  void updateLastList() {
+    int i = dataRow.length - 2;
+    String now = DateFormat("dd/MM/yyyy").format(DateTime.now());
+    dataRow[i]["Status"] = "Telah dibayarkan";
+    dataRow[i]["Distribusi"] = now;
+    dataRow[i]["Tempat"] = "Kampung Melarat";
+    dataRow[i]["NoTlp"] = "089898977012";
+    dataRow[i]["AtasNama"] = "Lurah Kampung Melarat";
   }
 }

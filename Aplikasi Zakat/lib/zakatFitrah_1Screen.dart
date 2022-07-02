@@ -112,7 +112,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                       ),
 //Dropdown LAZ menu============================================================================================================
                       Text(
-                        "Pilih LAZ tujuan",
+                        "Pilih LAZ Tujuan",
                         style: TextStyle(fontSize: 20),
                       ),
                       Container(
@@ -179,7 +179,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                         height: 20,
                       ),
                       Text(
-                        "Pilih Metode pembayaran",
+                        "Pilih Metode Pembayaran",
                         style: TextStyle(fontSize: 20),
                       ),
                       Container(

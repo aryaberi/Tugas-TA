@@ -146,6 +146,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                         height: 20,
                       ),
 //Dropdown Jenis Zakat=========================================================================================================
+                      Text(
+                        "Pilih Jenis Zakat",
+                        style: TextStyle(fontSize: 20),
+                      ),
                       data.isNotEmpty && data["Jenis"] != "belum"
                           ? Text("Pembayara " + data["Jenis"]!)
                           : DecoratedBox(
@@ -200,7 +204,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 
 //Dropdown LAZ menu============================================================================================================
                       Text(
-                        "Pilih Laz tujuan",
+                        "Pilih Laz Tujuan",
                         style: TextStyle(fontSize: 20),
                       ),
                       Container(
@@ -268,7 +272,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                         height: 20,
                       ),
                       Text(
-                        "Pilih metode pembayaran",
+                        "Pilih Metode Pembayaran",
                         style: TextStyle(fontSize: 20),
                       ),
                       Container(

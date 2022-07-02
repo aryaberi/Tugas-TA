@@ -81,7 +81,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                     data["methodPayment"] +
                                     " silahkan masukan no hp yang terhubung dengan akun " +
                                     data["methodPayment"] +
-                                    "Anda",
+                                    " Anda",
                                 style: TextStyle(fontSize: 16)),
 
                             //     ?
@@ -161,7 +161,14 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                   padding: const EdgeInsets.only(
                                       top: 20.0, left: 8.0, right: 8.0),
                                   child: PinInputTextField(
+                                    // enabled: false,
                                     pinLength: 6,
+                                    decoration: CirclePinDecoration(
+                                        strokeColorBuilder:
+                                            PinListenColorBuilder(
+                                                Colors.blue, Colors.black),
+                                        obscureStyle:
+                                            ObscureStyle(isTextObscure: true)),
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.digitsOnly
@@ -317,6 +324,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                       "NoTlp": "Belum ada",
                                                       "AtasNama": "Belum ada"
                                                     });
+                                                    items.updateLastList();
                                                     Navigator.pushNamed(context,
                                                         DashboardScreen.route,
                                                         arguments:
@@ -387,6 +395,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                     "NoTlp": "Belum ada",
                                                     "AtasNama": "Belum ada"
                                                   });
+                                                  items.updateLastList();
                                                   Navigator.pushNamed(context,
                                                       DashboardScreen.route,
                                                       arguments:

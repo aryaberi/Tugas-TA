@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Text(
-                  "Selamat Datang di ZOI, Aplikasi pemabayaran zakat online yang telah mendapat lisensi dari MUI",
+                  "Selamat datang di ZOI. Aplikasi pembayaran zakat online yang telah mendapat lisensi dari MUI",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,
@@ -120,6 +120,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
+                // const SizedBox(height: 5),
+                // Checkbox(
+                //     value: _passwordVisible,
+                //     onChanged: (bool? value) {
+                //       setState(() {
+                //         _passwordVisible = !_passwordVisible;
+                //       });
+                //     }),
                 const SizedBox(height: 5),
                 isWrong
                     ? Text("email atau password yang anda masukan salah",
@@ -135,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: InkWell(
                           splashColor: Colors.white,
                           onTap: () {
+                            print("Klik ini");
                             print(Nama);
                             print(Pass);
                             isTrue = user.check(Nama, Pass);
@@ -149,9 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 isWrong = true;
                               });
                             }
-                            // print(isTrue);
-                            // print(isWrong);
-                            // print(_passwordVisible);
+                            print(isTrue);
+                            print(isWrong);
+                            print(_passwordVisible);
                           },
                           child: Center(
                             child: Text(

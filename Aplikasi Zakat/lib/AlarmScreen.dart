@@ -25,10 +25,58 @@ class _AlarmScrennState extends State<AlarmScrenn> {
     {"name": "Zakat Perak"},
     {"name": "Zakat Fidyah"}
   ];
+  List<Map> Moon = [
+    {"name": "Januari"},
+    {"name": "Febuari"},
+    {"name": "Maret"},
+    {"name": "April"},
+    {"name": "Mei"},
+    {"name": "Juni"},
+    {"name": "Juli"},
+    {"name": "Agustus"},
+    {"name": "September"},
+    {"name": "Oktober"},
+    {"name": "November"},
+    {"name": "Desember"},
+  ];
+
+  List<Map> Day = [
+    {"name": "1"},
+    {"name": "2"},
+    {"name": "3"},
+    {"name": "4"},
+    {"name": "5"},
+    {"name": "6"},
+    {"name": "7"},
+    {"name": "8"},
+    {"name": "9"},
+    {"name": "10"},
+    {"name": "11"},
+    {"name": "12"},
+    {"name": "13"},
+    {"name": "14"},
+    {"name": "15"},
+    {"name": "16"},
+    {"name": "17"},
+    {"name": "18"},
+    {"name": "19"},
+    {"name": "20"},
+    {"name": "21"},
+    {"name": "22"},
+    {"name": "23"},
+    {"name": "24"},
+    {"name": "25"},
+    {"name": "26"},
+    {"name": "27"},
+    {"name": "28"},
+    {"name": "29"},
+    {"name": "30"},
+    {"name": "31"},
+  ];
   final formKey = GlobalKey<FormState>();
   String Jenis = "Zakat Pendapatan";
   String Tgl = "1";
-  String Bulan = "1";
+  String Bulan = "Januari";
   String Taun = "2022";
   String Tanggal = "1/1/2022";
 
@@ -48,6 +96,10 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                 child: Form(
                   key: formKey,
                   child: Column(children: [
+                    Text(
+                      "Pilih Jenis Zakat",
+                      style: TextStyle(fontSize: 16),
+                    ),
                     DecoratedBox(
                       decoration: BoxDecoration(
                         border: Border.all(),
@@ -82,65 +134,79 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "1.Masukan Tanggal pemasangan:",
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(2),
-                        ],
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('0[1-9]|1[0-9]|2[0-9]|3[0-1]')
-                                  .hasMatch(value)) {
-                            return "Isi dari angka 01-31";
-                          } else {
-                            return null;
-                          }
+                    Text(
+                      "Pilih Tanggal Pemasangan",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: DropdownButtonFormField(
+                        isExpanded: true,
+                        isDense: true,
+                        hint: new Text("Pilih Jenis Zakat"),
+                        value: Tgl,
+                        onChanged: (Value) {
+                          setState(() {
+                            Tgl = Value.toString();
+                          });
+
+                          print(Jenis);
                         },
-                        onChanged: (value) {
-                          if (formKey.currentState!.validate()) {
-                            print("Validate");
-                          } else {
-                            print("NotValidate");
-                          }
-                          if (value.isNotEmpty) {
-                            Tgl = value;
-                            print(Tgl);
-                          }
-                          ;
-                        }),
-                    TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "2.Masukan Bulan pemasangan:",
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(2),
-                        ],
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp('0[1-9]|1[0-2]').hasMatch(value)) {
-                            return "Isi dengan angka 01-12";
-                          } else {
-                            return null;
-                          }
+                        items: Day.map((Map map) {
+                          return new DropdownMenuItem<String>(
+                            value: map["name"].toString(),
+                            // value: _mySelection,
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Text(map["name"])),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Pilih Bulan Pemasangan",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: DropdownButtonFormField(
+                        isExpanded: true,
+                        isDense: true,
+                        hint: new Text("Pilih Bulan"),
+                        value: Bulan,
+                        onChanged: (Value) {
+                          setState(() {
+                            Bulan = Value.toString();
+                          });
+
+                          print(Bulan);
                         },
-                        onChanged: (value) {
-                          if (formKey.currentState!.validate()) {
-                            print("Validate");
-                          } else {
-                            print("NotValidate");
-                          }
-                          if (value.isNotEmpty) {
-                            Bulan = value;
-                            print(Bulan);
-                          }
-                          ;
-                        }),
+                        items: Moon.map((Map map) {
+                          return new DropdownMenuItem<String>(
+                            value: map["name"].toString(),
+                            // value: _mySelection,
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Text(map["name"])),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                   ]),
                 ),
               ),
@@ -204,6 +270,10 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                             child: Form(
                               key: formKey,
                               child: Column(children: [
+                                Text(
+                                  "Pilih Jenis Zakat",
+                                  style: TextStyle(fontSize: 16),
+                                ),
                                 DecoratedBox(
                                   decoration: BoxDecoration(
                                     border: Border.all(),
@@ -239,67 +309,81 @@ class _AlarmScrennState extends State<AlarmScrenn> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                TextFormField(
-                                    decoration: InputDecoration(
-                                      labelText:
-                                          "1.Masukan Tanggal pemasangan:",
-                                    ),
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.digitsOnly,
-                                      LengthLimitingTextInputFormatter(2),
-                                    ],
-                                    validator: (value) {
-                                      if (value!.isEmpty ||
-                                          !RegExp('0[1-9]|1[0-9]|2[0-9]|3[0-1]')
-                                              .hasMatch(value)) {
-                                        return "Isi dari angka 01-31";
-                                      } else {
-                                        return null;
-                                      }
+                                Text(
+                                  "Pilih Tanggal Pemasangan",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                  ),
+                                  child: DropdownButtonFormField(
+                                    isExpanded: true,
+                                    isDense: true,
+                                    hint: new Text("Pilih Jenis Zakat"),
+                                    value: Tgl,
+                                    onChanged: (Value) {
+                                      setState(() {
+                                        Tgl = Value.toString();
+                                      });
+
+                                      print(Jenis);
                                     },
-                                    onChanged: (value) {
-                                      if (formKey.currentState!.validate()) {
-                                        print("Validate");
-                                      } else {
-                                        print("NotValidate");
-                                      }
-                                      if (value.isNotEmpty) {
-                                        Tgl = value;
-                                        print(Tgl);
-                                      }
-                                      ;
-                                    }),
-                                TextFormField(
-                                    decoration: InputDecoration(
-                                      labelText: "2.Masukan Bulan pemasangan:",
-                                    ),
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.digitsOnly,
-                                      LengthLimitingTextInputFormatter(2),
-                                    ],
-                                    validator: (value) {
-                                      if (value!.isEmpty ||
-                                          !RegExp('0[1-9]|1[0-2]')
-                                              .hasMatch(value)) {
-                                        return "Isi dengan angka 01-12";
-                                      } else {
-                                        return null;
-                                      }
+                                    items: Day.map((Map map) {
+                                      return new DropdownMenuItem<String>(
+                                        value: map["name"].toString(),
+                                        // value: _mySelection,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(map["name"])),
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Pilih Bulan Pemasangan",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                  ),
+                                  child: DropdownButtonFormField(
+                                    isExpanded: true,
+                                    isDense: true,
+                                    hint: new Text("Pilih Bulan"),
+                                    value: Bulan,
+                                    onChanged: (Value) {
+                                      setState(() {
+                                        Bulan = Value.toString();
+                                      });
+
+                                      print(Bulan);
                                     },
-                                    onChanged: (value) {
-                                      if (formKey.currentState!.validate()) {
-                                        print("Validate");
-                                      } else {
-                                        print("NotValidate");
-                                      }
-                                      if (value.isNotEmpty) {
-                                        Bulan = value;
-                                        print(Bulan);
-                                      }
-                                      ;
-                                    }),
+                                    items: Moon.map((Map map) {
+                                      return new DropdownMenuItem<String>(
+                                        value: map["name"].toString(),
+                                        // value: _mySelection,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(map["name"])),
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
                               ]),
                             ),
                           ),
