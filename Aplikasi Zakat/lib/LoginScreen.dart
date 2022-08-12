@@ -16,17 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   bool isWrong = false;
   bool _passwordVisible = false;
-  void initState() {
-    isWrong = false;
-    _passwordVisible = false;
-    super.initState();
-  }
+  String Nama = "";
+  String Pass = "";
+  // changePass(String Nama) {
+  //   // setState(() {
+  //   //   _passwordVisible = !_passwordVisible;
+  //   // });
+  //   print(Nama);
+  // }
 
   Widget build(BuildContext context) {
     final user = Provider.of<dataUser>(context);
     final _users = user.allItems;
-    String Nama = "";
-    String Pass = "";
     String userName = "";
     bool isTrue = false;
 
@@ -90,21 +91,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(),
-                      suffixIcon: GestureDetector(
-                        onLongPress: () {
-                          setState(() {
-                            _passwordVisible = true;
-                          });
-                        },
-                        onLongPressUp: () {
-                          setState(() {
-                            _passwordVisible = false;
-                          });
-                        },
-                        child: Icon(_passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      ),
+                      suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                          child: Icon(
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          )),
                       prefixIcon: Icon(
                         Icons.lock,
                         size: 40,

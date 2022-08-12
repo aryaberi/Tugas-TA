@@ -15,14 +15,17 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
+  bool _passwordVisible = false;
+  bool _copasswordVisible = false;
+  String Nama = "";
+  String Email = "";
+  String Pass1 = "";
+  String Pass2 = "";
+  String NoIdentity = "";
   Widget build(BuildContext context) {
     final user = Provider.of<dataUser>(context);
     final _users = user.allItems;
-    String Nama = "";
-    String Email = "";
-    String Pass1 = "";
-    String Pass2 = "";
-    String NoIdentity = "";
+
     return Scaffold(
         // resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -100,10 +103,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 20,
             ),
             TextFormField(
-              obscureText: false,
-              decoration: const InputDecoration(
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(),
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                      child: Icon(
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      )),
                   prefixIcon: Icon(
                     Icons.lock,
                     size: 40,
@@ -123,10 +137,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 20,
             ),
             TextFormField(
-              obscureText: false,
-              decoration: const InputDecoration(
+              obscureText: !_copasswordVisible,
+              decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(),
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        setState(() {
+                          _copasswordVisible = !_copasswordVisible;
+                        });
+                      },
+                      child: Icon(
+                        _copasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      )),
                   prefixIcon: Icon(
                     Icons.lock,
                     size: 40,

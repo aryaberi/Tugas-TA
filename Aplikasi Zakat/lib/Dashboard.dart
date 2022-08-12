@@ -54,6 +54,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               spacing: 20,
               runSpacing: 20,
               children: [
+                const CardListDashboard(
+                  imageurl: "images/bantuan.png",
+                  title: "Bantuan",
+                  nav: BantuanScreen.route,
+                ),
                 CardListDashboard2(
                   imageurl: "images/zakatFitrah.jpg",
                   title: "Bayar Zakat Fitrah",
@@ -122,11 +127,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   title: "Belajar Zakat",
                   nav: BelajarScreen.route,
                 ),
-                const CardListDashboard(
-                  imageurl: "images/bantuan.png",
-                  title: "Bantuan",
-                  nav: BantuanScreen.route,
-                )
               ],
             ),
           )),

@@ -162,6 +162,12 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                       top: 20.0, left: 8.0, right: 8.0),
                                   child: PinInputTextField(
                                     // enabled: false,
+                                    cursor: Cursor(
+                                      width: 2,
+                                      color: Colors.lightBlue,
+                                      radius: Radius.circular(1),
+                                      enabled: true,
+                                    ),
                                     pinLength: 6,
                                     decoration: CirclePinDecoration(
                                         strokeColorBuilder:

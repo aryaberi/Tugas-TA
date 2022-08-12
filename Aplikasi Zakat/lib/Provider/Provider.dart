@@ -12,7 +12,7 @@ class itemLaporan with ChangeNotifier {
       "Tanggal": "12/02/2022",
       "Jenis": "Zakat Fitrah",
       "Jumlah": "27500",
-      "Status": "Telah dibayarkan",
+      "Status": "Telah disalurkan",
       "Laz": "Baznas",
       "Penangung": "09999777766",
       "Distribusi": "20/02/2022",
@@ -28,7 +28,7 @@ class itemLaporan with ChangeNotifier {
       "Tanggal": "12/02/2022",
       "Jenis": "Zakat Fitrah",
       "Jumlah": "27500",
-      "Status": "Telah dibayarkan",
+      "Status": "Telah disalurkan",
       "Laz": "Dhompet Dhuafa",
       "Penangung": "011122223333",
       "Distribusi": "18/02/2022",
@@ -44,7 +44,7 @@ class itemLaporan with ChangeNotifier {
       "Tanggal": "12/02/2022",
       "Jenis": "Zakat Fitrah",
       "Jumlah": "27500",
-      "Status": "Telah dibayarkan",
+      "Status": "Telah disalurkan",
       "Laz": "Baznas",
       "Penangung": "09999777766",
       "Distribusi": "20/02/2022",
@@ -60,7 +60,7 @@ class itemLaporan with ChangeNotifier {
       "Tanggal": "12/02/2022",
       "Jenis": "Zakat Fitrah",
       "Jumlah": "27500",
-      "Status": "Telah dibayarkan",
+      "Status": "Telah disalurkan",
       "Laz": "Dhompet Dhuafa",
       "Penangung": "011122223333",
       "Distribusi": "18/02/2022",
@@ -110,7 +110,7 @@ class itemLaporan with ChangeNotifier {
   void updateLastList() {
     int i = dataRow.length - 2;
     String now = DateFormat("dd/MM/yyyy").format(DateTime.now());
-    dataRow[i]["Status"] = "Telah dibayarkan";
+    dataRow[i]["Status"] = "Telah disalurkan";
     dataRow[i]["Distribusi"] = now;
     dataRow[i]["Tempat"] = "Kampung Melarat";
     dataRow[i]["NoTlp"] = "089898977012";

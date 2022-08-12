@@ -163,6 +163,12 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
                                   child: PinInputTextField(
                                     // enabled: false,
                                     pinLength: 6,
+                                    cursor: Cursor(
+                                      width: 2,
+                                      color: Colors.lightBlue,
+                                      radius: Radius.circular(1),
+                                      enabled: true,
+                                    ),
                                     decoration: CirclePinDecoration(
                                         strokeColorBuilder:
                                             PinListenColorBuilder(

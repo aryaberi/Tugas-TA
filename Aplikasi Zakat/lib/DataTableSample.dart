@@ -106,7 +106,10 @@ class _DataTableSampleState extends State<DataTableSample> {
                             placeholder: false,
                           ),
                           DataCell(
-                            Text("rincian"),
+                            Card(
+                                color: Colors.lightGreen,
+                                child: Text("rincian",
+                                    style: TextStyle(color: Colors.white))),
                             placeholder: false,
                             onTap: () {
                               showDialog<String>(

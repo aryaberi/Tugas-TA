@@ -253,222 +253,236 @@ class _AlarmScrennState extends State<AlarmScrenn> {
           },
         ),
       ),
-      body: ListView.builder(
-        itemCount: _dataAlarm2.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Setel Alarm'),
-                          content: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Form(
-                              key: formKey,
-                              child: Column(children: [
-                                Text(
-                                  "Pilih Jenis Zakat",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(),
-                                  ),
-                                  child: DropdownButtonFormField(
-                                    isExpanded: true,
-                                    isDense: true,
-                                    hint: new Text("Pilih Jenis Zakat"),
-                                    value: Jenis,
-                                    onChanged: (Value) {
-                                      setState(() {
-                                        Jenis = Value.toString();
-                                      });
-
-                                      print(Jenis);
-                                    },
-                                    items: zakatMall.map((Map map) {
-                                      return new DropdownMenuItem<String>(
-                                        value: map["name"].toString(),
-                                        // value: _mySelection,
-                                        child: Row(
-                                          children: <Widget>[
-                                            Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(map["name"])),
-                                          ],
+      body: _dataAlarm2.length == 0
+          ? Text("Belum ada alarm yang dipasang")
+          : ListView.builder(
+              itemCount: _dataAlarm2.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Column(
+                        children: [
+                          // Text(index.toString()),
+                          Text("${_dataAlarm2[index].jenis}"),
+                          Text("${_dataAlarm2[index].tanggal}"),
+                        ],
+                      ),
+                      SizedBox(width: 120),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Setel Alarm'),
+                                  content: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Form(
+                                      key: formKey,
+                                      child: Column(children: [
+                                        Text(
+                                          "Pilih Jenis Zakat",
+                                          style: TextStyle(fontSize: 16),
                                         ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Pilih Tanggal Pemasangan",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(),
-                                  ),
-                                  child: DropdownButtonFormField(
-                                    isExpanded: true,
-                                    isDense: true,
-                                    hint: new Text("Pilih Jenis Zakat"),
-                                    value: Tgl,
-                                    onChanged: (Value) {
-                                      setState(() {
-                                        Tgl = Value.toString();
-                                      });
+                                        DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(),
+                                          ),
+                                          child: DropdownButtonFormField(
+                                            isExpanded: true,
+                                            isDense: true,
+                                            hint: new Text("Pilih Jenis Zakat"),
+                                            value: Jenis,
+                                            onChanged: (Value) {
+                                              setState(() {
+                                                Jenis = Value.toString();
+                                              });
 
-                                      print(Jenis);
-                                    },
-                                    items: Day.map((Map map) {
-                                      return new DropdownMenuItem<String>(
-                                        value: map["name"].toString(),
-                                        // value: _mySelection,
-                                        child: Row(
-                                          children: <Widget>[
-                                            Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(map["name"])),
-                                          ],
+                                              print(Jenis);
+                                            },
+                                            items: zakatMall.map((Map map) {
+                                              return new DropdownMenuItem<
+                                                  String>(
+                                                value: map["name"].toString(),
+                                                // value: _mySelection,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 10),
+                                                        child:
+                                                            Text(map["name"])),
+                                                  ],
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
                                         ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Pilih Bulan Pemasangan",
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(),
-                                  ),
-                                  child: DropdownButtonFormField(
-                                    isExpanded: true,
-                                    isDense: true,
-                                    hint: new Text("Pilih Bulan"),
-                                    value: Bulan,
-                                    onChanged: (Value) {
-                                      setState(() {
-                                        Bulan = Value.toString();
-                                      });
-
-                                      print(Bulan);
-                                    },
-                                    items: Moon.map((Map map) {
-                                      return new DropdownMenuItem<String>(
-                                        value: map["name"].toString(),
-                                        // value: _mySelection,
-                                        child: Row(
-                                          children: <Widget>[
-                                            Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                child: Text(map["name"])),
-                                          ],
+                                        SizedBox(
+                                          height: 20,
                                         ),
-                                      );
-                                    }).toList(),
+                                        Text(
+                                          "Pilih Tanggal Pemasangan",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(),
+                                          ),
+                                          child: DropdownButtonFormField(
+                                            isExpanded: true,
+                                            isDense: true,
+                                            hint: new Text("Pilih Jenis Zakat"),
+                                            value: Tgl,
+                                            onChanged: (Value) {
+                                              setState(() {
+                                                Tgl = Value.toString();
+                                              });
+
+                                              print(Jenis);
+                                            },
+                                            items: Day.map((Map map) {
+                                              return new DropdownMenuItem<
+                                                  String>(
+                                                value: map["name"].toString(),
+                                                // value: _mySelection,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 10),
+                                                        child:
+                                                            Text(map["name"])),
+                                                  ],
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          "Pilih Bulan Pemasangan",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(),
+                                          ),
+                                          child: DropdownButtonFormField(
+                                            isExpanded: true,
+                                            isDense: true,
+                                            hint: new Text("Pilih Bulan"),
+                                            value: Bulan,
+                                            onChanged: (Value) {
+                                              setState(() {
+                                                Bulan = Value.toString();
+                                              });
+
+                                              print(Bulan);
+                                            },
+                                            items: Moon.map((Map map) {
+                                              return new DropdownMenuItem<
+                                                  String>(
+                                                value: map["name"].toString(),
+                                                // value: _mySelection,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 10),
+                                                        child:
+                                                            Text(map["name"])),
+                                                  ],
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
+                                      ]),
+                                    ),
                                   ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'Cancel'),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        var Idx = _dataAlarm2.length + 1;
+                                        Taun = DateFormat("yyyy")
+                                            .format(DateTime.now());
+
+                                        Tanggal = Tgl + "/" + Bulan;
+                                        setState(() {
+                                          _myWidgetList.remove(index);
+                                          _dataAlarm2
+                                              .remove(_dataAlarm2[index]);
+                                          // _myWidgetList.add(CardListAlarm(
+                                          //     id: index.toString(),
+                                          //     jenis: Jenis,
+                                          //     tanggal: Tanggal));
+                                          _dataAlarm2.add(dataAlarm(
+                                              id: Idx.toString(),
+                                              jenis: Jenis,
+                                              tanggal: Tanggal));
+                                        });
+                                        Navigator.pop(context, 'OK');
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
                                 ),
-                              ]),
-                            ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'Cancel'),
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                var Idx = _dataAlarm2.length + 1;
-                                Taun =
-                                    DateFormat("yyyy").format(DateTime.now());
+                              );
+                            });
+                          },
+                          icon: Icon(Icons.edit)),
+                      SizedBox(width: 10),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                          title: const Text('Hapus Alarm'),
+                                          content: Text(
+                                              "Yakin untuk menghapus alarm ini ?"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'Cancel'),
+                                              child: const Text('Tidak'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  _myWidgetList.remove(index);
+                                                  _dataAlarm2.remove(
+                                                      _dataAlarm2[index]);
+                                                });
 
-                                Tanggal = Tgl + "/" + Bulan;
-                                setState(() {
-                                  _myWidgetList.remove(index);
-                                  _dataAlarm2.remove(_dataAlarm2[index]);
-                                  // _myWidgetList.add(CardListAlarm(
-                                  //     id: index.toString(),
-                                  //     jenis: Jenis,
-                                  //     tanggal: Tanggal));
-                                  _dataAlarm2.add(dataAlarm(
-                                      id: Idx.toString(),
-                                      jenis: Jenis,
-                                      tanggal: Tanggal));
-                                });
-                                Navigator.pop(context, 'OK');
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    icon: Icon(Icons.more_vert)),
-                SizedBox(width: 20),
-                Column(
-                  children: [
-                    // Text(index.toString()),
-                    Text("${_dataAlarm2[index].jenis}"),
-                    Text("${_dataAlarm2[index].tanggal}"),
-                  ],
-                ),
-                SizedBox(width: 120),
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                                    title: const Text('Hapus Alarm'),
-                                    content: Text(
-                                        "Yakin untuk menghapus alarm ini ?"),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'Cancel'),
-                                        child: const Text('Tidak'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _myWidgetList.remove(index);
-                                            _dataAlarm2
-                                                .remove(_dataAlarm2[index]);
-                                          });
-
-                                          Navigator.pop(context, 'OK');
-                                        },
-                                        child: Text("Ya"),
-                                      )
-                                    ]));
-                      });
-                    },
-                    icon: Icon(Icons.delete))
-              ],
+                                                Navigator.pop(context, 'OK');
+                                              },
+                                              child: Text("Ya"),
+                                            )
+                                          ]));
+                            });
+                          },
+                          icon: Icon(Icons.delete))
+                    ],
+                  ),
+                );
+                // return CardListAlarm(
+                //     id: index.toString(),
+                //     jenis: "${_dataAlarm2[index].jenis}",
+                //     tanggal: "${_dataAlarm2[index].tanggal}");
+              },
             ),
-          );
-          // return CardListAlarm(
-          //     id: index.toString(),
-          //     jenis: "${_dataAlarm2[index].jenis}",
-          //     tanggal: "${_dataAlarm2[index].tanggal}");
-        },
-      ),
     );
   }
 }
