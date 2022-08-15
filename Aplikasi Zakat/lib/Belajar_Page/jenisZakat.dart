@@ -32,12 +32,12 @@ class jenisZakatScreen extends StatelessWidget {
             height: 20,
           ),
           Text(
-              "Zakat terbagi menjadi dua, yakni zakat mal atau zakat harta dan kemudian zakat fitrah (macam macam zakat)."),
+              "Zakat terbagi menjadi dua, yakni zakat mal atau zakat harta dan kemudian zakat fitrah (macam macam zakat).",style: TextStyle(fontSize: 14)),
           SizedBox(
             height: 10,
           ),
           Text(
-              "Zakat mal atau mal zakat adalah zakat yang dikenakan atas segala jenis harta, yang secara zat maupun substansi perolehannya, tidak bertentangan dengan ketentuan agama. Sebagai contoh, zakat mal terdiri atas uang, emas, surat berharga, penghasilan profesi, dan sebagainya."),
+              "Zakat mal atau mal zakat adalah zakat yang dikenakan atas segala jenis harta, yang secara zat maupun substansi perolehannya, tidak bertentangan dengan ketentuan agama. Sebagai contoh, zakat mal terdiri atas uang, emas, surat berharga, penghasilan profesi, dan sebagainya.",style: TextStyle(fontSize: 14)),
         ],
       ),
     );

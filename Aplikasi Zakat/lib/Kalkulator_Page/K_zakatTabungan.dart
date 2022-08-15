@@ -68,7 +68,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
 //Form Total Tabungan============================================================================================================
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "1.Masukan Total Tabungan anda:",
+                          labelText: "1.Masukan Total Tabungan anda(Rp):",
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
@@ -109,7 +109,8 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
 
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "2.Masukan Bunga dari Tabungan Anda :"),
+                            labelText:
+                                "2.Masukan Bunga dari Tabungan Anda(Rp):"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -154,7 +155,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText:
-                                "3.Masukan Jumlah Deposito yang Dimiliki :"),
+                                "3.Masukan Jumlah Deposito yang Dimiliki(Rp):"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -224,9 +225,9 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      int.parse(Hasil) < 95000000
+                                      int.parse(Hasil) < 73100000
                                           ? Text(
-                                              "Tabungan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                              "Tabungan anda kurang dari hisab yang ditentukan, hisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
                                               style: TextStyle(fontSize: 14))
                                           : Text(
                                               "Jumlah Zakat yang harus anda keluarkan adalah " +
@@ -241,7 +242,7 @@ class _kalkulatorZTabunganState extends State<kalkulatorZTabunganScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) >= 95000000
+                      isHitung && int.parse(Hasil) >= 73100000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,

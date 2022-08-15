@@ -31,17 +31,20 @@ class zakatOnlineScreen extends StatelessWidget {
             height: 20,
           ),
           Text(
-              "Bagaimana hukumnya pembayaran zakat menggunakan metode online ini? Apakah sah?"),
+              "Bagaimana hukumnya pembayaran zakat menggunakan metode online ini? Apakah sah?",
+              style: TextStyle(fontSize: 14)),
           SizedBox(
             height: 10,
           ),
           Text(
-              "Menanggapi hal tersebut Pengamat Ekonomi Syariah IPB, Irfan Syauqi Beik mengungkapkan pembayaran zakat baik maal dan fitrah dengan metode online itu sah. Hal ini karena pada dasarnya ijab qabul dalam zakat mengalami perubahan dan perkembangan metode pembayaran."),
+              "Menanggapi hal tersebut Pengamat Ekonomi Syariah IPB, Irfan Syauqi Beik mengungkapkan pembayaran zakat baik maal dan fitrah dengan metode online itu sah. Hal ini karena pada dasarnya ijab qabul dalam zakat mengalami perubahan dan perkembangan metode pembayaran.",
+              style: TextStyle(fontSize: 14)),
           SizedBox(
             height: 10,
           ),
           Text(
-              "Intinya sama, ada proses yang memastikan bahwa antara pihak yang satu dan yang lain memiliki kesepahaman dalam proses tersebut, kata dia kepada detikcom, Sabtu (1/5/2021)."),
+              "Intinya sama, ada proses yang memastikan bahwa antara pihak yang satu dan yang lain memiliki kesepahaman dalam proses tersebut, kata dia kepada detikcom, Sabtu (1/5/2021).",
+              style: TextStyle(fontSize: 14)),
         ],
       ),
     );

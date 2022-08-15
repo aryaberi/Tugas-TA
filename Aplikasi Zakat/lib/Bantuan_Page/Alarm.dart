@@ -33,34 +33,42 @@ class bantuanAlarmScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text("1. Pilih menu Alarm pada dashboard seperti gambar berikut."),
+          Text(
+            "1. Pilih menu Alarm pada dashboard seperti gambar berikut.",
+            style: TextStyle(fontSize: 14),
+          ),
           image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_1.jpg"),
           SizedBox(
             height: 10,
           ),
-          Text("2. Anda akan ditampilkan list alarm yang telah anda buat"),
+          Text("2. Anda akan ditampilkan list alarm yang telah anda buat",
+              style: TextStyle(fontSize: 14)),
           SizedBox(
             height: 10,
           ),
           Text(
-              "3. Apabila akan membuat laporan baru, tekan tombol + pada pojok kanan bawah layar seperti berikut...."),
+              "3. Apabila akan membuat laporan baru, tekan tombol + pada pojok kanan bawah layar seperti berikut....",
+              style: TextStyle(fontSize: 14)),
           image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_3.jpg"),
           SizedBox(
             height: 10,
           ),
           Text(
-              "4. Pilih jenis zakat, serta masukan tanggal dan bulan pemyetelan alarm"),
+              "4. Pilih jenis zakat, serta masukan tanggal dan bulan pemyetelan alarm",
+              style: TextStyle(fontSize: 14)),
           image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_4.jpg"),
           SizedBox(
             height: 10,
           ),
-          Text("5. Tekan tombol setel untuk memasang alarm ."),
+          Text("5. Tekan tombol setel untuk memasang alarm",
+              style: TextStyle(fontSize: 14)),
           image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/Alarm_5.jpg"),
           SizedBox(
             height: 10,
           ),
           Text(
-              "6. Apa bila anda ingin menghapus alarm tersebut, tekan icon delete pada pojok kanan alarm yang akan dihapus"),
+              "6. Apa bila anda ingin menghapus alarm tersebut, tekan icon delete pada pojok kanan alarm yang akan dihapus",
+              style: TextStyle(fontSize: 14)),
         ],
       ),
     );

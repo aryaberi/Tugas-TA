@@ -4,6 +4,7 @@ import 'package:flutter_application_2/LoginScreen.dart';
 import 'package:provider/provider.dart';
 
 import 'Provider/User.dart';
+import 'Provider/listBayar.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -24,7 +25,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String NoIdentity = "";
   Widget build(BuildContext context) {
     final user = Provider.of<dataUser>(context);
+    final bayar = Provider.of<listBayar>(context);
     final _users = user.allItems;
+    final _bayars = bayar.allItems;
 
     return Scaffold(
         // resizeToAvoidBottomInset: false,
@@ -71,6 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onChanged: (value) {
                 if (value.isNotEmpty) {
                   Nama = value;
+                  print(_bayars[3]["nama"]);
                   print("isNotEmpty");
                 } else {
                   print("isEmpty");
@@ -248,6 +252,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               "SDana": "1000000",
                                               "Link Aja": false,
                                               "SLink": "1000000",
+                                            });
+                                            // var newId = _bayars.length + 1;
+                                            bayar.addData({
+                                              // "Id": newId.toString(),
+                                              "nama": Nama
                                             });
                                             Navigator.pushNamed(
                                                 context, LoginScreen.route);

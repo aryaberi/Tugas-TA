@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Dashboard.dart';
 import 'package:flutter_application_2/RegisterScreen.dart';
+import 'package:flutter_application_2/Transisi.dart';
 import 'package:provider/provider.dart';
 
 import 'Provider/User.dart';
@@ -147,8 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (isTrue == true) {
                               userName = user.getUserName(Nama, Pass);
-                              Navigator.pushNamed(
-                                  context, DashboardScreen.route,
+                              Navigator.pushNamed(context, TransisiScreen.route,
                                   arguments: userName);
                             } else {
                               setState(() {

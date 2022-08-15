@@ -51,12 +51,21 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
               "Jika sudah yakin dengan data-data tersebut, silahkan baca niat di bawah ini, dan menekan tombol lanjut",
               style: TextStyle(fontSize: 16)),
           SizedBox(height: 20),
-          Container(
-            child: Image.asset("images/Niat_Zakat_Fitrah.png"),
+          // Container(
+          //   child: Image.asset("images/Niat_Zakat_Fitrah.png"),
+          // ),
+          Text(
+            "Nawaitu an ukhrija zakatadz maali an " +
+                data["nama"] +
+                " fardhan lillahi ta`ala",
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
           ),
           Text(
-            "Nawaitu 'an Ukhrija Zakatal Fithri 'an Nafsi Fardhon Lillahi Ta'ala",
-            style: TextStyle(fontSize: 12),
+            "Saya Niat Mengeluarkan Zakat Maal atas " +
+                data["nama"] +
+                " Fardhu Karena Allah Ta`ala",
+            style: TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 90),

@@ -44,7 +44,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
               );
             },
           ),
-          // actions: [CircleAvatar(child: Icon(Icons.person))],
+          actions: [
+            IconButton(
+              icon: CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage("images/bantuan.png")),
+              iconSize: 50,
+              onPressed: () {
+                Navigator.pushNamed(context, BantuanScreen.route);
+              },
+            )
+          ],
         ),
         body: ListView(children: [
           Center(
@@ -54,11 +64,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               spacing: 20,
               runSpacing: 20,
               children: [
-                const CardListDashboard(
-                  imageurl: "images/bantuan.png",
-                  title: "Bantuan",
-                  nav: BantuanScreen.route,
-                ),
                 CardListDashboard2(
                   imageurl: "images/zakatFitrah.jpg",
                   title: "Bayar Zakat Fitrah",
@@ -177,7 +182,7 @@ class CardListDashboard extends StatelessWidget {
                     Center(
                       child: Text(
                         title,
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 14),
                         textAlign: TextAlign.right,
                       ),
                     ),
@@ -235,7 +240,7 @@ class CardListDashboard2 extends StatelessWidget {
                     Center(
                       child: Text(
                         title,
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 14),
                         textAlign: TextAlign.right,
                       ),
                     ),

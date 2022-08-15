@@ -32,17 +32,17 @@ class pengertianScreen extends StatelessWidget {
             height: 20,
           ),
           Text(
-              "Pengertian Zakat sendiri berasal dari Bahasa Arab yakni zaka yang artinya bersih, suci, subur, berkembang."),
+              "Pengertian Zakat sendiri berasal dari Bahasa Arab yakni zaka yang artinya bersih, suci, subur, berkembang.",style: TextStyle(fontSize: 14)),
           SizedBox(
             height: 10,
           ),
           Text(
-              "Dikutip dari laman Badan Amil Zakat Nasional (Baznas), zakat artinya bagian tertentu dari harta yang wajib dikeluarkan oleh setiap muslim apabila telah mencapai syarat yang ditetapkan."),
+              "Dikutip dari laman Badan Amil Zakat Nasional (Baznas), zakat artinya bagian tertentu dari harta yang wajib dikeluarkan oleh setiap muslim apabila telah mencapai syarat yang ditetapkan.",style: TextStyle(fontSize: 14)),
           SizedBox(
             height: 10,
           ),
           Text(
-              "Sebagai salah satu rukun Islam, zakat ditunaikan untuk diberikan kepada golongan yang berhak menerimanya (asnaf)."),
+              "Sebagai salah satu rukun Islam, zakat ditunaikan untuk diberikan kepada golongan yang berhak menerimanya (asnaf).",style: TextStyle(fontSize: 14)),
         ],
       ),
     );

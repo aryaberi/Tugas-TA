@@ -122,8 +122,8 @@ class _DataTableSampleState extends State<DataTableSample> {
                                           content: Container(
                                             height: itemRow["Status"] ==
                                                     "Telah diterima oleh LAZ"
-                                                ? 200
-                                                : 200,
+                                                ? 300
+                                                : 300,
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,

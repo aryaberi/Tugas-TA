@@ -63,7 +63,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
 //FormEmasDimiliki============================================================================================================
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "1.Masukan Emas yang dimiliki:",
+                          labelText: "1.Masukan Emas yang dimiliki (gr):",
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
@@ -105,7 +105,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText:
-                                "2.Masukan Jumlah emas yang digunakan :"),
+                                "2.Masukan Jumlah emas yang digunakan(gr) :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly
@@ -166,7 +166,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                           " - " +
                                           _digunakan +
                                           " X " +
-                                          "Rp.85000" +
+                                          "Rp.860000" +
                                           " = " +
                                           formatter
                                               .format(int.parse(Hasil))
@@ -176,9 +176,9 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    int.parse(Hasil) < 95000000
+                                    int.parse(Hasil) < 73100000
                                         ? Text(
-                                            "Simpanan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                            "Simpanan anda kurang dari hisab yang ditentukan, hisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
                                             style: TextStyle(fontSize: 14))
                                         : Text(
                                             "Jumlah Zakat yang harus anda keluarkan adalah " +
@@ -196,7 +196,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) > 95000000
+                      isHitung && int.parse(Hasil) > 73100000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -228,10 +228,10 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                         int Jumlah = int.parse(_dimiliki) -
                                             int.parse(_digunakan);
 
-                                        Hasil = (Jumlah * 850000).toString();
+                                        Hasil = (Jumlah * 860000).toString();
 
                                         Zakat =
-                                            (((Jumlah * 850000) * 25) / 1000)
+                                            (((Jumlah * 860000) * 25) / 1000)
                                                 .toString();
                                         isHitung = true;
                                       });

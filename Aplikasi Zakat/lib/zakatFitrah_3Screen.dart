@@ -8,6 +8,8 @@ import 'package:flutter_application_2/Provider/Provider.dart';
 import 'package:provider/provider.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
+import 'Provider/listBayar.dart';
+
 String convertLaz(value) {
   String No = "";
   if (value == "Rumah Yatim") {
@@ -51,6 +53,8 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
     final _items = items.allItems;
     final items2 = Provider.of<itemLaporan2>(context);
     final _items2 = items2.allItems;
+    final bayar = Provider.of<listBayar>(context);
+    final _bayars = bayar.allItems;
 
     return Scaffold(
       appBar: AppBar(
@@ -238,7 +242,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                               title: const Text(
                                                   'Pembayaran Gagal'),
                                               content: Container(
-                                                height: 130,
+                                                height: 150,
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -273,7 +277,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                               title: const Text(
                                                   'Pembayaran berhasil'),
                                               content: Container(
-                                                height: 130,
+                                                height: 150,
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -312,6 +316,8 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                         data["methodPayment"],
                                                         int.parse(
                                                             data["jumlah"]));
+                                                    bayar.addData(
+                                                        {"nama": data["nama"]});
                                                     items.addData({
                                                       "Id": no.toString(),
                                                       "Count": count,
@@ -383,6 +389,8 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                               "usernama"]) +
                                                           1;
                                                   // data["usernama"] == "Maman"?
+                                                  bayar.addData(
+                                                      {"nama": data["nama"]});
                                                   items.addData({
                                                     "Id": no.toString(),
                                                     "Count": count,

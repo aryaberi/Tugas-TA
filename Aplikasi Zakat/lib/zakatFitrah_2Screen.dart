@@ -41,7 +41,7 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
           SizedBox(height: 20),
           Text("Kepada LAZ                :   " + data["Laz"],
               style: TextStyle(fontSize: 16)),
-          Text("Metode Pembayaran :   " + data["methodPayment"],
+          Text("Metode Pembayaran :  " + data["methodPayment"],
               style: TextStyle(fontSize: 16)),
           Text("Atas Nama                  :   " + data["nama"],
               style: TextStyle(fontSize: 16)),
@@ -52,14 +52,24 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
               "Jika sudah yakin dengan data-data tersebut, silahkan baca niat di bawah ini, dan menekan tombol lanjut",
               style: TextStyle(fontSize: 16)),
           SizedBox(height: 20),
-          Container(
-            child: Image.asset("images/Niat_Zakat_Fitrah.png"),
-          ),
+          // Container(
+          //   child: Image.asset("images/Niat_Zakat_Fitrah.png"),
+          // ),
           Text(
-            "Nawaitu 'an Ukhrija Zakatal Fithri 'an Nafsi Fardhon Lillahi Ta'ala",
-            style: TextStyle(fontSize: 12),
+            "(Nawaytu an ukhrija zakaata al-fitri `an " +
+                data["nama"] +
+                " fardhan lillahi ta`ala",
+            style: TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
+          Text(
+            "Aku niat mengeluarkan zakat fitrah untuk, " +
+                data["nama"] +
+                " fardu karena Allah Ta‘âlâ.",
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+
           SizedBox(height: 90),
           Padding(
             padding: const EdgeInsets.all(20),

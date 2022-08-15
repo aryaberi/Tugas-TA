@@ -64,7 +64,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
 //Form Pendapatan bulanan============================================================================================================
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "1.Masukan pendapatan bulanan anda:",
+                          labelText: "1.Masukan pendapatan bulanan anda(Rp):",
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
@@ -105,7 +105,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
 
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "2.Masukan Bonus tahunan anda :"),
+                            labelText: "2.Masukan Bonus tahunan anda(Rp) :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -182,9 +182,9 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    int.parse(Hasil) < 95000000
+                                    int.parse(Hasil) < 73100000
                                         ? Text(
-                                            "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                            "Pendapatan anda kurang dari hisab yang ditentukan, hisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
                                             style: TextStyle(fontSize: 14))
                                         : Text(
                                             "Jumlah Zakat yang harus anda keluarkan adalah " +
@@ -203,7 +203,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) > 95000000
+                      isHitung && int.parse(Hasil) > 73100000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,

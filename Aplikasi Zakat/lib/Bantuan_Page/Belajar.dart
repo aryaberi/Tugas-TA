@@ -33,18 +33,24 @@ class bantuanBelajarScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text("1. Pilih menu belajar pada dashboard seperti gambar berikut."),
+          Text("1. Pilih menu belajar pada dashboard seperti gambar berikut.",
+              style: TextStyle(fontSize: 14)),
           image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/belajar_1.jpg"),
           SizedBox(
             height: 10,
           ),
-          Text("2. Pilih topik yang ingin dipelajari"),
-          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/belajar_2.jpg"),
+          Text("2. Pilih topik yang ingin dipelajari",
+              style: TextStyle(fontSize: 14)),
+          image_font_1(
+            imageurl: "images/Bantuan_Zakat_Fitrah/belajar_2.jpg",
+          ),
           SizedBox(
             height: 10,
           ),
-          Text("3. Selamat belajar."),
-          image_font_1(imageurl: "images/Bantuan_Zakat_Fitrah/belajar_3.jpg"),
+          Text("3. Selamat belajar.", style: TextStyle(fontSize: 14)),
+          image_font_1(
+            imageurl: "images/Bantuan_Zakat_Fitrah/belajar_3.jpg",
+          ),
         ],
       ),
     );

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
+import 'package:provider/provider.dart';
+
+import 'Provider/listBayar.dart';
 
 class zakatMall_1Screen extends StatefulWidget {
   const zakatMall_1Screen({Key? key}) : super(key: key);
@@ -88,7 +91,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 
   final formatter = NumberFormat.simpleCurrency(locale: 'id_ID');
   bool isButtonActive = false;
-  String _nama = "";
+  String _nama = "pilih nama";
   String Hasil = "0";
   String _jumlah = "0";
   String _Selected = "Zakat Pendapatan";
@@ -98,11 +101,15 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
   String _methodPayment = "Ovo";
   String _kindPayment = "emoney";
   String _jenis = "Zakat Harta";
+  String initbayar = "pilih nama";
+  bool isOther = false;
   late TextEditingController controller;
 
   Widget build(BuildContext context) {
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final bayar = Provider.of<listBayar>(context);
+    final _bayars = bayar.allItems;
     // int.parse(data) > 0 ? Hasil = data : null;
 
     data.isNotEmpty && int.parse(data["Zakat"]!) > 0
@@ -343,40 +350,159 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                         ),
                       ),
 //Dropdown Metode pembayara menu============================================================================================================
-
-//Form nama============================================================================================================
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "1.Masukan Nama anda:",
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Perlu isi";
-                          } else {
-                            return null;
-                          }
-                        },
-                        style: TextStyle(fontSize: 20),
+                      CheckboxListTile(
+                        value: isOther,
                         onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            _nama = value;
-                          }
-                          if (formKey.currentState!.validate()) {
-                            setState(() {
-                              isButtonActive = true;
-                            });
-                            print("validate");
-                          } else {
-                            setState(() {
-                              isButtonActive = false;
-                            });
-
-                            print(isButtonActive);
-                          }
+                          setState(() {
+                            isOther = value!;
+                          });
                         },
+                        title: Text("Masukan input baru"),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
                       ),
-                      //Form nama============================================================================================================
+//Form nama============================================================================================================
+                      isOther
+                          ? TextFormField(
+                              decoration: InputDecoration(
+                                labelText: "1.Masukan Nama anda:",
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Perlu isi";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              style: TextStyle(fontSize: 20),
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  _nama = value;
+                                }
+                                if (formKey.currentState!.validate() &&
+                                    _nama != "pilih nama") {
+                                  setState(() {
+                                    isButtonActive = true;
+                                  });
+                                  print("validate");
+                                } else {
+                                  setState(() {
+                                    isButtonActive = false;
+                                  });
 
+                                  print(isButtonActive);
+                                }
+                              },
+                            )
+                          : Text(""),
+                      isOther
+                          ? TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: "2.Masukan no KTP/KK :",
+                                  hintText: "No identitas"),
+                              maxLength: 16,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              validator: (value) {
+                                if (value!.isEmpty ||
+                                    !RegExp('^[0-9]').hasMatch(value)) {
+                                  return "Isi dengan angka";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              style: TextStyle(fontSize: 20),
+                              onChanged: (value) {
+                                // if (value.isNotEmpty) {
+                                //   var jumlah = 27500 * int.parse(value);
+                                //   setState(() {
+                                //     _jumlah = jumlah.toString();
+                                //   });
+                                // } else {
+                                //   _jumlah = "0";
+                                // }
+                                if (formKey.currentState!.validate() &&
+                                    _nama != "pilih nama") {
+                                  setState(() {
+                                    isButtonActive = true;
+                                  });
+                                  print("validate");
+                                } else {
+                                  setState(() {
+                                    isButtonActive = false;
+                                  });
+
+                                  print(isButtonActive);
+                                }
+                              },
+                            )
+                          : Text(""),
+//Form nama============================================================================================================
+                      isOther
+                          ? Text("")
+                          : DecoratedBox(
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(width: 1, color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                        child: DropdownButtonHideUnderline(
+                                            child: ButtonTheme(
+                                      alignedDropdown: true,
+                                      child: DropdownButton<String>(
+                                        isExpanded: true,
+                                        isDense: true,
+                                        hint: new Text("Pilih nama orang"),
+                                        value: initbayar,
+                                        onChanged: (Value) {
+                                          if (Value!.isNotEmpty) {
+                                            _nama = Value;
+                                          }
+                                          if (formKey.currentState!
+                                                  .validate() &&
+                                              _nama != "pilih nama") {
+                                            setState(() {
+                                              isButtonActive = true;
+                                            });
+                                            print("validate");
+                                          } else {
+                                            setState(() {
+                                              isButtonActive = false;
+                                            });
+                                          }
+                                          setState(() {
+                                            initbayar = Value.toString();
+                                            print(initbayar);
+                                          });
+
+                                          // print(_selected3);
+                                        },
+                                        items: _bayars.map((Map map) {
+                                          return new DropdownMenuItem<String>(
+                                            value: map["nama"].toString(),
+                                            // value: _mySelection,
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
+                                                    child: Text(map["nama"])),
+                                              ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    )))
+                                  ])),
+                      SizedBox(
+                        height: 20,
+                      ),
 //Form jumlah orang============================================================================================================
                       data.isNotEmpty && int.parse(data["Zakat"]!) > 0
                           ? Text("Jumlah Zakat yang akan dibayarkan " +
@@ -408,7 +534,8 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                 } else {
                                   Hasil = "0";
                                 }
-                                if (formKey.currentState!.validate()) {
+                                if (formKey.currentState!.validate() &&
+                                    _nama != "pilih nama") {
                                   setState(() {
                                     isButtonActive = true;
                                   });
@@ -434,6 +561,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                       //   style: TextStyle(fontSize: 18),
                       // ),
 //jumlah yang dibayar============================================================================================================
+                      // Text(
+                      //   "Pilih Nama Pembayar",
+                      //   style: TextStyle(fontSize: 20),
+                      // ),
 
 //Button bayar============================================================================================================
 

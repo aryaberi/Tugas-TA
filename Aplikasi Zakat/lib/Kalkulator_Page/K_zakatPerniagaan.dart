@@ -66,7 +66,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
 //Form Total Aset atau Modal ============================================================================================================
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "1.Masukan Aset atau Modal yang dimiliki:",
+                          labelText:
+                              "1.Masukan Aset atau Modal yang dimiliki(Rp):",
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
@@ -107,7 +108,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
 
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "2.Pendapatan selama satu tahun :"),
+                            labelText: "2.Pendapatan selama satu tahun(Rp) :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -151,7 +152,8 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
 
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "3.Masukan Jumlah yang Dihutangkan :"),
+                            labelText:
+                                "3.Masukan Jumlah yang Dihutangkan(Rp) :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -196,7 +198,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText:
-                                "3.Masukan Jumlah Hutang yang harus dibayar :"),
+                                "3.Masukan Jumlah Hutang yang harus dibayar(Rp) :"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -270,9 +272,9 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      int.parse(Hasil) < 95000000
+                                      int.parse(Hasil) < 73100000
                                           ? Text(
-                                              "Pendapatan anda kurang dari hisab yang ditentukan, anda tidak dikenai wajib zakat saat ini",
+                                              "Pendapatan anda kurang dari hisab yang ditentukan, hisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
                                               style: TextStyle(fontSize: 14))
                                           : Text(
                                               "Jumlah Zakat yang harus anda keluarkan adalah " +
@@ -289,7 +291,7 @@ class _kalkulatorZPerniagaanState extends State<kalkulatorZPerniagaanScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) > 95000000
+                      isHitung && int.parse(Hasil) > 73100000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,

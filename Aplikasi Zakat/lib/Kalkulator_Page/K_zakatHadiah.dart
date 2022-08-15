@@ -63,7 +63,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
 //Form Hadiah Total============================================================================================================
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "1.Masukan Total Hadiah:",
+                          labelText: "1.Masukan Total Hadiah(Rp):",
                         ),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[

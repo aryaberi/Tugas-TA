@@ -34,33 +34,38 @@ class bantuanKalulatorScreen extends StatelessWidget {
             height: 20,
           ),
           Text(
-              "1. Pilih menu Kalkulator pada dashboard seperti gambar berikut."),
+              "1. Pilih menu Kalkulator pada dashboard seperti gambar berikut.",
+              style: TextStyle(fontSize: 14)),
           image_font_1(
               imageurl: "images/Bantuan_Zakat_Fitrah/kalkulator_zakat_1.jpg"),
           SizedBox(
             height: 10,
           ),
-          Text("2. Pilihlah jenis zakat yang mau dihitung"),
+          Text("2. Pilihlah jenis zakat yang mau dihitung",
+              style: TextStyle(fontSize: 14)),
           image_font_1(
               imageurl: "images/Bantuan_Zakat_Fitrah/kalkulator_zakat_2.jpg"),
           SizedBox(
             height: 10,
           ),
-          Text("3. Masukan data-data sesuai yang dinginkan apliaksi."),
+          Text("3. Masukan data-data sesuai yang dinginkan apliaksi.",
+              style: TextStyle(fontSize: 14)),
           image_font_1(
               imageurl: "images/Bantuan_Zakat_Fitrah/kalkulator_zakat_3.jpg"),
           SizedBox(
             height: 10,
           ),
           Text(
-              "4. Tekan tombol hitung, setelah itu anda akan diberitahu berapa besarnya jumlah zakat yang harus dikeluarkan"),
+              "4. Tekan tombol hitung, setelah itu anda akan diberitahu berapa besarnya jumlah zakat yang harus dikeluarkan",
+              style: TextStyle(fontSize: 14)),
           image_font_1(
               imageurl: "images/Bantuan_Zakat_Fitrah/kalkulator_zakat_4.jpg"),
           SizedBox(
             height: 10,
           ),
           Text(
-              "5. Tekan tombol bayar apabila anda ingin langsung membayarkan zakat sesuai hasil perhitungan."),
+              "5. Tekan tombol bayar apabila anda ingin langsung membayarkan zakat sesuai hasil perhitungan.",
+              style: TextStyle(fontSize: 14)),
         ],
       ),
     );
