@@ -180,7 +180,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                             arguments: {
                                               "Zakat": Zakat,
                                               "Jenis": "Zakat Hadiah",
-                                              "userName": userName
+                                              "usernama": userName
                                             });
                                       });
                                       ;
@@ -197,7 +197,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                       if (_Selected == "1") {
                                         var jumlah = ((int.parse(
                                                         _Total.replaceAll(
-                                                            "", "")) *
+                                                            ",", "")) *
                                                     20) /
                                                 100)
                                             .toInt();
@@ -209,7 +209,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                       } else if (_Selected == "2") {
                                         var jumlah = ((int.parse(
                                                         _Total.replaceAll(
-                                                            "", "")) *
+                                                            ",", "")) *
                                                     10) /
                                                 100)
                                             .toInt();
@@ -220,7 +220,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                       } else if (_Selected == "3") {
                                         var jumlah = ((int.parse(
                                                         _Total.replaceAll(
-                                                            "", "")) *
+                                                            ",", "")) *
                                                     25) /
                                                 1000)
                                             .toInt();

@@ -205,7 +205,7 @@ class _zakatMall_3State extends State<zakatMall_3Screen> {
                           "Untuk melakukan pembayaran menggunakan metode " +
                               data["kindPayment"] +
                               " silahkan tranfer ke no rek berikut" +
-                              " 9998765432112345",
+                              " 9998765432112345, jangan lupa tambahkan 123 dibelakang pembayaran anda sebagai kode unik, contoh 500.123",
                           style: TextStyle(fontSize: 16))
                     ])),
           SizedBox(height: 90),

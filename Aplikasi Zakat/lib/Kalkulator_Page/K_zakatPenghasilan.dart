@@ -203,7 +203,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) > 73100000
+                      isHitung && int.parse(Hasil) >= 73100000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,

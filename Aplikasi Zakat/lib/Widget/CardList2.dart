@@ -22,7 +22,7 @@ class CardList2 extends StatelessWidget {
         },
         child: ListTile(
           title: Text(name),
-          trailing: Icon(Icons.arrow_right),
+          trailing: Icon(Icons.circle),
         ),
       )),
     );

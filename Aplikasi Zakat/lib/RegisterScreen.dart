@@ -18,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   bool _passwordVisible = false;
   bool _copasswordVisible = false;
+  bool _samePass = true;
   String Nama = "";
   String Email = "";
   String Pass1 = "";
@@ -210,6 +211,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 20,
             ),
+            !_samePass
+                ? Text("konfrmasi password salah",
+                    style: TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center)
+                : Text(""),
             Card(
                 color: Colors.lightGreen,
                 child: Container(
@@ -258,12 +264,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               // "Id": newId.toString(),
                                               "nama": Nama
                                             });
+                                            setState(() {
+                                              _samePass = true;
+                                            });
                                             Navigator.pushNamed(
                                                 context, LoginScreen.route);
                                           },
                                           child: const Text('Ok'),
                                         )
                                       ]));
+                        } else {
+                          setState(() {
+                            _samePass = false;
+                          });
                         }
                       },
                       child: const Center(

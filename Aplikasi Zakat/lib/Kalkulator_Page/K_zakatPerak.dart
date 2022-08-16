@@ -195,7 +195,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
 //Button bayar============================================================================================================
 
                       SizedBox(height: 20),
-                      isHitung && int.parse(Hasil) > 73100000
+                      isHitung && int.parse(Hasil) >= 73100000
                           ? ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
@@ -221,7 +221,7 @@ class _kalkulatorZPerakState extends State<kalkulatorZPerakScreen> {
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
                                   minimumSize: const Size(200, 50)),
-                              onPressed: isButtonActive
+                              onPressed: isButtonActive && isHitung == false
                                   ? () {
                                       setState(() {
                                         int Jumlah = int.parse(_dimiliki) -

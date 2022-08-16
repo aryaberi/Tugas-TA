@@ -306,7 +306,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                 }
                               },
                             )
-                          : Text(""),
+                          : SizedBox(height: 0),
                       //Form nama============================================================================================================
 
 //Form jumlah orang============================================================================================================
@@ -353,14 +353,14 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                 }
                               },
                             )
-                          : Text(""),
+                          : SizedBox(height: 0),
 //Form jumlah orang============================================================================================================
                       // Text(
                       //   "Pilih Nama Pembayar",
                       //   style: TextStyle(fontSize: 20),
                       // ),
                       isOther
-                          ? Text("")
+                          ? SizedBox(height: 0)
                           : DecoratedBox(
                               decoration: BoxDecoration(
                                   border:
@@ -443,7 +443,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                               onSurface: Colors.lightGreen,
                               primary: Colors.lightGreen,
                               minimumSize: const Size(200, 50)),
-                          onPressed: isButtonActive
+                          onPressed: isButtonActive && _jumlah != 0
                               ? () {
                                   Navigator.pushNamed(
                                       context, ZakatFitrah_2Screen.route,

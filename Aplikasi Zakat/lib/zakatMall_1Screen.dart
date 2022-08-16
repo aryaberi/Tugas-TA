@@ -5,6 +5,7 @@ import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:provider/provider.dart';
 
+import 'KalkulatorZakat.dart';
 import 'Provider/listBayar.dart';
 
 class zakatMall_1Screen extends StatefulWidget {
@@ -152,6 +153,16 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                       SizedBox(
                         height: 20,
                       ),
+                      data.isNotEmpty && int.parse(data["Zakat"]!) > 0
+                          ? Text("")
+                          : TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, KalkulatorScreen.route,
+                                    arguments: data["usernama"]);
+                              },
+                              child: Text("Ingin hitung dulu zakatmu ?",
+                                  style: TextStyle(fontSize: 18))),
 //Dropdown Jenis Zakat=========================================================================================================
                       Text(
                         "Pilih Jenis Zakat",
@@ -394,7 +405,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                 }
                               },
                             )
-                          : Text(""),
+                          : SizedBox(height: 0),
                       isOther
                           ? TextFormField(
                               decoration: InputDecoration(
@@ -438,10 +449,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                 }
                               },
                             )
-                          : Text(""),
+                          : SizedBox(height: 0),
 //Form nama============================================================================================================
                       isOther
-                          ? Text("")
+                          ? SizedBox(height: 0)
                           : DecoratedBox(
                               decoration: BoxDecoration(
                                   border:
@@ -574,7 +585,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                               onSurface: Colors.lightGreen,
                               primary: Colors.lightGreen,
                               minimumSize: const Size(200, 50)),
-                          onPressed: isButtonActive
+                          onPressed: isButtonActive && Hasil != "0"
                               ? () {
                                   print(_jenis);
 
