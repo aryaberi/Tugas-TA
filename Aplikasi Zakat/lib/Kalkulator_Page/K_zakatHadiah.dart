@@ -4,6 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
+import 'package:flutter_application_2/LandingPage.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
+import 'package:provider/provider.dart';
+
+
 
 class kalkulatorZHadiahScreen extends StatefulWidget {
   const kalkulatorZHadiahScreen({Key? key}) : super(key: key);
@@ -26,6 +31,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
 
   Widget build(BuildContext context) {
     final userName = ModalRoute.of(context)!.settings.arguments as String;
+    final login = Provider.of<itemLogin>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -44,6 +50,34 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
               );
             },
           ),
+        actions: [
+            TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                              // title: const Text('Hapus Alarm'),
+                              content:
+                                  Text("Yakin ingin keluar dari aplikasi ?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Tidak'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    login.delete();
+                                   Navigator.pushNamed(context, LandingPageScreen.route);
+                                  },
+                                  child: Text("Ya"),
+                                )
+                              ]));
+                  
+                },
+                child: Text("Keluar",
+                    style: TextStyle(fontSize: 20, color: Color(0xffffffff)))),
+          ],
         ),
         body: ListView(children: [
           Padding(
@@ -151,12 +185,48 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                                   padding: const EdgeInsets.all(20),
                                   child: Column(
                                     children: [
-                                      Text(
-                                          "Zakat yang perlu anda keluarkan adalah " +
-                                              formatter
-                                                  .format(int.parse(Zakat))
-                                                  .toString(),
-                                          style: TextStyle(fontSize: 14)),
+                                      _Selected == "1"
+                                          ? Text(
+                                              "Zakat yang perlu anda keluarkan adalah " +
+                                                  _Total +
+                                                  " X" +
+                                                  " 20%" +
+                                                  " = " +
+                                                  formatter
+                                                      .format(int.parse(Zakat))
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold))
+                                          : _Selected == "2"
+                                              ? Text(
+                                                  "Zakat yang perlu anda keluarkan adalah " +
+                                                      _Total +
+                                                      " X" +
+                                                      " 10%" +
+                                                      " = " +
+                                                      formatter
+                                                          .format(
+                                                              int.parse(Zakat))
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold))
+                                              : Text(
+                                                  "Zakat yang perlu anda keluarkan adalah " +
+                                                      _Total +
+                                                      " X" +
+                                                      " 2,5%" +
+                                                      " = " +
+                                                      formatter
+                                                          .format(
+                                                              int.parse(Zakat))
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
                                     ],
                                   )))
                           : SizedBox(width: 0, height: 0),
@@ -191,7 +261,7 @@ class _kalkulatorZHadiahState extends State<kalkulatorZHadiahScreen> {
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
-                                  minimumSize: const Size(200, 50)),
+                                  minimumSize: const Size(400, 50)),
                               onPressed: isButtonActive
                                   ? () {
                                       if (_Selected == "1") {

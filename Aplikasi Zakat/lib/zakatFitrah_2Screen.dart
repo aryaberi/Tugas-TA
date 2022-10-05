@@ -22,7 +22,7 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
       appBar: AppBar(
         title: Text(
           "Pembayaran Zakat Fitrah",
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
         backgroundColor: Colors.lightGreen,
@@ -39,13 +39,13 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
               child: Text("Anda akan melakukan pembayaran zakat fitrah",
                   style: TextStyle(fontSize: 20), textAlign: TextAlign.center)),
           SizedBox(height: 20),
-          Text("Kepada LAZ                :   " + data["Laz"],
+          Text("Kepada LAZ                 :   " + data["Laz"],
               style: TextStyle(fontSize: 16)),
           Text("Metode Pembayaran :  " + data["methodPayment"],
               style: TextStyle(fontSize: 16)),
-          Text("Atas Nama                  :   " + data["nama"],
+          Text("Atas Nama                   :   " + data["nama"],
               style: TextStyle(fontSize: 16)),
-          Text("Dengan Jumlah          :   " + _jumlah.toString(),
+          Text("Dengan Jumlah           :   " + _jumlah.toString(),
               style: TextStyle(fontSize: 16)),
           SizedBox(height: 20),
           Text(
@@ -56,12 +56,13 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
           //   child: Image.asset("images/Niat_Zakat_Fitrah.png"),
           // ),
           Text(
-            "(Nawaytu an ukhrija zakaata al-fitri `an " +
+            "Nawaytu an ukhrija zakaata al-fitri `an " +
                 data["nama"] +
                 " fardhan lillahi ta`ala",
             style: TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
+          SizedBox(height: 10),
           Text(
             "Aku niat mengeluarkan zakat fitrah untuk, " +
                 data["nama"] +
@@ -70,7 +71,7 @@ class _ZakatFitrah_2ScreenState extends State<ZakatFitrah_2Screen> {
             textAlign: TextAlign.center,
           ),
 
-          SizedBox(height: 90),
+          SizedBox(height: 70),
           Padding(
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(

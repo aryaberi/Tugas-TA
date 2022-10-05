@@ -9,13 +9,13 @@ class dataUser with ChangeNotifier {
       "Email": "Budi123@gmail.com",
       "Password": "Budi123",
       "NoIdentity": "1234567887654321",
-      "Ovo": false,
+      "Ovo": "0",
       "SOvo": "1000000",
-      "Gopay": false,
+      "Gopay": "0",
       "SGopay": "1000000",
-      "Dana": false,
+      "Dana": "0",
       "SDana": "1000000",
-      "Link Aja": false,
+      "Link Aja": "0",
       "SLink": "1000000",
     },
     {
@@ -24,13 +24,13 @@ class dataUser with ChangeNotifier {
       "Email": "Maman@gmail.com",
       "Password": "Maman123",
       "NoIdentity": "8765432112345678",
-      "Ovo": false,
+      "Ovo": "0",
       "SOvo": "1000000",
-      "Gopay": false,
+      "Gopay": "0",
       "SGopay": "1000000",
-      "Dana": false,
+      "Dana": "0",
       "SDana": "1000000",
-      "Link Aja": false,
+      "Link Aja": "0",
       "SLink": "1000000",
     }
   ];
@@ -82,10 +82,10 @@ class dataUser with ChangeNotifier {
     return value;
   }
 
-  bool getStatusEmoney(Nama, Jenis) {
+  String getStatusEmoney(Nama, Jenis) {
     int i = 0;
     // print(UserRow[i][Jenis]);
-    bool value = UserRow[i]["Ovo"];
+    String value = UserRow[i]["Ovo"];
     while (i < UserRow.length) {
       if (UserRow[i]["Nama"] == Nama) {
         // print("masuk sini");
@@ -124,7 +124,7 @@ class dataUser with ChangeNotifier {
     return value;
   }
 
-  void setStatusEmoney(Nama, Jenis) {
+  void setStatusEmoney(Nama, Jenis, No) {
     int i = 0;
     // bool value = UserRow[i]["Ovo"];
     while (i < UserRow.length) {
@@ -132,7 +132,7 @@ class dataUser with ChangeNotifier {
       // print(Nama);
       if (UserRow[i]["Nama"] == Nama) {
         // print("Masuk sini");
-        UserRow[i][Jenis] = true;
+        UserRow[i][Jenis] = No;
         notifyListeners();
         i = i + UserRow.length;
       } else {
@@ -179,5 +179,25 @@ class dataUser with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  bool forgetPass(Email, newPass) {
+    bool value = false;
+    int i = 0;
+    print("masuk forget pass");
+    while (i < UserRow.length && value == false) {
+      print(UserRow[i]["Email"]);
+      print(Email);
+      if (UserRow[i]["Email"] == Email) {
+        UserRow[i]["Password"] = newPass;
+        print("ini password barunya" + UserRow[i]["Password"]);
+        notifyListeners();
+        value = true;
+      } else {
+        i = i + 1;
+      }
+    }
+    notifyListeners();
+    return value;
   }
 }

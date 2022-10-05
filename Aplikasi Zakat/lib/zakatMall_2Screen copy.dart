@@ -21,7 +21,7 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
       appBar: AppBar(
         title: Text(
           "Pembayaran Zakat Mall",
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
         backgroundColor: Colors.lightGreen,
@@ -38,13 +38,13 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
               child: Text("Anda akan melakukan pembayaran " + data["jenis"],
                   style: TextStyle(fontSize: 20), textAlign: TextAlign.center)),
           SizedBox(height: 20),
-          Text("Kepada LAZ                :   " + data["Laz"],
+          Text("Kepada LAZ                 :   " + data["Laz"],
               style: TextStyle(fontSize: 16)),
           Text("Metode Pembayaran :   " + data["methodPayment"],
               style: TextStyle(fontSize: 16)),
-          Text("Atas Nama                  :   " + data["nama"],
+          Text("Atas Nama                   :   " + data["nama"],
               style: TextStyle(fontSize: 16)),
-          Text("Dengan Jumlah          :   " + _jumlah.toString(),
+          Text("Dengan Jumlah           :   " + _jumlah.toString(),
               style: TextStyle(fontSize: 16)),
           SizedBox(height: 20),
           Text(
@@ -61,6 +61,7 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
             style: TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
+          SizedBox(height: 10),
           Text(
             "Saya Niat Mengeluarkan Zakat Maal atas " +
                 data["nama"] +
@@ -68,7 +69,7 @@ class _ZakatMall_2ScreenState extends State<ZakatMall_2Screen> {
             style: TextStyle(fontSize: 16),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 90),
+          SizedBox(height: 70),
           Padding(
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(

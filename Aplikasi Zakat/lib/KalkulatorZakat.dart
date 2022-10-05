@@ -21,7 +21,7 @@ class KalkulatorScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Kalkulator Zakat",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,

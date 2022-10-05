@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/Dashboard.dart';
+import 'package:flutter_application_2/LandingPage.dart';
 import 'package:flutter_application_2/Provider/User.dart';
-import 'package:flutter_application_2/Provider/itemLaporan2.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_application_2/Provider/Provider.dart';
 import 'package:provider/provider.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
 import 'Provider/listBayar.dart';
+
 
 String convertLaz(value) {
   String No = "";
@@ -42,6 +44,8 @@ class zakatFitrah_3Screen extends StatefulWidget {
 class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
   final formKey = GlobalKey<FormState>();
   bool isValidate = false;
+  bool isGanti = false;
+  String _No = "0";
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<dataUser>(context);
@@ -51,16 +55,17 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
     bool isButtonActive = data["kindPayment"] == "emoney" ? false : true;
     final items = Provider.of<itemLaporan>(context);
     final _items = items.allItems;
-    final items2 = Provider.of<itemLaporan2>(context);
-    final _items2 = items2.allItems;
+    // final items2 = Provider.of<itemLaporan2>(context);
+    // final _items2 = items2.allItems;
     final bayar = Provider.of<listBayar>(context);
     final _bayars = bayar.allItems;
+    final login = Provider.of<itemLogin>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Pembayaran Zakat Fitrah",
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
         backgroundColor: Colors.lightGreen,
@@ -76,8 +81,10 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
           Padding(
               padding: const EdgeInsets.only(top: 50.0, left: 8.0, right: 8.0),
               child: data["kindPayment"] == "emoney"
-                  ? !user.getStatusEmoney(
-                          data["usernama"], data["methodPayment"])
+                  ? user.getStatusEmoney(
+                                  data["usernama"], data["methodPayment"]) ==
+                              "0" ||
+                          isGanti
                       ? Column(
                           children: [
                             Text(
@@ -111,6 +118,7 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                     onChanged: (value) {
                                       if (formKey.currentState!.validate()) {
                                         setState(() {
+                                          _No = value;
                                           isValidate = true;
                                         });
                                         print(isButtonActive);
@@ -139,21 +147,49 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: Column(children: [
-                                      Text(
-                                          "Jumlah saldo anda adalah : " +
-                                              formatter.format(int.parse(
-                                                  user.getSaldo(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          // Row(
+                                          //   children: [
+                                          Center(
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    isGanti = !isGanti;
+                                                  });
+                                                },
+                                                child: Text("Ganti nomor",
+                                                    style: TextStyle(
+                                                        fontSize: 16))),
+                                          ),
+                                          Text(
+                                              "No " +
+                                                  data["methodPayment"] +
+                                                  "mu adalah : " +
+                                                  user.getStatusEmoney(
                                                       data["usernama"],
-                                                      data["methodPayment"]))),
-                                          style: TextStyle(fontSize: 16)),
-                                      Text(
-                                          "Jumlah yang harus dibayar adalah : " +
-                                              formatter.format(
-                                                  int.parse(data["jumlah"])),
-                                          style: TextStyle(fontSize: 16)),
-                                    ]))),
+                                                      data["methodPayment"]),
+                                              style: TextStyle(fontSize: 16)),
+
+                                          //   ],
+                                          // ),
+                                          Text(
+                                              "Jumlah saldo anda adalah : " +
+                                                  formatter.format(int.parse(
+                                                      user.getSaldo(
+                                                          data["usernama"],
+                                                          data[
+                                                              "methodPayment"]))),
+                                              style: TextStyle(fontSize: 16)),
+                                          Text(
+                                              "Jumlah yang harus dibayar adalah : " +
+                                                  formatter.format(int.parse(
+                                                      data["jumlah"])),
+                                              style: TextStyle(fontSize: 16)),
+                                        ]))),
                             Text(
                                 "Untuk melanjutkan pembayaran, silahkan masukan PIN e-money anda",
                                 style: TextStyle(fontSize: 16)),
@@ -219,14 +255,19 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                     minimumSize: const Size(200, 50)),
                 onPressed: isButtonActive || isValidate
                     ? data["kindPayment"] == "emoney" &&
-                            !user.getStatusEmoney(
-                                data["usernama"], data["methodPayment"])
+                                user.getStatusEmoney(data["usernama"],
+                                        data["methodPayment"]) ==
+                                    "0" ||
+                            isGanti
                         ? () {
                             user.setStatusEmoney(
-                                data["usernama"], data["methodPayment"]);
+                                data["usernama"], data["methodPayment"], _No);
                             print("ini hasi final nya");
                             print(user.getStatusEmoney(
                                 data["usernama"], data["methodPayment"]));
+                            setState(() {
+                              isGanti = !isGanti;
+                            });
                           }
                         : data["kindPayment"] == "emoney"
                             ? () {
@@ -242,12 +283,19 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                               title: const Text(
                                                   'Pembayaran Gagal'),
                                               content: Container(
-                                                height: 150,
+                                                height: 200,
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
-                                                    Icon(Icons.close),
+                                                    Image.asset(
+                                                      "images/Wrong.png",
+                                                      height: 60,
+                                                      width: 60,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
                                                     Text(
                                                         'Maaf saldo anda tidak mencukupi untuk melakukan pemabayaran'),
                                                     SizedBox(
@@ -266,7 +314,18 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                         arguments:
                                                             data["usernama"]);
                                                   },
-                                                  child: const Text('Ok'),
+                                                  child:
+                                                      const Text('Lanjutkan'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    login.delete();
+                                                    Navigator.pushNamed(
+                                                      context,
+                                                      LandingPageScreen.route,
+                                                    );
+                                                  },
+                                                  child: const Text('Keluar'),
                                                 )
                                               ]));
                                 } else {
@@ -277,12 +336,19 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                               title: const Text(
                                                   'Pembayaran berhasil'),
                                               content: Container(
-                                                height: 150,
+                                                height: 200,
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
-                                                    Icon(Icons.check),
+                                                    Image.asset(
+                                                      "images/True.png",
+                                                      height: 60,
+                                                      width: 60,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
                                                     Text(
                                                         'Selamat pembayaran zakat Fitrah anda berhasil'),
                                                     SizedBox(
@@ -302,10 +368,11 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                     String now = DateFormat(
                                                             "dd/MM/yyyy")
                                                         .format(DateTime.now());
-                                                    var no = data["usernama"] ==
-                                                            "Maman"
-                                                        ? _items.length + 1
-                                                        : _items2.length + 1;
+                                                    // var no = data["usernama"] ==
+                                                    //         "Maman"
+                                                    //     ?
+                                                    var no = _items.length + 1;
+                                                    // : _items2.length + 1;
                                                     // data["usernama"] == "Maman"?
                                                     var count =
                                                         items.getCountName(data[
@@ -342,7 +409,55 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                         arguments:
                                                             data["usernama"]);
                                                   },
-                                                  child: const Text('Ok'),
+                                                  child:
+                                                      const Text('Lanjutkan'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    String Penangung =
+                                                        convertLaz(data["Laz"]);
+                                                    String now = DateFormat(
+                                                            "dd/MM/yyyy")
+                                                        .format(DateTime.now());
+                                                    // var no = data["usernama"] ==
+                                                    //         "Maman"
+                                                    //     ?
+                                                    var no = _items.length + 1;
+                                                    // : _items2.length + 1;
+                                                    var count =
+                                                        items.getCountName(data[
+                                                                "usernama"]) +
+                                                            1;
+                                                    // data["usernama"] == "Maman"?
+                                                    bayar.addData(
+                                                        {"nama": data["nama"]});
+                                                    items.addData({
+                                                      "Id": no.toString(),
+                                                      "Count": count,
+                                                      "Nama": data["nama"],
+                                                      "UserName":
+                                                          data["usernama"],
+                                                      "Tanggal": now,
+                                                      "Jenis": data["jenis"],
+                                                      "Jumlah": data["jumlah"],
+                                                      "Status":
+                                                          "Telah diterima oleh LAZ",
+                                                      "Laz": data["Laz"],
+                                                      "Penangung": Penangung,
+                                                      "Distribusi": "Belum ada",
+                                                      "Tempat": "Belum ada",
+                                                      "NoTlp": "Belum ada",
+                                                      "AtasNama": "Belum ada"
+                                                    });
+                                                    items.updateLastList();
+                                                    login.delete();
+                                                    Navigator.pushNamed(
+                                                      context,
+                                                      LandingPageScreen.route,
+                                                    );
+                                                  },
+                                                  child: const Text('Keluar'),
                                                 )
                                               ]));
                                 }
@@ -355,12 +470,19 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                             title: const Text(
                                                 'Pembayaran berhasil'),
                                             content: Container(
-                                              height: 130,
+                                              height: 200,
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
-                                                  Icon(Icons.check),
+                                                  Image.asset(
+                                                    "images/True.png",
+                                                    height: 60,
+                                                    width: 60,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
                                                   Text(
                                                       'Selamat pembayaran zakat Fitrah anda berhasil'),
                                                   SizedBox(
@@ -380,10 +502,11 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                   String now = DateFormat(
                                                           "dd/MM/yyyy")
                                                       .format(DateTime.now());
-                                                  var no = data["usernama"] ==
-                                                          "Maman"
-                                                      ? _items.length + 1
-                                                      : _items2.length + 1;
+                                                  // var no = data["usernama"] ==
+                                                  //         "Maman"
+                                                  //     ?
+                                                  var no = _items.length + 1;
+                                                  // : _items2.length + 1;
                                                   var count =
                                                       items.getCountName(data[
                                                               "usernama"]) +
@@ -415,7 +538,50 @@ class _zakatFitrah_3State extends State<zakatFitrah_3Screen> {
                                                       arguments:
                                                           data["usernama"]);
                                                 },
-                                                child: const Text('Ok'),
+                                                child: const Text('Lanjutkan'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  String Penangung =
+                                                      convertLaz(data["Laz"]);
+                                                  String now = DateFormat(
+                                                          "dd/MM/yyyy")
+                                                      .format(DateTime.now());
+                                                  var no = _items.length + 1;
+                                                  var count =
+                                                      items.getCountName(data[
+                                                              "usernama"]) +
+                                                          1;
+                                                  // data["usernama"] == "Maman"?
+                                                  bayar.addData(
+                                                      {"nama": data["nama"]});
+                                                  items.addData({
+                                                    "Id": no.toString(),
+                                                    "Count": count,
+                                                    "Nama": data["nama"],
+                                                    "UserName":
+                                                        data["usernama"],
+                                                    "Tanggal": now,
+                                                    "Jenis": data["jenis"],
+                                                    "Jumlah": data["jumlah"],
+                                                    "Status":
+                                                        "Telah diterima oleh LAZ",
+                                                    "Laz": data["Laz"],
+                                                    "Penangung": Penangung,
+                                                    "Distribusi": "Belum ada",
+                                                    "Tempat": "Belum ada",
+                                                    "NoTlp": "Belum ada",
+                                                    "AtasNama": "Belum ada"
+                                                  });
+                                                  items.updateLastList();
+                                                  login.delete();
+                                                  Navigator.pushNamed(
+                                                    context,
+                                                    LandingPageScreen.route,
+                                                  );
+                                                },
+                                                child: const Text('Keluar'),
                                               )
                                             ]));
                               }

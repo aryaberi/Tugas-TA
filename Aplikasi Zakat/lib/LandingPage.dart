@@ -1,17 +1,23 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/AlarmScreen.dart';
+import 'package:flutter_application_2/Bantuan.dart';
 import 'package:flutter_application_2/LoginScreen.dart';
 import 'package:flutter_application_2/belajarZakat.dart';
-import 'package:flutter_application_2/Bantuan.dart';
-import 'package:flutter_application_2/DataTableSample.dart';
-import 'package:flutter_application_2/KalkulatorZakat.dart';
-import 'package:flutter_application_2/LaporanScreen.dart';
-import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
-import 'package:flutter_application_2/zakatMall_1Screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_application_2/Belajar_Page/jenisZakat.dart';
 import 'package:flutter_application_2/Belajar_Page/WajibZakat.dart';
+import 'package:flutter_application_2/Belajar_Page/jenisZakat.dart';
 import 'package:flutter_application_2/Belajar_Page/ZakatOnline.dart';
+
+import 'package:provider/provider.dart';
+
+import 'Provider/User.dart';
+
+class LandingPageScreen extends StatefulWidget {
+  const LandingPageScreen({Key? key}) : super(key: key);
+  static const route = "/Landing";
+  @override
+  _LandingPageScreenState createState() => _LandingPageScreenState();
+}
 
 final List<Map> imgList = [
   {"id": "1", "image": "images/Bayar.jpg", "route": WajibScreen.route},
@@ -19,20 +25,35 @@ final List<Map> imgList = [
   {"id": "3", "image": "images/jenis.jpg", "route": jenisZakatScreen.route}
 ];
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
-  static const route = "Dashboard";
+class _LandingPageScreenState extends State<LandingPageScreen> {
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  int _current = 0;
+  bool isWrong = false;
+  bool _passwordVisible = false;
+  String Nama = "";
+  String Pass = "";
   final CarouselController _controller = CarouselController();
-  @override
+
+  // changePass(String Nama) {
+  //   // setState(() {
+  //   //   _passwordVisible = !_passwordVisible;
+  //   // });
+  //   print(Nama);
+  // }
+
   Widget build(BuildContext context) {
-    final userName = ModalRoute.of(context)!.settings.arguments as String;
-    String Nama = userName;
+    final user = Provider.of<dataUser>(context);
+    final _users = user.allItems;
+    String userName = "";
+    bool isTrue = false;
+    int _current = 0;
+
+    // void _toggle() {
+    //   setState(() {
+    //     print(_obscureText);
+    //     _obscureText = !_obscureText;
+    //     print(_obscureText);
+    //   });
+    // }
     final List<Widget> imageSliders = imgList
         .map((item) => InkWell(
               splashColor: Colors.white,
@@ -76,63 +97,53 @@ class _DashboardScreenState extends State<DashboardScreen> {
         .toList();
 
     return Scaffold(
+        // resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text("ZOI", style: TextStyle(fontSize: 30)),
+          title: const Text("ZOI"),
+          leading: Container(),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
-          leadingWidth: 300,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(children: [
-                  CircleAvatar(child: Icon(Icons.person)),
-                  TextButton(
-                    style: TextButton.styleFrom(primary: Colors.white),
-                    child: Text(userName,
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      Navigator.pushNamed(context, LoginScreen.route);
-                    },
-                  )
-                ]),
-              );
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage("images/bantuan.png")),
-              iconSize: 50,
-              onPressed: () {
-                Navigator.pushNamed(context, BantuanScreen.route);
-              },
-            )
-          ],
         ),
-        body: ListView(children: [
+        body:
+            ListView(physics: const AlwaysScrollableScrollPhysics(), children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Text(
+                  "Selamat datang di ZOI. Aplikasi pembayaran zakat online yang telah mendapat lisensi dari MUI",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                //   ],
+                // )
+              ],
+            ),
+          ),
           Center(
               child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child:Row(children: [
-            Expanded(
-              child: CarouselSlider(
-                items: imageSliders,
-                carouselController: _controller,
-                options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    aspectRatio: 2.0,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _current = index;
-                      });
-                    }),
-              ),
-            )
-          ]))),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(children: [
+                    Expanded(
+                      child: CarouselSlider(
+                        items: imageSliders,
+                        carouselController: _controller,
+                        options: CarouselOptions(
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            aspectRatio: 2.0,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _current = index;
+                              });
+                            }),
+                      ),
+                    )
+                  ]))),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: imgList.asMap().entries.map((entry) {
@@ -159,66 +170,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               spacing: 20,
               runSpacing: 20,
               children: [
-                CardListDashboard2(
-                  imageurl: "images/zakatFitrah.jpg",
-                  title: "Bayar Zakat Fitrah",
-                  nav: zakatFitrah_1Screen.route,
-                  argumen: Nama,
-                ),
-                SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Card(
-                      child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, zakatMall_1Screen.route,
-                                arguments: {
-                                  "Zakat": "0",
-                                  "Jenis": "belum",
-                                  "usernama": Nama,
-                                });
-                          },
-                          child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 5, bottom: 5, left: 5, right: 5),
-                              child: Column(children: <Widget>[
-                                Container(
-                                  height: 65,
-                                  width: 65,
-                                  color: Colors.white,
-                                  // decoration: BoxDecoration(border: Border.all()),
-                                  child: Image(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage("images/zakatMall.png"),
-                                    height: 20,
-                                    width: 20,
-                                  ),
-                                ),
-                                // SizedBox(
-                                //   height: 20,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "Bayar Zakat Mall",
-                                    style: TextStyle(fontSize: 9),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                ),
-                              ])))),
-                ),
-                CardListDashboard2(
-                  imageurl: "images/kalkulator.png",
-                  title: "Hitung Zakat Mall",
-                  nav: KalkulatorScreen.route,
-                  argumen: Nama,
-                ),
-                CardListDashboard2(
-                  imageurl: "images/laporan.png",
-                  title: "Laporan Zakat",
-                  nav: DataTableSample.route,
-                  argumen: Nama,
-                ),
                 const CardListDashboard(
                   imageurl: "images/alarm.png",
                   title: "Pasang Alarm",
@@ -228,6 +179,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   imageurl: "images/belajar.png",
                   title: "Belajar Zakat",
                   nav: BelajarScreen.route,
+                ),
+                const CardListDashboard(
+                  imageurl: "images/bantuan.png",
+                  title: "Bantuan",
+                  nav: BantuanScreen.route,
+                ),
+                Row(
+                  children: [
+                    Text("Silahkan"),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, LoginScreen.route);
+                        },
+                        child: Text("Login")),
+                    Text("jika ingin mengakses full aplikasi"),
+                  ],
                 ),
               ],
             ),

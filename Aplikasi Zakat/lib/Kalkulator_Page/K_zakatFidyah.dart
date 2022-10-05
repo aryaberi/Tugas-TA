@@ -4,6 +4,9 @@ import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:intl/intl.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
+import 'package:flutter_application_2/LandingPage.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
+import 'package:provider/provider.dart';
 
 class kalkulatorZFidyahScreen extends StatefulWidget {
   const kalkulatorZFidyahScreen({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class kalkulatorZFidyahScreen extends StatefulWidget {
 class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
   @override
   final formKey = GlobalKey<FormState>();
+
   bool isButtonActive = false;
   bool isHitung = false;
   late TextEditingController controller;
@@ -27,6 +31,7 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
 
   Widget build(BuildContext context) {
     final userName = ModalRoute.of(context)!.settings.arguments as String;
+    final login = Provider.of<itemLogin>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -45,6 +50,34 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
               );
             },
           ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                              // title: const Text('Hapus Alarm'),
+                              content:
+                                  Text("Yakin ingin keluar dari aplikasi ?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Tidak'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    login.delete();
+                                    Navigator.pushNamed(
+                                        context, LandingPageScreen.route);
+                                  },
+                                  child: Text("Ya"),
+                                )
+                              ]));
+                },
+                child: Text("Keluar",
+                    style: TextStyle(fontSize: 20, color: Color(0xffffffff)))),
+          ],
         ),
         body: ListView(children: [
           Padding(
@@ -105,7 +138,7 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
 
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "2.Biaya satu kali makan:"),
+                            labelText: "2.Biaya satu kali makan(Rp):"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly,
@@ -160,10 +193,16 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                                   children: [
                                     Text(
                                       "Total Fidyah anda  adalah " +
+                                          _Jumlah +
+                                          " X " +
+                                          _Harga +
+                                          " = " +
                                           formatter
                                               .format(int.parse(Zakat))
                                               .toString(),
-                                      style: TextStyle(fontSize: 14),
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -180,7 +219,7 @@ class _kalkulatorZFidyahState extends State<kalkulatorZFidyahScreen> {
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
-                                  minimumSize: const Size(200, 50)),
+                                  minimumSize: const Size(400, 50)),
                               onPressed: int.parse(Zakat) > 0
                                   ? () {
                                       setState(() {

@@ -1,7 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-class itemLaporan2 with ChangeNotifier {
+class itemLogin with ChangeNotifier {
   List<Map> dataRow = [];
 
   List<Map> get allItems {
@@ -10,6 +10,11 @@ class itemLaporan2 with ChangeNotifier {
 
   void addData(value) {
     dataRow.add(value);
+    notifyListeners();
+  }
+
+  void delete() {
+    dataRow.removeLast();
     notifyListeners();
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/LandingPage.dart';
 import 'package:flutter_application_2/tes3.dart';
 import 'package:intl/intl.dart';
+
+import 'package:provider/provider.dart';
+import 'Provider/itemLogin.dart';
 
 final newData =
     dataAlarm(id: "2", jenis: "Zakat Fitrah", tanggal: "12/02/2022");
@@ -146,6 +150,8 @@ class _AlarmScrennState extends State<AlarmScrenn> {
 
   @override
   Widget build(BuildContext context) {
+    final login = Provider.of<itemLogin>(context);
+    final _login = login.allItems;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
@@ -159,7 +165,7 @@ class _AlarmScrennState extends State<AlarmScrenn> {
       appBar: AppBar(
         title: Text(
           "Alarm Zakat",
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 20),
         ),
         centerTitle: true,
         backgroundColor: Colors.lightGreen,
@@ -173,16 +179,49 @@ class _AlarmScrennState extends State<AlarmScrenn> {
             );
           },
         ),
+        actions: [
+          _login.isEmpty
+              ? SizedBox()
+              : TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                                // title: const Text('Hapus Alarm'),
+                                content:
+                                    Text("Yakin ingin keluar dari aplikasi ?"),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Cancel'),
+                                    child: const Text('Tidak'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      login.delete();
+                                      Navigator.pushNamed(
+                                          context, LandingPageScreen.route);
+                                    },
+                                    child: Text("Ya"),
+                                  )
+                                ]));
+                  },
+                  child: Text(
+                    "Keluar",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xffffffff),
+                    ),
+                  )),
+        ],
       ),
       body: _dataAlarm2.length == 0
-          ? Row(children: [
-              SizedBox(width: 60),
-              Text(
-                "Belum ada alarm yang dipasang",
-                style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.center,
-              )
-            ])
+          ? Center(
+              child: Text(
+              "Belum ada alarm yang dipasang",
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ))
           : ListView.builder(
               itemCount: _dataAlarm2.length,
               itemBuilder: (BuildContext context, int index) {

@@ -6,19 +6,20 @@ import 'package:provider/provider.dart';
 import 'Provider/User.dart';
 import 'Provider/listBayar.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
-  static const route = "/Register";
+class ForgetPassScreen extends StatefulWidget {
+  const ForgetPassScreen({Key? key}) : super(key: key);
+  static const route = "/ForgetPass";
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _ForgetPassScreenState createState() => _ForgetPassScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _ForgetPassScreenState extends State<ForgetPassScreen> {
   @override
   bool _passwordVisible = false;
   bool _copasswordVisible = false;
   bool _samePass = true;
+  bool sucses = false;
   String Nama = "";
   String Email = "";
   String Pass1 = "";
@@ -44,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             },
           ),
-          title: const Text("Pendaftaran"),
+          title: const Text("Lupa Password"),
           centerTitle: true,
         ),
         body: ListView(children: [
@@ -56,34 +57,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 10,
                   ),
                   Text(
-                    "Silahkan Daftrakan Diri Anda",
+                    "Silahkan Buat Password Baru",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.black87,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(),
-                        prefixIcon: Icon(
-                          Icons.person,
-                          size: 40,
-                        ),
-                        hintText: "masukan nama pengguna anda",
-                        labelText: "Nama Pengguna"),
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        Nama = value;
-                        print(_bayars[3]["nama"]);
-                        print("isNotEmpty");
-                      } else {
-                        print("isEmpty");
-                      }
-                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -130,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Icons.lock,
                           size: 40,
                         ),
-                        hintText: "masukan password anda",
+                        hintText: "masukan password baru anda",
                         labelText: "Password"),
                     onChanged: (value) {
                       if (value.isNotEmpty) {
@@ -178,42 +156,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    obscureText: false,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(),
-                      prefixIcon: Icon(
-                        Icons.card_giftcard,
-                        size: 40,
-                      ),
-                      hintText: "masukan no identitas anda",
-                      labelText: "No KTP/KK",
-                    ),
-                    maxLength: 16,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    validator: (value) {
-                      if (value!.isEmpty || value.length < 16) {
-                        return "Isi dengan angka";
-                      } else {
-                        return null;
-                      }
-                    },
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        NoIdentity = value;
-                        print("isNotEmpty");
-                      } else {
-                        print("isEmpty");
-                      }
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   !_samePass
                       ? Text("konfrmasi password salah",
                           style: TextStyle(color: Colors.red),
@@ -228,12 +170,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onTap: () {
                               if (Pass1 == Pass2) {
                                 var no = _users.length + 1;
+                                user.forgetPass(Email, Pass1);
                                 showDialog<String>(
                                     context: context,
                                     builder: (BuildContext context) =>
                                         AlertDialog(
                                             title: const Text(
-                                                'Pendaftaran berhasil'),
+                                                'Pemulihan password berhasil'),
                                             content: Container(
                                               height: 120,
                                               child: Column(
@@ -247,33 +190,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   ),
                                                   SizedBox(height: 10),
                                                   Text(
-                                                      'Selamat akun anda berhasil didaftarkan'),
+                                                      'Selamat password anda berhasil diperbarui'),
                                                 ],
                                               ),
                                             ),
                                             actions: <Widget>[
                                               TextButton(
                                                 onPressed: () {
-                                                  user.addData({
-                                                    "Id": no.toString(),
-                                                    "Nama": Nama,
-                                                    "Email": Email,
-                                                    "Password": Pass1,
-                                                    "NoIdentity": NoIdentity,
-                                                    "Ovo": "0",
-                                                    "SOvo": "1000000",
-                                                    "Gopay": "0",
-                                                    "SGopay": "1000000",
-                                                    "Dana": "0",
-                                                    "SDana": "1000000",
-                                                    "Link Aja": "0",
-                                                    "SLink": "1000000",
-                                                  });
-                                                  // var newId = _bayars.length + 1;
-                                                  bayar.addData({
-                                                    // "Id": newId.toString(),
-                                                    "nama": Nama
-                                                  });
                                                   setState(() {
                                                     _samePass = true;
                                                   });
@@ -291,7 +214,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: const Center(
                               child: Text(
-                                "Daftar",
+                                "OK",
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,

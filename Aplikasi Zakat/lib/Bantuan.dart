@@ -25,7 +25,7 @@ class BantuanScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Bantuan Penggunaan",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
@@ -39,7 +39,6 @@ class BantuanScreen extends StatelessWidget {
               );
             },
           ),
-          actions: [Icon(Icons.home)],
         ),
         body: ListView(shrinkWrap: true, children: [
           CardList(

@@ -18,8 +18,8 @@ class image_font_2 extends StatelessWidget {
             padding: EdgeInsets.all(5.0),
             child: Image.asset(
               imageurl,
-              height: 300,
-              width: 300,
+              height: 200,
+              width: 200,
             ),
           ),
         ]);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/LandingPage.dart';
 import 'package:flutter_application_2/Provider/Provider.dart';
-import 'package:flutter_application_2/Provider/itemLaporan2.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
 import 'package:provider/provider.dart';
+import 'Provider/itemLogin.dart';
 
 import 'Scroll _view.dart';
 
@@ -37,6 +39,8 @@ class _DataTableSampleState extends State<DataTableSample> {
     // final items2 = Provider.of<itemLaporan2>(context);
     final userName = ModalRoute.of(context)!.settings.arguments as String;
     final _item = items.allItems;
+    final login = Provider.of<itemLogin>(context);
+    final _login = login.allItems;
     int i = 0;
     List<Map> _items = getByName(userName, _item);
     // userName == "Maman" ? items.getByName(userName) : items2.allItems;
@@ -44,7 +48,7 @@ class _DataTableSampleState extends State<DataTableSample> {
         appBar: AppBar(
           title: Text(
             "Laporan Zakat",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
@@ -58,6 +62,34 @@ class _DataTableSampleState extends State<DataTableSample> {
               );
             },
           ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                              // title: const Text('Hapus Alarm'),
+                              content:
+                                  Text("Yakin ingin keluar dari aplikasi ?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Tidak'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    login.delete();
+                                    Navigator.pushNamed(
+                                        context, LandingPageScreen.route);
+                                  },
+                                  child: Text("Ya"),
+                                )
+                              ]));
+                },
+                child: Text("Keluar",
+                    style: TextStyle(fontSize: 20, color: Color(0xffffffff)))),
+          ],
         ),
         body: Column(children: [
           Expanded(
@@ -137,12 +169,12 @@ class _DataTableSampleState extends State<DataTableSample> {
                                                         fontSize: 12)),
                                                 SizedBox(height: 10),
                                                 Text(
-                                                    "Pada Tanggal                  : " +
+                                                    "Pada Tanggal                 : " +
                                                         itemRow["Tanggal"],
                                                     style: TextStyle(
                                                         fontSize: 12)),
                                                 Text(
-                                                    "Kepada                             : " +
+                                                    "Kepada                            : " +
                                                         itemRow["Laz"],
                                                     style: TextStyle(
                                                         fontSize: 12)),
@@ -152,7 +184,7 @@ class _DataTableSampleState extends State<DataTableSample> {
                                                     style: TextStyle(
                                                         fontSize: 12)),
                                                 Text(
-                                                    "Sebesar                            : " +
+                                                    "Sebesar                           : " +
                                                         itemRow["Jumlah"],
                                                     style: TextStyle(
                                                         fontSize: 12)),
@@ -183,7 +215,7 @@ class _DataTableSampleState extends State<DataTableSample> {
                                                             alignment: Alignment
                                                                 .topLeft,
                                                             child: Text(
-                                                                "Telah disalurkan ke        : " +
+                                                                "Telah disalurkan ke      : " +
                                                                     itemRow[
                                                                         "Tempat"],
                                                                 style: TextStyle(
@@ -193,7 +225,7 @@ class _DataTableSampleState extends State<DataTableSample> {
                                                           alignment:
                                                               Alignment.topLeft,
                                                           child: Text(
-                                                              "Pada Tanggal                  : " +
+                                                              "Pada Tanggal                 : " +
                                                                   itemRow[
                                                                       "Distribusi"],
                                                               style: TextStyle(

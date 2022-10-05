@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatFitrah_2Screen.dart';
 import 'package:provider/provider.dart';
-
 import 'Provider/listBayar.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class zakatFitrah_1Screen extends StatefulWidget {
   const zakatFitrah_1Screen({Key? key}) : super(key: key);
@@ -93,7 +93,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
         appBar: AppBar(
           title: Text(
             "Pembayaran Zakat Fitrah",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
@@ -110,18 +110,22 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
               child: Form(
                   key: formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Silahkan isi data-data berikut",
-                        style: TextStyle(fontSize: 20),
-                      ),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Silahkan isi data-data berikut",
+                            style: TextStyle(fontSize: 20),
+                            textAlign: TextAlign.center,
+                          )),
                       SizedBox(
                         height: 20,
                       ),
 //Dropdown LAZ menu============================================================================================================
                       Text(
                         "Pilih LAZ Tujuan",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 14),
                       ),
                       Container(
                         padding: EdgeInsets.all(15),
@@ -188,7 +192,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                       ),
                       Text(
                         "Pilih Metode Pembayaran",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 14),
                       ),
                       Container(
                         padding: EdgeInsets.all(15),
@@ -374,7 +378,10 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                                         child: DropdownButtonHideUnderline(
                                             child: ButtonTheme(
                                       alignedDropdown: true,
-                                      child: DropdownButton<String>(
+                                      child: DropdownButton2<String>(
+                                        buttonHeight: 60,
+                                        buttonWidth: 140,
+                                        itemHeight: 40,
                                         isExpanded: true,
                                         isDense: true,
                                         hint: new Text("Pilih nama orang"),
@@ -425,7 +432,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
 //jumlah yang dibayar============================================================================================================
 
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Text(
                         "Jumlah yang harus dibayarkan untuk satu orang adalah Rp 27.500 "
@@ -442,7 +449,7 @@ class _zakatFitrah_1State extends State<zakatFitrah_1Screen> {
                           style: ElevatedButton.styleFrom(
                               onSurface: Colors.lightGreen,
                               primary: Colors.lightGreen,
-                              minimumSize: const Size(200, 50)),
+                              minimumSize: const Size(400, 50)),
                           onPressed: isButtonActive && _jumlah != 0
                               ? () {
                                   Navigator.pushNamed(

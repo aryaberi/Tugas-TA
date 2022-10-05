@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
 import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_application_2/LandingPage.dart';
+import 'package:provider/provider.dart';
+
+
 
 class kalkulatorZEmasScreen extends StatefulWidget {
   const kalkulatorZEmasScreen({Key? key}) : super(key: key);
@@ -15,6 +20,7 @@ class kalkulatorZEmasScreen extends StatefulWidget {
 class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
   @override
   final formKey = GlobalKey<FormState>();
+  
   bool isButtonActive = false;
   bool isHitung = false;
   late TextEditingController controller;
@@ -26,6 +32,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
 
   Widget build(BuildContext context) {
     final userName = ModalRoute.of(context)!.settings.arguments as String;
+    final login = Provider.of<itemLogin>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -44,6 +51,34 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
               );
             },
           ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                              // title: const Text('Hapus Alarm'),
+                              content:
+                                  Text("Yakin ingin keluar dari aplikasi ?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Tidak'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    login.delete();
+                                    Navigator.pushNamed(
+                                        context, LandingPageScreen.route);
+                                  },
+                                  child: Text("Ya"),
+                                )
+                              ]));
+                },
+                child: Text("Keluar",
+                    style: TextStyle(fontSize: 20, color: Color(0xffffffff)))),
+          ],
         ),
         body: ListView(children: [
           Padding(
@@ -178,14 +213,19 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                                     ),
                                     int.parse(Hasil) < 73100000
                                         ? Text(
-                                            "Simpanan anda kurang dari hisab yang ditentukan, hisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
-                                            style: TextStyle(fontSize: 14))
+                                            "Simpanan anda kurang dari nisab yang ditentukan, nisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold))
                                         : Text(
                                             "Jumlah Zakat yang harus anda keluarkan adalah " +
                                                 formatter
                                                     .format(int.parse(Zakat))
-                                                    .toString(),
-                                            style: TextStyle(fontSize: 14))
+                                                    .toString() +
+                                                " Merupakan hasil dari 2,5% total simpanan emas anda.",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold))
                                   ],
                                 ),
                               ))
@@ -201,7 +241,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
-                                  minimumSize: const Size(200, 50)),
+                                  minimumSize: const Size(400, 50)),
                               onPressed: int.parse(Zakat) > 0
                                   ? () {
                                       setState(() {
@@ -221,7 +261,7 @@ class _kalkulatorZEmasState extends State<kalkulatorZEmasScreen> {
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
-                                  minimumSize: const Size(200, 50)),
+                                  minimumSize: const Size(400, 50)),
                               onPressed: isButtonActive & isHitung == false
                                   ? () {
                                       setState(() {

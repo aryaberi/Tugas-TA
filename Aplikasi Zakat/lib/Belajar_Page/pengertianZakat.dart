@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_2/LandingPage.dart';
+
+
 
 class pengertianScreen extends StatelessWidget {
   const pengertianScreen({Key? key}) : super(key: key);
@@ -7,44 +12,88 @@ class pengertianScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final login = Provider.of<itemLogin>(context);
+    final _login = login.allItems;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            );
-          },
-        ),
-      ),
-      body: ListView(
-        children: [
-          Text(
-            "Pengertian Zakat",
-            style: TextStyle(fontSize: 20),
-            textAlign: TextAlign.center,
+        appBar: AppBar(
+          backgroundColor: Colors.lightGreen,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              );
+            },
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-              "Pengertian Zakat sendiri berasal dari Bahasa Arab yakni zaka yang artinya bersih, suci, subur, berkembang.",style: TextStyle(fontSize: 14)),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-              "Dikutip dari laman Badan Amil Zakat Nasional (Baznas), zakat artinya bagian tertentu dari harta yang wajib dikeluarkan oleh setiap muslim apabila telah mencapai syarat yang ditetapkan.",style: TextStyle(fontSize: 14)),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-              "Sebagai salah satu rukun Islam, zakat ditunaikan untuk diberikan kepada golongan yang berhak menerimanya (asnaf).",style: TextStyle(fontSize: 14)),
+          actions: [
+          _login.isEmpty
+              ? SizedBox()
+              : TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                                // title: const Text('Hapus Alarm'),
+                                content:
+                                    Text("Yakin ingin keluar dari aplikasi ?"),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'Cancel'),
+                                    child: const Text('Tidak'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      login.delete();
+                                      Navigator.pushNamed(
+                                          context, LandingPageScreen.route);
+                                    },
+                                    child: Text("Ya"),
+                                  )
+                                ]));
+                  },
+                  child: Text(
+                    "Keluar",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xffffffff),
+                    ),
+                  )),
         ],
-      ),
-    );
+        ),
+        body: ListView(children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Text(
+                  "Pengertian Zakat",
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                    "Pengertian Zakat sendiri berasal dari Bahasa Arab yakni zaka yang artinya bersih, suci, subur, berkembang.",
+                    style: TextStyle(fontSize: 14)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Dikutip dari laman Badan Amil Zakat Nasional (Baznas), zakat artinya bagian tertentu dari harta yang wajib dikeluarkan oleh setiap muslim apabila telah mencapai syarat yang ditetapkan.",
+                    style: TextStyle(fontSize: 14)),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "Sebagai salah satu rukun Islam, zakat ditunaikan untuk diberikan kepada golongan yang berhak menerimanya (asnaf).",
+                    style: TextStyle(fontSize: 14)),
+              ],
+            ),
+          )
+        ]));
   }
 }

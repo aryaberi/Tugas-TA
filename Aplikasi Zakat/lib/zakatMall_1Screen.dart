@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:provider/provider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 import 'KalkulatorZakat.dart';
 import 'Provider/listBayar.dart';
@@ -124,7 +125,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
         appBar: AppBar(
           title: Text(
             "Pembayaran Zakat Mall",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
@@ -145,13 +146,16 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
               child: Form(
                   key: formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Silahkan isi data-data berikut",
-                        style: TextStyle(fontSize: 20),
-                      ),
+                      Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Silahkan isi data-data berikut",
+                            style: TextStyle(fontSize: 20),
+                          )),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       data.isNotEmpty && int.parse(data["Zakat"]!) > 0
                           ? Text("")
@@ -166,7 +170,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 //Dropdown Jenis Zakat=========================================================================================================
                       Text(
                         "Pilih Jenis Zakat",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 12),
                       ),
                       data.isNotEmpty && data["Jenis"] != "belum"
                           ? Text("Pembayara " + data["Jenis"]!)
@@ -183,7 +187,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                         child: DropdownButtonHideUnderline(
                                             child: ButtonTheme(
                                       alignedDropdown: true,
-                                      child: DropdownButton<String>(
+                                      child: DropdownButton2<String>(
+                                        buttonHeight: 60,
+                                        buttonWidth: 140,
+                                        itemHeight: 40,
                                         isExpanded: true,
                                         isDense: true,
                                         hint: new Text("Pilih Jenis Zakat"),
@@ -223,7 +230,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
 //Dropdown LAZ menu============================================================================================================
                       Text(
                         "Pilih Laz Tujuan",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 12),
                       ),
                       Container(
                         padding: EdgeInsets.all(15),
@@ -291,7 +298,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                       ),
                       Text(
                         "Pilih Metode Pembayaran",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 12),
                       ),
                       Container(
                         padding: EdgeInsets.all(15),
@@ -466,7 +473,10 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                                         child: DropdownButtonHideUnderline(
                                             child: ButtonTheme(
                                       alignedDropdown: true,
-                                      child: DropdownButton<String>(
+                                      child: DropdownButton2<String>(
+                                        buttonHeight: 60,
+                                        buttonWidth: 140,
+                                        itemHeight: 40,
                                         isExpanded: true,
                                         isDense: true,
                                         hint: new Text("Pilih nama orang"),
@@ -584,7 +594,7 @@ class _zakatMall_1State extends State<zakatMall_1Screen> {
                           style: ElevatedButton.styleFrom(
                               onSurface: Colors.lightGreen,
                               primary: Colors.lightGreen,
-                              minimumSize: const Size(200, 50)),
+                              minimumSize: const Size(400, 50)),
                           onPressed: isButtonActive && Hasil != "0"
                               ? () {
                                   print(_jenis);

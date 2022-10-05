@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/AlarmScreen.dart';
+import 'package:flutter_application_2/LandingPage.dart';
 import 'package:flutter_application_2/Bantuan_Page/Alarm.dart';
 import 'package:flutter_application_2/Bantuan_Page/Belajar.dart';
 import 'package:flutter_application_2/Bantuan_Page/Kalkulator.dart';
 import 'package:flutter_application_2/Bantuan_Page/Laporan.dart';
 import 'package:flutter_application_2/Bantuan_Page/bayarZakatFitrah.dart';
 import 'package:flutter_application_2/Bantuan_Page/bayarZakatMal.dart';
+import 'package:flutter_application_2/Belajar_Page/LAZ.dart';
 import 'package:flutter_application_2/Belajar_Page/jenisZakat.dart';
+import 'package:flutter_application_2/ForgetPass.dart';
 import 'package:flutter_application_2/JenisZakat.dart';
 import 'package:flutter_application_2/Provider/User.dart';
-import 'package:flutter_application_2/Provider/itemLaporan2.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
 import 'package:flutter_application_2/Transisi.dart';
 import 'package:flutter_application_2/belajarZakat.dart';
 import 'package:flutter_application_2/Bantuan.dart';
@@ -32,7 +35,7 @@ import 'package:flutter_application_2/Provider/Provider.dart';
 import 'package:flutter_application_2/Provider/User.dart';
 import 'package:flutter_application_2/zakatFitrah_2Screen.dart';
 import 'package:flutter_application_2/zakatFitrah_3Screen.dart';
-import 'package:flutter_application_2/zakatFitrah_4Screen%20.dart';
+// import 'package:flutter_application_2/zakatFitrah_4Screen%20.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_2Screen%20copy.dart';
 import 'package:flutter_application_2/zakatMall_3Screen%20.dart';
@@ -52,7 +55,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => itemLaporan2(),
+        create: (context) => itemLogin(),
         child: ChangeNotifierProvider(
           create: (context) => dataUser(),
           child: ChangeNotifierProvider(
@@ -65,11 +68,15 @@ class MyApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   //   home: (zakatFitrah_1Screen()),
                   // );
-                  initialRoute: LoginScreen.route,
+                  initialRoute: LandingPageScreen.route,
                   routes: {
                     // route Menu Dashboard//
+                    LandingPageScreen.route: (context) =>
+                        const LandingPageScreen(),
                     LoginScreen.route: (context) => const LoginScreen(),
                     RegisterScreen.route: (context) => const RegisterScreen(),
+                    ForgetPassScreen.route: (context) =>
+                        const ForgetPassScreen(),
                     DashboardScreen.route: (context) => const DashboardScreen(),
                     TransisiScreen.route: (context) => const TransisiScreen(),
                     zakatFitrah_1Screen.route: (context) =>
@@ -89,8 +96,8 @@ class MyApp extends StatelessWidget {
                         ZakatFitrah_2Screen(),
                     zakatFitrah_3Screen.route: (context) =>
                         zakatFitrah_3Screen(),
-                    zakatFitrah_4Screen.route: (context) =>
-                        zakatFitrah_4Screen(),
+                    // zakatFitrah_4Screen.route: (context) =>
+                    //     zakatFitrah_4Screen(),
 
                     //route Zakat Mall//
                     ZakatMall_2Screen.route: (context) => ZakatMall_2Screen(),
@@ -116,11 +123,12 @@ class MyApp extends StatelessWidget {
                     pengertianScreen.route: (context) =>
                         const pengertianScreen(),
                     jenisZakatScreen.route: (context) =>
-                        const JenisZakatScreen(),
+                        const jenisZakatScreen(),
                     WajibScreen.route: (context) => const WajibScreen(),
                     HukumanScreen.route: (context) => const HukumanScreen(),
                     zakatOnlineScreen.route: (context) =>
                         const zakatOnlineScreen(),
+                    LAZScreen.route: (context) => const LAZScreen(),
 
                     //route bantuan//
                     bantuanKalulatorScreen.route: (context) =>

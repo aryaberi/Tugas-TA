@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_2/Belajar_Page/Hukuman.dart';
+import 'package:flutter_application_2/Belajar_Page/LAZ.dart';
 import 'package:flutter_application_2/Belajar_Page/WajibZakat.dart';
 import 'package:flutter_application_2/Belajar_Page/ZakatOnline.dart';
 import 'package:flutter_application_2/Belajar_Page/pengertianZakat.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_application_2/Kalkulator_Page/K_zakatPenghasilan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerak.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatPerniagaan.dart';
 import 'package:flutter_application_2/Kalkulator_Page/K_zakatTabungan.dart';
+import 'package:flutter_application_2/Belajar_Page/jenisZakat.dart';
 
 class BelajarScreen extends StatelessWidget {
   const BelajarScreen({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class BelajarScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Belajar Zakat",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
@@ -41,7 +43,7 @@ class BelajarScreen extends StatelessWidget {
         body: ListView(shrinkWrap: true, children: [
           CardList(name: "Pengertian Zakat", route: pengertianScreen.route),
           CardList(name: "Mengapa Wajib Zakat", route: WajibScreen.route),
-          CardList(name: "Jenis Zakat", route: pengertianScreen.route),
+          CardList(name: "Jenis Zakat", route: jenisZakatScreen.route),
           CardList(
             name: "Hukuman Bagi Orang yang Tidak Mau Berzakat",
             route: HukumanScreen.route,
@@ -49,6 +51,10 @@ class BelajarScreen extends StatelessWidget {
           CardList(
             name: "Hukum Membayar Zakat Online",
             route: zakatOnlineScreen.route,
+          ),
+          CardList(
+            name: "Tentang LAZ",
+            route: LAZScreen.route,
           ),
         ]));
   }

@@ -35,7 +35,8 @@ dependencies:
   pin_input_text_field: ^4.1.2
   pattern_formatter: ^2.0.0
   flutter_launcher_icons: "^0.9.2"
-
+  dropdown_button2: ^1.0.0
+  carousel_slider: ^4.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -83,6 +84,12 @@ flutter:
       - images/Niat_Zakat_Fitrah.png
       - images/LogoZOI.png
       - images/bayarZakat.jpg
+      - images/Wrong.png
+      - images/True.png
+      - images/Bayar.jpg
+      - images/Hukum.png
+      - images/jenis.jpg
+      - images/At_Taubah.PNG
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

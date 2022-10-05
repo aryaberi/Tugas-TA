@@ -4,6 +4,11 @@ import 'package:flutter_application_2/zakatFitrah_1Screen.dart';
 import 'package:flutter_application_2/zakatMall_1Screen.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_application_2/LandingPage.dart';
+import 'package:flutter_application_2/Provider/itemLogin.dart';
+import 'package:provider/provider.dart';
+
+
 
 class kalkulatorZPendapatanScreen extends StatefulWidget {
   const kalkulatorZPendapatanScreen({Key? key}) : super(key: key);
@@ -16,6 +21,7 @@ class kalkulatorZPendapatanScreen extends StatefulWidget {
 class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
   @override
   final formKey = GlobalKey<FormState>();
+  
   bool isButtonActive = false;
   bool isHitung = false;
   late TextEditingController controller;
@@ -27,11 +33,12 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
 
   Widget build(BuildContext context) {
     final userName = ModalRoute.of(context)!.settings.arguments as String;
+    final login = Provider.of<itemLogin>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text(
             "Kalkulator Zakat Harta",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
@@ -45,6 +52,34 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
               );
             },
           ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                              // title: const Text('Hapus Alarm'),
+                              content:
+                                  Text("Yakin ingin keluar dari aplikasi ?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Tidak'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    login.delete();
+                                    Navigator.pushNamed(context, LandingPageScreen.route);
+                                  },
+                                  child: Text("Ya"),
+                                )
+                              ]));
+                  
+                },
+                child: Text("Keluar",
+                    style: TextStyle(fontSize: 20, color: Color(0xffffffff)))),
+          ],
         ),
         body: ListView(children: [
           Padding(
@@ -184,14 +219,19 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                                     ),
                                     int.parse(Hasil) < 73100000
                                         ? Text(
-                                            "Pendapatan anda kurang dari hisab yang ditentukan, hisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
-                                            style: TextStyle(fontSize: 14))
+                                            "Pendapatan anda kurang dari nisab yang ditentukan, nisab saat ini adalah sebesar Rp 73.100.000, anda tidak dikenai wajib zakat saat ini",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold))
                                         : Text(
                                             "Jumlah Zakat yang harus anda keluarkan adalah " +
                                                 formatter
                                                     .format(int.parse(Zakat))
-                                                    .toString(),
-                                            style: TextStyle(fontSize: 14))
+                                                    .toString() +
+                                                ", Merupakan hasil dari 2,5% Total penghasilan anda.",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold))
                                   ],
                                 ),
                               ),
@@ -208,7 +248,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
-                                  minimumSize: const Size(200, 50)),
+                                  minimumSize: const Size(400, 50)),
                               onPressed: int.parse(Zakat) > 0
                                   ? () {
                                       setState(() {
@@ -228,7 +268,7 @@ class _kalkulatorZPendapatanState extends State<kalkulatorZPendapatanScreen> {
                               style: ElevatedButton.styleFrom(
                                   onSurface: Colors.lightGreen,
                                   primary: Colors.lightGreen,
-                                  minimumSize: const Size(200, 50)),
+                                  minimumSize: const Size(400, 50)),
                               onPressed: isButtonActive & isHitung == false
                                   ? () {
                                       setState(() {

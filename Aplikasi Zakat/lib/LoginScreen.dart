@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Dashboard.dart';
+import 'package:flutter_application_2/ForgetPass.dart';
 import 'package:flutter_application_2/RegisterScreen.dart';
 import 'package:flutter_application_2/Transisi.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_application_2/belajarZakat.dart';
 
+import 'package:provider/provider.dart';
+import 'Provider/itemLogin.dart';
 import 'Provider/User.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,6 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final user = Provider.of<dataUser>(context);
     final _users = user.allItems;
+    final login = Provider.of<itemLogin>(context);
+    final _login = login.allItems;
     String userName = "";
     bool isTrue = false;
 
@@ -55,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Text(
-                  "Selamat datang di ZOI. Aplikasi pembayaran zakat online yang telah mendapat lisensi dari MUI",
+                  "Silahkan Melakukan Login Untuk Menikmati Applikasi Secara Utuh",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black87,
@@ -148,7 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (isTrue == true) {
                               userName = user.getUserName(Nama, Pass);
-                              Navigator.pushNamed(context, TransisiScreen.route,
+                              login.addData({"nama": Nama});
+                              Navigator.pushNamed(
+                                  context, DashboardScreen.route,
                                   arguments: userName);
                             } else {
                               setState(() {
@@ -169,17 +176,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ))),
-                const SizedBox(height: 50),
-                Row(
-                  children: [
-                    const Text("Belum punya akun ? "),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RegisterScreen.route);
-                        },
-                        child: Text("Daftar di sini"))
-                  ],
-                )
+                const SizedBox(height: 20),
+                Row(children: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, RegisterScreen.route);
+                      },
+                      child: Text("Daftar akun")),
+                  Text("|"),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, ForgetPassScreen.route);
+                      },
+                      child: Text("Lupa password")),
+                ]),
+                const SizedBox(height: 20),
+                // Row(
+                //   children: [
+
+                //   ],
+                // )
               ],
             ),
           )

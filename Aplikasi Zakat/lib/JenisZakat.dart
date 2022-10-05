@@ -19,7 +19,7 @@ class JenisZakatScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Macam-macam Zakat",
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
           backgroundColor: Colors.lightGreen,
